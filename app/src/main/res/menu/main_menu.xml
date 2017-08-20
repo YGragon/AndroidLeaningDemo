@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_edit"
+          android:title="@string/action_edit"
+          android:orderInCategory="80"
+          android:icon="@mipmap/message"
+          app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_share"
+          android:title="@string/action_share"
+          android:orderInCategory="90"
+          android:icon="@mipmap/add"
+          app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_settings"
+          android:title="@string/action_settings"
+          android:orderInCategory="10"
+          app:showAsAction="never"/>
+</menu>
