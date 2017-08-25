@@ -15,9 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".RxJavaTestActivity">
+        <activity android:name=".MDOneActivity">
         </activity>
-        <activity android:name=".MActivity"
+        <activity android:name=".MDTwoActivity"
             android:theme="@style/MActivityTheme">
         </activity>
     </application>
