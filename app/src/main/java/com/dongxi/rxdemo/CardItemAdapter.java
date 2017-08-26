@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2017/8/20.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class CardItemAdapter extends RecyclerView.Adapter<CardItemAdapter.ViewHolder> {
 
 
     private Context mContext;
@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.mMyListener = listener ;
     }
 
-    public MyAdapter(Context context, List list) {
+    public CardItemAdapter(Context context, List list) {
         this.mContext = context;
         this.mTextList = list;
     }

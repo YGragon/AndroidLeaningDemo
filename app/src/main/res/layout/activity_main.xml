@@ -23,4 +23,16 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_right_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:paddingTop="0dp"
+        android:background="#ffffffff"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:listSelector="?attr/selectableItemBackground"
+        >
+    </android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.DrawerLayout>

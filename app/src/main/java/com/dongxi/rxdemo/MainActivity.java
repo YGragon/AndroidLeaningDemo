@@ -9,6 +9,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private RecyclerView mRecyclerViewRightMenu;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -32,6 +35,12 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mRecyclerViewRightMenu = (RecyclerView) findViewById(R.id.recycler_view_right_menu);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerViewRightMenu.setLayoutManager(linearLayoutManager);
+        RightMenuAdapter rightMenuAdapter = new RightMenuAdapter(this);
+        mRecyclerViewRightMenu.setAdapter(rightMenuAdapter);
+
         setupDrawerContent(mNavigationView);
 
         mNavigationView.setNavigationItemSelectedListener(
@@ -70,6 +79,23 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 //                finish();
 //            }
 //        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     //设置状态栏透明
@@ -79,16 +105,11 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
 
-    private void setupDrawerContent(NavigationView navigationView)
-    {
-        navigationView.setNavigationItemSelectedListener(
-
-                new NavigationView.OnNavigationItemSelectedListener()
-                {
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem)
-                    {
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
                         return true;
@@ -121,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                 Toast.makeText(this, "menu1", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_share:
+                mDrawerLayout.openDrawer(GravityCompat.END);
                 Toast.makeText(this, "menu2", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_settings:

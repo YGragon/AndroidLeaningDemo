@@ -38,7 +38,7 @@ public class MDOneActivity extends AppCompatActivity {
     SwipeRefreshLayout mSwipeRefresh;
 
     private List<String> mStringList = new ArrayList<>();
-    private MyAdapter mMyAdapter;
+    private CardItemAdapter mMyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +82,10 @@ public class MDOneActivity extends AppCompatActivity {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
-        mMyAdapter = new MyAdapter(this, mStringList);
+        mMyAdapter = new CardItemAdapter(this, mStringList);
         mRecyclerView.setAdapter(mMyAdapter);
 
-        mMyAdapter.setCardClickListener(new MyAdapter.OnMyClickListener() {
+        mMyAdapter.setCardClickListener(new CardItemAdapter.OnMyClickListener() {
             @Override
             public void cardClickListener(View view, final int position) {
                 Snackbar.make(view, "hehe", Snackbar.LENGTH_SHORT).setAction("heheda", new View.OnClickListener() {
