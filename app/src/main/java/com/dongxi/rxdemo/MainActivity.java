@@ -1,5 +1,7 @@
 package com.dongxi.rxdemo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -12,13 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
 
+    private static final String TAG = "MainActivity";
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -129,8 +137,46 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         {
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true ;
+        }else if (item.getItemId() == R.id.nav_notification){
+            Toast.makeText(this, "点击了", Toast.LENGTH_SHORT).show();
+            showDialogListView() ;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showDialogListView() {
+        View bottomView = View.inflate(MainActivity.this,R.layout.dialog_recyclerview,null);//填充ListView布局
+        RecyclerView recyclerView = (RecyclerView) bottomView.findViewById(R.id.dialog_recyclerView);//初始化ListView控件
+
+        List<String> list = new ArrayList<>() ;
+        for (int i= 0 ; i < 20; i++){
+            list.add("酒水：100=="+i) ;
+        }
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new DialogRecyclerViewAdapter(this,list));//ListView设置适配器
+
+        // 居中标题
+        TextView title = new TextView(this);
+        title.setText("费用详细");
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+// title.setTextColor(getResources().getColor(R.color.greenBG));
+        title.setTextSize(23);
+
+        AlertDialog dialogRecyclerView = new AlertDialog.Builder(this)
+                .setCustomTitle(title).setView(bottomView)//在这里把写好的这个listview的布局加载dialog中
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                }).create();
+        dialogRecyclerView.show();
     }
 
 
@@ -147,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                 break;
             case R.id.action_settings:
                 Toast.makeText(this, "menu3", Toast.LENGTH_SHORT).show();
+                showDialogListView();
                 break;
             default:
                 break;
