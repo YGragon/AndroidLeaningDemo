@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,20 +52,15 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 
         setupDrawerContent(mNavigationView);
 
-        mNavigationView.setNavigationItemSelectedListener(
-
-                new NavigationView.OnNavigationItemSelectedListener()
-                {
-
-                    private MenuItem mPreMenuItem;
-
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem)
-                    {
-                        if (mPreMenuItem != null) mPreMenuItem.setChecked(false);
-                        menuItem.setChecked(true);
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        int itemId = menuItem.getItemId();
+                        if (itemId == R.id.nav_message){
+                            Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
+                        }
                         mDrawerLayout.closeDrawers();
-                        mPreMenuItem = menuItem;
                         return true;
                     }
                 });
@@ -87,19 +83,6 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 //                finish();
 //            }
 //        });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -137,16 +120,13 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         {
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true ;
-        }else if (item.getItemId() == R.id.nav_notification){
-            Toast.makeText(this, "点击了", Toast.LENGTH_SHORT).show();
-            showDialogListView() ;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void showDialogListView() {
-        View bottomView = View.inflate(MainActivity.this,R.layout.dialog_recyclerview,null);//填充ListView布局
+        final View bottomView = View.inflate(MainActivity.this,R.layout.dialog_recyclerview,null);//填充ListView布局
         RecyclerView recyclerView = (RecyclerView) bottomView.findViewById(R.id.dialog_recyclerView);//初始化ListView控件
 
         List<String> list = new ArrayList<>() ;
@@ -154,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
             list.add("酒水：100=="+i) ;
         }
 
+        list.add("合计：300块") ;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new DialogRecyclerViewAdapter(this,list));//ListView设置适配器
@@ -168,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 
         AlertDialog dialogRecyclerView = new AlertDialog.Builder(this)
                 .setCustomTitle(title).setView(bottomView)//在这里把写好的这个listview的布局加载dialog中
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setNegativeButton("我知道了", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -177,6 +158,22 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                     }
                 }).create();
         dialogRecyclerView.show();
+        //控制弹窗的高度
+        bottomView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop,
+                                       int oldRight, int oldBottom) {
+                int contentHeight = bottomView.getHeight();
+
+                int needHeight = 500;
+
+                if (contentHeight > needHeight) {
+                    //注意：这里的 LayoutParams 必须是 FrameLayout的！！
+                    bottomView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                            needHeight));
+                }
+            }
+        });
     }
 
 
