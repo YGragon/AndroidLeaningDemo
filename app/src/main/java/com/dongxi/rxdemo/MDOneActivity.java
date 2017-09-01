@@ -8,12 +8,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +17,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
-import io.reactivex.annotations.NonNull;
 
 public class MDOneActivity extends AppCompatActivity {
 
@@ -100,41 +91,41 @@ public class MDOneActivity extends AppCompatActivity {
             }
         });
 
-
-        // 用于学习RxJava2
-        Flowable<Integer> observable = Flowable.create(new FlowableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(@NonNull FlowableEmitter<Integer> e) throws Exception {
-                e.onNext(1);
-                e.onNext(2);
-                e.onNext(3);
-                e.onComplete();
-            }
-        }, BackpressureStrategy.ERROR);
-        Subscriber<Integer> observer = new Subscriber<Integer>() {
-
-
-            @Override
-            public void onSubscribe(Subscription s) {
-                Log.e(TAG, "onSubscribe: ");
-            }
-
-            @Override
-            public void onNext(Integer integer) {
-                Log.e(TAG, "onNext: ");
-            }
-
-            @Override
-            public void onError(Throwable t) {
-                Log.e(TAG, "onError: ");
-            }
-
-            @Override
-            public void onComplete() {
-                Log.e(TAG, "onComplete: ");
-            }
-        };
-        observable.subscribe(observer);
+//
+//        // 用于学习RxJava2
+//        Flowable<Integer> observable = Flowable.create(new FlowableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(@NonNull FlowableEmitter<Integer> e) throws Exception {
+//                e.onNext(1);
+//                e.onNext(2);
+//                e.onNext(3);
+//                e.onComplete();
+//            }
+//        }, BackpressureStrategy.ERROR);
+//        Subscriber<Integer> observer = new Subscriber<Integer>() {
+//
+//
+//            @Override
+//            public void onSubscribe(Subscription s) {
+//                Log.e(TAG, "onSubscribe: ");
+//            }
+//
+//            @Override
+//            public void onNext(Integer integer) {
+//                Log.e(TAG, "onNext: ");
+//            }
+//
+//            @Override
+//            public void onError(Throwable t) {
+//                Log.e(TAG, "onError: ");
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//                Log.e(TAG, "onComplete: ");
+//            }
+//        };
+//        observable.subscribe(observer);
     }
 
     private void refreshText() {

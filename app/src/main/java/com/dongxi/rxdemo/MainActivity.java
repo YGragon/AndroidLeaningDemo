@@ -1,16 +1,17 @@
 package com.dongxi.rxdemo;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +26,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
+import static android.R.attr.permission;
+
+public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
 
     private static final String TAG = "MainActivity";
     private Toolbar mToolbar;
@@ -53,12 +56,14 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         setupDrawerContent(mNavigationView);
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            
+
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         int itemId = menuItem.getItemId();
                         if (itemId == R.id.nav_message){
                             Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
+                        }else if (itemId == R.id.nav_me){
+                            permission();
                         }
                         mDrawerLayout.closeDrawers();
                         return true;
@@ -88,6 +93,42 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 
 
     }
+
+    /**
+     * 测试封装的权限工具
+     */
+    private void permission() {
+        requestRunPermission(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.CAMERA}, new PermissionListener() {
+            @Override
+            public void onGranted() {
+                //表示所有权限都授权了
+                Toast.makeText(MainActivity.this, "所有权限都授权了，可以搞事情了", Toast.LENGTH_SHORT).show();
+                //我们可以执行打电话的逻辑
+                call();
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermission) {
+                for(int i = 0; i < deniedPermission.size(); i++){
+
+                    PermissionTip.showTipGoSetting(MainActivity.this,deniedPermission.get(0),deniedPermission.get(0)+"被拒绝");
+                    Toast.makeText(MainActivity.this, "被拒绝的权限：" + permission, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public void call(){
+        try {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            Uri uri = Uri.parse("tel:" + "10086");
+            intent.setData(uri);
+            startActivity(intent);
+        }catch (SecurityException e){
+            e.printStackTrace();
+        }
+    }
+
 
     //设置状态栏透明
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.dongxi.rxdemo">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,8 +18,11 @@
         </activity>
         <activity android:name=".MDOneActivity">
         </activity>
-        <activity android:name=".MDTwoActivity"
+        <activity
+            android:name=".MDTwoActivity"
             android:theme="@style/MActivityTheme">
+        </activity>
+        <activity android:name=".BaseActivity">
         </activity>
     </application>
 
