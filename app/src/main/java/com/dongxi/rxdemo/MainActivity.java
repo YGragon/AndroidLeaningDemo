@@ -41,13 +41,13 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        iniView() ;
+        iniData() ;
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void iniData() {
         setStatus() ;
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
-        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
-        mRecyclerViewRightMenu = (RecyclerView) findViewById(R.id.recycler_view_right_menu);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerViewRightMenu.setLayoutManager(linearLayoutManager);
         RightMenuAdapter rightMenuAdapter = new RightMenuAdapter(this);
@@ -57,18 +57,18 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        int itemId = menuItem.getItemId();
-                        if (itemId == R.id.nav_message){
-                            Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
-                        }else if (itemId == R.id.nav_me){
-                            permission();
-                        }
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int itemId = menuItem.getItemId();
+                if (itemId == R.id.nav_message){
+                    Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
+                }else if (itemId == R.id.nav_me){
+                    permission();
+                }
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
 
         mToolbar.setTitle("DemoToolbar");
         setSupportActionBar(mToolbar);
@@ -81,17 +81,13 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
         //设置返回的图标
         mToolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.slide));
-        //设置监听
-//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+    }
 
-
-
-
+    private void iniView() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mRecyclerViewRightMenu = (RecyclerView) findViewById(R.id.recycler_view_right_menu);
     }
 
     /**
