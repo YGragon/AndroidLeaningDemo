@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!--填充的颜色-->
+    <solid android:color="@color/colorPrimary"/>
+    <!--设置内容区域距离边界的范围-->
+    <padding android:bottom="10dp"
+             android:top="10dp"
+             android:left="5dp"
+             android:right="5dp"/>
+    <!--设置圆角，只适用于rectangle-->
+    <corners android:radius="20dp"/>
+    <!--设置描边 dashWidth 设置虚线时的横线长度 ashGap 设置虚线时的横线之间的距离-->
+    <stroke android:width="2dp"
+            android:dashGap="4dp"
+            android:dashWidth="4dp"
+            android:color="@color/colorAccent"/>
+</shape>

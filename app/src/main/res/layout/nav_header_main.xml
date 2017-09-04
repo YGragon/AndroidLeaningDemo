@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:fitsSystemWindows="true"
+              android:background="@drawable/bg_ring"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -9,6 +10,7 @@
         android:id="@+id/id_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_oval_with_gradient"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
         android:text="gogogogogo"/>
@@ -17,6 +19,7 @@
         android:id="@+id/id_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_line"
         android:layout_above="@id/id_link"
         android:text="Zhang San"/>
 
@@ -24,6 +27,7 @@
         android:id="@+id/nav_head"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:background="@drawable/bg_rectangle_with_stroke_dash"
         android:layout_above="@id/id_username"
         android:layout_marginBottom="16dp"
         android:src="@mipmap/ic_launcher"/>
