@@ -10,7 +10,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,8 +22,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
+import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,11 @@ import static android.R.attr.permission;
 public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
 
     private static final String TAG = "MainActivity";
+
+    String[] tags = {"婚姻育儿", "散文", "设计", "上班这点事儿", "影视天堂", "大学生活", "美人说", "运动和健身", "工具癖", "生活家", "程序员", "想法", "短篇小说", "美食", "教育", "心理", "奇思妙想", "美食", "摄影"};
+
+    private FlexboxLayout mFlexboxLayout ;
+
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -88,6 +99,38 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mRecyclerViewRightMenu = (RecyclerView) findViewById(R.id.recycler_view_right_menu);
+
+        SimpleFragmentPagerAdapter simpleFragmentPagerAdapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), this);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        viewPager.setAdapter(simpleFragmentPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);   // 在setAdapter时候调用
+        tabLayout.setTabMode(TabLayout.MODE_FIXED); // MODE_SCROLLABLE 适合多Tab
+
+        // 流式布局
+        mFlexboxLayout = (FlexboxLayout) findViewById(R.id.flexboxLayout);
+        //动态添加子View
+        for (int i = 0; i < tags.length; i++) {
+            mFlexboxLayout.addView(getFlexboxLayoutItemView(i));
+        }
+        // 星级评分
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.rating_bar);
+        ratingBar.setNumStars(3);
+        ratingBar.setRating(3f);
+    }
+
+    private View getFlexboxLayoutItemView(final int position) {
+        View view = getLayoutInflater().inflate(R.layout.item_flex_box_layout, null, false);
+        TextView itemTv = (TextView) view.findViewById(R.id.item_tv);
+        itemTv.setText(tags[position]);
+        itemTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "点击了 "+ tags[position], Toast.LENGTH_SHORT).show();
+            }
+        });
+        return view;
+
     }
 
     /**
@@ -218,7 +261,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                startActivity(new Intent(MainActivity.this,MDOneActivity.class));
+                startActivity(new Intent(MainActivity.this,CardRecycleViewActivity.class));
                 Toast.makeText(this, "menu1", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_share:

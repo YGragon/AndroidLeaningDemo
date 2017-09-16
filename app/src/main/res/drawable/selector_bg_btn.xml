@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--比较懒，没有去找图片，这里全部使用drawable/add 这张图片-->
+    <!--当窗口失去焦点时-->
+    <item android:drawable="@drawable/add" android:state_window_focused="false"/>
+    <!--不可用时-->
+    <item android:drawable="@drawable/add" android:state_enabled="false"/>
+    <!--按压时-->
+    <item android:drawable="@drawable/guitar" android:state_pressed="true"/>
+    <!--被选中时-->
+    <item android:drawable="@drawable/guitar" android:state_selected="true"/>
+    <!--被激活时-->
+    <item android:drawable="@drawable/guitar" android:state_activated="true"/>
+    <!--默认时-->
+    <item android:drawable="@drawable/add"/>
+</selector>

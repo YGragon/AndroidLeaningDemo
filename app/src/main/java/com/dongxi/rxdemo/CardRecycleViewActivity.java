@@ -18,9 +18,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MDOneActivity extends AppCompatActivity {
+public class CardRecycleViewActivity extends AppCompatActivity {
 
-    private static final String TAG = "MDOneActivity";
+    private static final String TAG = "CardRecycleViewActivity";
     @BindView(R.id.fab)
     FloatingActionButton mFab;
     @BindView(R.id.recycler_view)
@@ -46,8 +46,8 @@ public class MDOneActivity extends AppCompatActivity {
         customToolbar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MDOneActivity.this, MDTwoActivity.class));
-                Toast.makeText(MDOneActivity.this, "hello", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(CardRecycleViewActivity.this, MDTwoActivity.class));
+                Toast.makeText(CardRecycleViewActivity.this, "hello", Toast.LENGTH_SHORT).show();
             }
         });
         customToolbar.setLeftTextOnClickListener(new View.OnClickListener() {
@@ -82,50 +82,14 @@ public class MDOneActivity extends AppCompatActivity {
                 Snackbar.make(view, "hehe", Snackbar.LENGTH_SHORT).setAction("heheda", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(MDOneActivity.this,MDTwoActivity.class) ;
+                        Intent intent = new Intent(CardRecycleViewActivity.this,MDTwoActivity.class) ;
                         intent.putExtra("name",mStringList.get(position)) ;
                         startActivity(intent);
-                        Toast.makeText(MDOneActivity.this, "hehe,null point", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CardRecycleViewActivity.this, "hehe,null point", Toast.LENGTH_SHORT).show();
                     }
                 }).show();
             }
         });
-
-//
-//        // 用于学习RxJava2
-//        Flowable<Integer> observable = Flowable.create(new FlowableOnSubscribe<Integer>() {
-//            @Override
-//            public void subscribe(@NonNull FlowableEmitter<Integer> e) throws Exception {
-//                e.onNext(1);
-//                e.onNext(2);
-//                e.onNext(3);
-//                e.onComplete();
-//            }
-//        }, BackpressureStrategy.ERROR);
-//        Subscriber<Integer> observer = new Subscriber<Integer>() {
-//
-//
-//            @Override
-//            public void onSubscribe(Subscription s) {
-//                Log.e(TAG, "onSubscribe: ");
-//            }
-//
-//            @Override
-//            public void onNext(Integer integer) {
-//                Log.e(TAG, "onNext: ");
-//            }
-//
-//            @Override
-//            public void onError(Throwable t) {
-//                Log.e(TAG, "onError: ");
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                Log.e(TAG, "onComplete: ");
-//            }
-//        };
-//        observable.subscribe(observer);
     }
 
     private void refreshText() {
@@ -143,6 +107,7 @@ public class MDOneActivity extends AppCompatActivity {
                         initTextData();
                         mMyAdapter.notifyDataSetChanged();
                         mSwipeRefresh.setRefreshing(false);
+                        Toast.makeText(CardRecycleViewActivity.this, "刷新成功哟", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -160,7 +125,7 @@ public class MDOneActivity extends AppCompatActivity {
         Snackbar.make(view, "undo", Snackbar.LENGTH_LONG).setAction("hello", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MDOneActivity.this, "hello snackbar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CardRecycleViewActivity.this, "hello snackbar", Toast.LENGTH_SHORT).show();
             }
         }).show();
     }
