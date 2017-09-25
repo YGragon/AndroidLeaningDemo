@@ -15,9 +15,9 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MDTwoActivity extends AppCompatActivity {
+public class CollapsingToolbarActivity extends AppCompatActivity {
 
-    private static final String TAG = "MDTwoActivity";
+    private static final String TAG = "CollapsingToolbarActivity";
 
     @BindView(R.id.img_guitar)
     ImageView mImgGuitar;

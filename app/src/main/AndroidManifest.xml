@@ -20,7 +20,7 @@
         <activity android:name=".CardRecycleViewActivity">
         </activity>
         <activity
-            android:name=".MDTwoActivity"
+            android:name=".CollapsingToolbarActivity"
             android:theme="@style/MActivityTheme">
         </activity>
         <activity android:name=".BaseActivity">

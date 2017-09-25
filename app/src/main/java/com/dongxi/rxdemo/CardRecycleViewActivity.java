@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CardRecycleViewActivity extends AppCompatActivity {
+public class CardRecycleViewActivity extends AppCompatActivity{
 
     private static final String TAG = "CardRecycleViewActivity";
     @BindView(R.id.fab)
@@ -46,7 +46,7 @@ public class CardRecycleViewActivity extends AppCompatActivity {
         customToolbar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CardRecycleViewActivity.this, MDTwoActivity.class));
+                startActivity(new Intent(CardRecycleViewActivity.this, CollapsingToolbarActivity.class));
                 Toast.makeText(CardRecycleViewActivity.this, "hello", Toast.LENGTH_SHORT).show();
             }
         });
@@ -82,7 +82,7 @@ public class CardRecycleViewActivity extends AppCompatActivity {
                 Snackbar.make(view, "hehe", Snackbar.LENGTH_SHORT).setAction("heheda", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(CardRecycleViewActivity.this,MDTwoActivity.class) ;
+                        Intent intent = new Intent(CardRecycleViewActivity.this,CollapsingToolbarActivity.class) ;
                         intent.putExtra("name",mStringList.get(position)) ;
                         startActivity(intent);
                         Toast.makeText(CardRecycleViewActivity.this, "hehe,null point", Toast.LENGTH_SHORT).show();
