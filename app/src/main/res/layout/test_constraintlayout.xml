@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#11ff0000"
-    android:id="@+id/constaintLayout">
+    android:id="@+id/constraintLayout">
 
     <TextView
         android:id="@+id/banner"
@@ -125,10 +125,20 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8"
         />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--app:layout_constraintHorizontal_bias="0.9"-->
+        <!--app:layout_constraintVertical_bias="0.9"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--/>-->
+
     <android.support.design.widget.FloatingActionButton
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:layout_constraintLeft_toRightOf="@id/guideline_w"
-        app:layout_constraintTop_toBottomOf="@id/guideline_h"
-        />
+        app:layout_constraintTop_toBottomOf="@id/guideline_h"/>
 </android.support.constraint.ConstraintLayout>
