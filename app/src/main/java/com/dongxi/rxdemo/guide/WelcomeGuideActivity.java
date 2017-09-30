@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -49,7 +50,9 @@ public class WelcomeGuideActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(WelcomeGuideActivity.this, MainActivity.class));
-                Toast.makeText(WelcomeGuideActivity.this, "Go Home", Toast.LENGTH_SHORT).show();
+                Toast toast = Toast.makeText(WelcomeGuideActivity.this, "Go Home", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
             }
         });
 
