@@ -1,155 +1,170 @@
 package com.dongxi.rxdemo.guide;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dongxi.rxdemo.MainActivity;
 import com.dongxi.rxdemo.R;
-import com.dongxi.rxdemo.global.AppConstants;
-import com.dongxi.rxdemo.utils.SpUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class WelcomeGuideActivity extends AppCompatActivity implements View.OnClickListener{
+public class WelcomeGuideActivity extends AppCompatActivity {
     private static final String TAG = "WelcomeGuideActivity";
 
-    private ViewPager mVpGuide;
-    private Button mBtnEnter;
-    private LinearLayout mLl;
-
-    private GuideViewPagerAdapter mGuideViewPagerAdapter ;
-    private List<View> mViews ;
-
-    private static final int[] guideImgs = {R.layout.guid_view1,R.layout.guid_view2,
-            R.layout.guid_view3,R.layout.guid_view4 } ;
-    private ImageView[] points ;
-
-    private int currentIndex ;
+    private ViewPager mViewPager;
+    private Button mBtnGo;
+    private GuideViewPagerAdapter vpAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_guide);
+        initViews();
+    }
 
-        Log.e(TAG, "onCreate: 哈哈哈");
-        mViews = new ArrayList<>() ;
+    private void initViews() {
+        mViewPager = (ViewPager)findViewById(R.id.vp_guide);
+        mBtnGo = (Button)findViewById(R.id.btn_go);
 
-        for (int i = 0; i < guideImgs.length; i++){
-            View view = LayoutInflater.from(this).inflate(guideImgs[i],null) ;
-            if (i == guideImgs.length-1){
-                mBtnEnter = (Button)view.findViewById(R.id.btn_login) ;
-                mBtnEnter.setTag("enter");
-                mBtnEnter.setOnClickListener(this);
+        //实例化各个界面的布局对象
+        View view1 = View.inflate(this, R.layout.guid_view1, null);
+        View view2 = View.inflate(this, R.layout.guid_view1, null);
+        View view3 = View.inflate(this, R.layout.guid_view1, null);
+
+        ((ImageView)view1.findViewById(R.id.tv_pic)).setImageResource(R.drawable.android_guide_step_1);
+        ((ImageView)view2.findViewById(R.id.tv_pic)).setImageResource(R.drawable.android_guide_step_2);
+        ((ImageView)view3.findViewById(R.id.tv_pic)).setImageResource(R.drawable.android_guide_step_3);
+
+        mBtnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WelcomeGuideActivity.this, MainActivity.class));
+                Toast.makeText(WelcomeGuideActivity.this, "Go Home", Toast.LENGTH_SHORT).show();
             }
-            mViews.add(view) ;
-        }
+        });
 
-        mVpGuide = (ViewPager) findViewById(R.id.vp_guide) ;
+        view1.findViewById(R.id.tv_pic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(0);
+            }
+        });
+        view2.findViewById(R.id.tv_pic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(1);
+            }
+        });
+        view3.findViewById(R.id.tv_pic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(2);
+            }
+        });
 
-        mGuideViewPagerAdapter = new GuideViewPagerAdapter(mViews) ;
-        mVpGuide.setAdapter(mGuideViewPagerAdapter);
-        mVpGuide.setOnPageChangeListener(new PageChanceListener());
+        ((TextView)view1.findViewById(R.id.tv_title)).setText("精彩首页");
+        ((TextView)view1.findViewById(R.id.tv_title)).setTextColor(Color.parseColor("#FF5000"));
+        ((TextView)view2.findViewById(R.id.tv_title)).setText("发现定位");
+        ((TextView)view2.findViewById(R.id.tv_title)).setTextColor(Color.parseColor("#49ca65"));
+        ((TextView)view3.findViewById(R.id.tv_title)).setText("欢乐互动");
+        ((TextView)view3.findViewById(R.id.tv_title)).setTextColor(Color.parseColor("#16c5c6"));
 
-        initDots() ;
+        ((TextView)view1.findViewById(R.id.tv_desc)).setText("优惠第一时间为你奉上\n");
+        ((TextView)view2.findViewById(R.id.tv_desc)).setText("给你最好的\n做你最想要的");
+        ((TextView)view3.findViewById(R.id.tv_desc)).setText("欢迎互动\n精彩由你");
+
+        mViewPager = (ViewPager) findViewById(R.id.vp_guide);
+
+        ArrayList<View> views = new ArrayList<>();
+        views.add(view1);
+        views.add(view2);
+        views.add(view3);
+
+        vpAdapter = new GuideViewPagerAdapter(views);
+
+        mViewPager.setOffscreenPageLimit(views.size());
+        mViewPager.setPageMargin(-dip2px(135));
+        mViewPager.setAdapter(vpAdapter);
+
+        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position + 1 == mViewPager.getAdapter().getCount()) {
+                    if (mBtnGo.getVisibility() != View.VISIBLE) {
+                        mBtnGo.setVisibility(View.VISIBLE);
+                        mBtnGo.startAnimation(AnimationUtils.loadAnimation(WelcomeGuideActivity.this, android.R.anim.fade_in));
+                    }
+                } else {
+                    if (mBtnGo.getVisibility() != View.GONE) {
+                        mBtnGo.setVisibility(View.GONE);
+                        mBtnGo.startAnimation(AnimationUtils.loadAnimation(WelcomeGuideActivity.this, android.R.anim.fade_out));
+                    }
+                }
+            }
+        });
+
+        mViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            private static final float MIN_SCALE = 0.85f;
+//            private static final float MIN_ALPHA = 0.5f;
+
+            private static final float MIN_TXT_SCALE = 0.0f;
+            private static final float MIN_TXT_ALPHA = 0.0f;
+
+            @SuppressLint("NewApi")
+            @Override
+            public void transformPage(View view, float position) {
+                View mGuideImage = view.findViewById(R.id.tv_pic);
+                View mTitle = view.findViewById(R.id.tv_title);
+                View mDesc = view.findViewById(R.id.tv_desc);
+
+                int viewWidth = mDesc.getWidth();
+
+                if (position < -1) {
+                    mTitle.setAlpha(0);
+                    mDesc.setAlpha(0);
+                } else if (position <= 1) {
+                    float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
+                    float scaleTxtFactor = Math.max(MIN_TXT_SCALE, 1 - Math.abs(position));
+
+//                    float horzMargin = viewWidth * (1 - (1 - Math.abs(position))) / 2;
+//                    if (position < 0) {
+//                        mTitle.setTranslationX(horzMargin);
+//                        mDesc.setTranslationX(horzMargin);
+//                    } else {
+//                        mTitle.setTranslationX(-horzMargin);
+//                        mDesc.setTranslationX(-horzMargin);
+//                    }
+
+                    mGuideImage.setScaleX(scaleFactor);
+                    mGuideImage.setScaleY(scaleFactor);
+
+                    mTitle.setScaleX(scaleTxtFactor);
+                    mTitle.setScaleY(scaleTxtFactor);
+                    mTitle.setAlpha(MIN_TXT_ALPHA + (scaleTxtFactor - MIN_TXT_SCALE) / (1 - MIN_TXT_SCALE) * (1 - MIN_TXT_ALPHA));
+
+                    mDesc.setAlpha(mTitle.getAlpha());
+                    mDesc.setScaleX(scaleTxtFactor);
+                    mDesc.setScaleY(scaleTxtFactor);
+                } else {
+                    mTitle.setAlpha(0);
+                    mDesc.setAlpha(0);
+                }
+            }
+        });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SpUtils.putBoolean(WelcomeGuideActivity.this,AppConstants.FIRST_OPEN,true);
-        finish();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    private void initDots() {
-        mLl = (LinearLayout)findViewById(R.id.ll) ;
-        points = new ImageView[guideImgs.length] ;
-
-        for (int i = 0; i < guideImgs.length; i++){
-            points[i] = (ImageView) mLl.getChildAt(i);
-            points[i].setEnabled(false);
-            points[i].setOnClickListener(this);
-            points[i].setTag(i);
-        }
-
-        currentIndex = 0 ;
-        points[currentIndex] .setEnabled(true); // 选中
-    }
-
-    private void setCurView(int position) {
-        if (position < 0 || position > guideImgs.length){
-            return;
-        }
-        mVpGuide.setCurrentItem(position);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getTag().equals("enter")){
-            enterMainActivity();
-            return;
-        }
-        int position = (int) v.getTag();
-        setCurView(position) ;
-        setCurDot(position);
-
-    }
-
-    private class PageChanceListener implements ViewPager.OnPageChangeListener{
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            setCurDot(position) ;
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    }
-
-    private void setCurDot(int position) {
-        if (position < 0 || position > guideImgs.length || currentIndex == position){
-            return;
-        }
-        points[position].setEnabled(true);
-        points[currentIndex].setEnabled(false);
-        currentIndex = position ;
-
-    }
-
-    private void enterMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        SpUtils.putBoolean(WelcomeGuideActivity.this, AppConstants.FIRST_OPEN,true);
-        finish();
+    private int dip2px(float dpValue) {
+        final float scale = getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

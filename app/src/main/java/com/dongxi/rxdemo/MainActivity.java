@@ -26,6 +26,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongxi.rxdemo.demo.Update;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.google.android.flexbox.FlexboxLayout;
 
@@ -126,6 +127,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         itemTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    startActivity(new Intent(MainActivity.this, Update.class));
                 Toast.makeText(MainActivity.this, "点击了 "+ tags[position], Toast.LENGTH_SHORT).show();
             }
         });

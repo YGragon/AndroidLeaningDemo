@@ -5,14 +5,18 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
     <application
-        android:name=".global.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".guide.SplashActivity">
+        <activity android:name=".MainActivity">
+        <!--<activity android:name=".MainActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -21,8 +25,10 @@
         </activity>
         <activity android:name=".CardRecycleViewActivity">
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <!--<activity android:name=".MainActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--&gt;-->
+        <!--</activity>-->
         <activity
             android:name=".CollapsingToolbarActivity"
             android:theme="@style/MActivityTheme">
@@ -30,9 +36,21 @@
         <activity android:name=".BaseActivity">
         </activity>
         <activity android:name=".guide.WelcomeGuideActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             >
         </activity>
+        <activity android:name=".guide.SplashActivity"
+            >
+        </activity>
+        <activity android:name=".demo.Update">
+        </activity>
+
+        <!--下载-->
+        <receiver
+            android:name=".demo.SystemDownLoadingReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
