@@ -27,7 +27,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dongxi.rxdemo.demo.Update;
+import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
+import com.dongxi.rxdemo.update.Update;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.dongxi.rxdemo.pinsenction.IndexActivity;
 import com.google.android.flexbox.FlexboxLayout;
@@ -78,6 +79,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
         setupDrawerContent(mNavigationView);
 
+        // 侧边栏
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -87,7 +89,10 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
                 } else if (itemId == R.id.nav_me) {
                     permission();
+                }else if (itemId == R.id.nav_setting){
+                    startActivity(new Intent(MainActivity.this, GankTestActivity.class));
                 }
+
                 mDrawerLayout.closeDrawers();
                 return true;
             }
@@ -213,7 +218,6 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo.demo;
+package com.dongxi.rxdemo.update;
 
 import android.content.Context;
 import android.widget.TextView;
