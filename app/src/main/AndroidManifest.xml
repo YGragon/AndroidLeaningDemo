@@ -43,6 +43,8 @@
         </activity>
         <activity android:name=".demo.Update">
         </activity>
+        <activity android:name=".pinsenction.IndexActivity">
+        </activity>
 
         <!--下载-->
         <receiver

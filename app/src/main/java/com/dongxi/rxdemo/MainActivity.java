@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -28,10 +29,15 @@ import android.widget.Toast;
 
 import com.dongxi.rxdemo.demo.Update;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
+import com.dongxi.rxdemo.pinsenction.IndexActivity;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.R.attr.permission;
 
@@ -40,8 +46,12 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     private static final String TAG = "MainActivity";
 
     String[] tags = {"婚姻育儿", "散文", "设计", "上班这点事儿", "影视天堂", "大学生活", "美人说", "运动和健身", "工具癖", "生活家", "程序员", "想法", "短篇小说", "美食", "教育", "心理", "奇思妙想", "美食", "摄影"};
+    @BindView(R.id.btn_1)
+    Button btn1;
+    @BindView(R.id.btn_2)
+    Button btn2;
 
-    private FlexboxLayout mFlexboxLayout ;
+    private FlexboxLayout mFlexboxLayout;
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -53,13 +63,14 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        iniView() ;
-        iniData() ;
+        ButterKnife.bind(this);
+        iniView();
+        iniData();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void iniData() {
-        setStatus() ;
+        setStatus();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerViewRightMenu.setLayoutManager(linearLayoutManager);
         RightMenuAdapter rightMenuAdapter = new RightMenuAdapter(this);
@@ -72,9 +83,9 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                if (itemId == R.id.nav_message){
+                if (itemId == R.id.nav_message) {
                     Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
-                }else if (itemId == R.id.nav_me){
+                } else if (itemId == R.id.nav_me) {
                     permission();
                 }
                 mDrawerLayout.closeDrawers();
@@ -127,8 +138,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         itemTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    startActivity(new Intent(MainActivity.this, Update.class));
-                Toast.makeText(MainActivity.this, "点击了 "+ tags[position], Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, Update.class));
+                Toast.makeText(MainActivity.this, "点击了 " + tags[position], Toast.LENGTH_SHORT).show();
             }
         });
         return view;
@@ -150,22 +161,22 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
             @Override
             public void onDenied(List<String> deniedPermission) {
-                for(int i = 0; i < deniedPermission.size(); i++){
+                for (int i = 0; i < deniedPermission.size(); i++) {
 
-                    PermissionTip.showTipGoSetting(MainActivity.this,deniedPermission.get(0),deniedPermission.get(0)+"被拒绝");
+                    PermissionTip.showTipGoSetting(MainActivity.this, deniedPermission.get(0), deniedPermission.get(0) + "被拒绝");
                     Toast.makeText(MainActivity.this, "被拒绝的权限：" + permission, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public void call(){
+    public void call() {
         try {
             Intent intent = new Intent(Intent.ACTION_CALL);
             Uri uri = Uri.parse("tel:" + "10086");
             intent.setData(uri);
             startActivity(intent);
-        }catch (SecurityException e){
+        } catch (SecurityException e) {
             e.printStackTrace();
         }
     }
@@ -181,45 +192,44 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if(item.getItemId() == android.R.id.home)
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
-            return true ;
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void showDialogListView() {
-        final View bottomView = View.inflate(MainActivity.this,R.layout.dialog_recyclerview,null);//填充ListView布局
+        final View bottomView = View.inflate(MainActivity.this, R.layout.dialog_recyclerview, null);//填充ListView布局
         RecyclerView recyclerView = (RecyclerView) bottomView.findViewById(R.id.dialog_recyclerView);//初始化ListView控件
 
-        List<String> list = new ArrayList<>() ;
-        for (int i= 0 ; i < 20; i++){
-            list.add("酒水：100=="+i) ;
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            list.add("酒水：100==" + i);
         }
 
-        list.add("合计：300块") ;
+        list.add("合计：300块");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new DialogRecyclerViewAdapter(this,list));//ListView设置适配器
+        recyclerView.setAdapter(new DialogRecyclerViewAdapter(this, list));//ListView设置适配器
 
         // 居中标题
         TextView title = new TextView(this);
@@ -263,7 +273,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                startActivity(new Intent(MainActivity.this,CardRecycleViewActivity.class));
+                startActivity(new Intent(MainActivity.this, CardRecycleViewActivity.class));
                 Toast.makeText(this, "menu1", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_share:
@@ -279,5 +289,16 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
         }
         return true;
+    }
+
+    @OnClick({R.id.btn_1, R.id.btn_2})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_1:
+                break;
+            case R.id.btn_2:
+                startActivity(new Intent(MainActivity.this, IndexActivity.class));
+                break;
+        }
     }
 }
