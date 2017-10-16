@@ -51,6 +51,8 @@
 
         <activity android:name=".db.gank_test.GankTestActivity">
         </activity>
+        <activity android:name=".thumbup.ThumbUpActivity">
+        </activity>
     </application>
 
 </manifest>

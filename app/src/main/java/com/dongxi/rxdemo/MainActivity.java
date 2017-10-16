@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
+import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
 import com.dongxi.rxdemo.update.Update;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.google.android.flexbox.FlexboxLayout;
@@ -80,6 +81,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     permission();
                 }else if (itemId == R.id.nav_setting){
                     startActivity(new Intent(MainActivity.this, GankTestActivity.class));
+                }else if (itemId == R.id.nav_manage){
+                    startActivity(new Intent(MainActivity.this, ThumbUpActivity.class));
                 }
 
                 mDrawerLayout.closeDrawers();
