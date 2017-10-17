@@ -23,4 +23,8 @@ public class ThumbUp {
     public void setThumbUpCount(int thumbUpCount) {
         this.thumbUpCount = thumbUpCount;
     }
+
+    public void increase() {
+        thumbUpCount++ ;
+    }
 }
