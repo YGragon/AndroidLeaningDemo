@@ -32,7 +32,10 @@ public class ThumbUpActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 ThumbUp thumbUp = mThumbUpAdapter.getItem(position);
                 thumbUp.setThumbUpCount(thumbUp.getThumbUpCount()+1);
+                thumbUp.setSelect(true);
+//                thumbUp.setThumbUpImg();
                 Log.e(TAG, "onItemClick: size=="+thumbUp.getThumbUpCount());
+                Log.e(TAG, "onItemClick: isSelect=="+thumbUp.isSelect());
                 mThumbUpAdapter.notifyDataSetChanged();
             }
         });

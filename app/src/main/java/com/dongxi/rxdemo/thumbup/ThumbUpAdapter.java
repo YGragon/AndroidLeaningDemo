@@ -88,14 +88,25 @@ public class ThumbUpAdapter extends BaseAdapter {
         }
 
         viewHolder.thumbUpCount.setText(mThumbUpList.get(position).getThumbUpCount()+"");
+//        viewHolder.imgThumbUp.setImageResource(R.drawable.dot_normal);
 
+        // 取出bean中当记录状态是否为true，是的话则给img设置focus点赞图片
+        if (mThumbUpList.get(position).isSelect()) {
+            viewHolder.imgThumbUp.setImageResource(R.drawable.message);
+        } else {
+            viewHolder.imgThumbUp.setImageResource(R.drawable.dot_normal);
+        }
 
         viewHolder.thumbUpItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnThumbUpClickListener != null){
                     mOnThumbUpClickListener.onItemClick(position);
+//                    viewHolder.imgThumbUp.setImageResource(R.drawable.message);
                 }
+//                else {
+//                    viewHolder.imgThumbUp.setImageResource(R.drawable.dot_normal);
+//                }
 
                 Toast.makeText(mContext, "点击了"+position, Toast.LENGTH_SHORT).show();
 //                    viewHolder.thumbUpCount.setText(mThumbUpList.get(position).getThumbUpCount()+1);
