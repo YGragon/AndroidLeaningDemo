@@ -102,15 +102,9 @@ public class ThumbUpAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (mOnThumbUpClickListener != null){
                     mOnThumbUpClickListener.onItemClick(position);
-//                    viewHolder.imgThumbUp.setImageResource(R.drawable.message);
                 }
-//                else {
-//                    viewHolder.imgThumbUp.setImageResource(R.drawable.dot_normal);
-//                }
 
                 Toast.makeText(mContext, "点击了"+position, Toast.LENGTH_SHORT).show();
-//                    viewHolder.thumbUpCount.setText(mThumbUpList.get(position).getThumbUpCount()+1);
-//                    viewHolder.imgThumbUp.setImageResource(R.mipmap.ic_launcher);
             }
         });
 

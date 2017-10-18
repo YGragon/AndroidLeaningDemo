@@ -230,10 +230,10 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
-            list.add("酒水：100==" + i);
+            list.add("酒水：10==" + i);
         }
 
-        list.add("合计：300块");
+        list.add("合计：100块");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new DialogRecyclerViewAdapter(this, list));//ListView设置适配器
@@ -304,6 +304,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             case R.id.btn_1:
                 break;
             case R.id.btn_2:
+                // 跳转悬浮头的列表页
                 startActivity(new Intent(MainActivity.this, IndexActivity.class));
                 break;
         }
