@@ -3,7 +3,7 @@
     <group android:checkableBehavior="none">
     <item
         android:id="@+id/nav_me"
-        android:title="我"
+        android:title="动态权限"
         android:icon="@mipmap/ic_launcher"/>
     <item
         android:id="@+id/nav_friend"
@@ -23,7 +23,7 @@
            android:id="@+id/group_manage">
         <item
             android:id="@+id/nav_manage"
-            android:title="应用管理"
+            android:title="点赞-单选-多选-反选"
             android:icon="@mipmap/ic_launcher"/>
     </group>
     <group
@@ -34,7 +34,7 @@
         <item android:id="@+id/nav_night"
               android:title="夜间模式"/>
         <item android:id="@+id/nav_setting"
-              android:title="设置"/>
+              android:title="干活集中营"/>
         <item android:id="@+id/nav_suggestion"
               android:title="意见反馈"/>
         <item android:id="@+id/nav_about"
