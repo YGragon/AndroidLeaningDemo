@@ -30,14 +30,6 @@ public class ThumbUpAdapter extends BaseAdapter {
 
     private Context mContext ;
 
-    public ArrayList<ThumbUp> getThumbUpList() {
-        return mThumbUpList;
-    }
-
-    public void setThumbUpList(ArrayList<ThumbUp> thumbUpList) {
-        mThumbUpList = thumbUpList;
-    }
-
     private ArrayList<ThumbUp> mThumbUpList ;
     private LayoutInflater mInflater;
 
@@ -100,12 +92,13 @@ public class ThumbUpAdapter extends BaseAdapter {
      */
     public void revertSelect(){
 
-        for(int i=0;i<mThumbUpList.size();i++){
+        for(int i = 0; i < mThumbUpList.size(); i++){
             if(!map.get(i)){
                 map.put(i, true);
             }else{
                 map.put(i, false);
             }
+            notifyDataSetChanged();
         }
         notifyDataSetChanged();
 
