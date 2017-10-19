@@ -21,6 +21,8 @@ import java.util.Set;
 
 /**
  * Created by Administrator on 2017/10/16.
+ * 点赞
+ * 全选，单选，反选
  */
 
 public class ThumbUpAdapter extends BaseAdapter {
@@ -46,6 +48,7 @@ public class ThumbUpAdapter extends BaseAdapter {
         this.mThumbUpList = list ;
         this.mInflater = LayoutInflater.from(context);
 
+        // 模拟数据
         map = new HashMap<>();
         for (int  i = 0 ; i < list.size(); i++){
             if ( i % 2 == 0 ){
