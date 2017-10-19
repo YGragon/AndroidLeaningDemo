@@ -2,7 +2,8 @@ package com.dongxi.rxdemo.thumbup;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.dongxi.rxdemo.R;
@@ -16,6 +17,9 @@ public class ThumbUpActivity extends AppCompatActivity {
 
     private ArrayList<ThumbUp> mThumbUpList = new ArrayList<>() ;
     private ThumbUpAdapter mThumbUpAdapter;
+    private Button mSingleSelect;
+    private Button mAllSelect;
+    private Button mRevertSelect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,11 @@ public class ThumbUpActivity extends AppCompatActivity {
 
 
         ListView listView = (ListView) findViewById(R.id.listView);
+        mSingleSelect = (Button) findViewById(R.id.single_select);
+        mAllSelect = (Button) findViewById(R.id.all_select);
+        mRevertSelect = (Button) findViewById(R.id.revert_select);
+
+
         mThumbUpAdapter = new ThumbUpAdapter(this ,initData());
         listView.setAdapter(mThumbUpAdapter);
 
@@ -34,6 +43,24 @@ public class ThumbUpActivity extends AppCompatActivity {
                 thumbUp.setThumbUpCount(thumbUp.getThumbUpCount()+1);
                 thumbUp.setSelect(true);
                 mThumbUpAdapter.notifyDataSetChanged();
+            }
+        });
+        mSingleSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThumbUpAdapter.singleSelect();
+            }
+        });
+        mAllSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThumbUpAdapter.allSelect();
+            }
+        });
+        mRevertSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThumbUpAdapter.revertSelect();
             }
         });
     }

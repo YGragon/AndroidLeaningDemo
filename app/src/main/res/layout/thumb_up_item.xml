@@ -18,5 +18,11 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/dot_normal"/>
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginLeft="50dp"
+        />
 
 </LinearLayout>

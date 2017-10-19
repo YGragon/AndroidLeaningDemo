@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 import com.dongxi.rxdemo.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017/10/16.
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 public class ThumbUpAdapter extends BaseAdapter {
 
     private static final String TAG = "ThumbUpAdapter";
+    private final HashMap<Integer, Boolean> map ;
 
     private Context mContext ;
 
@@ -43,17 +48,68 @@ public class ThumbUpAdapter extends BaseAdapter {
     public void setThumbUpListener(OnThumbUpClickListener listener){
         this.mOnThumbUpClickListener = listener ;
     }
-
-
     public ThumbUpAdapter(Context context,ArrayList<ThumbUp> list) {
         Log.e(TAG, "ThumbUpAdapter: list.size=="+list.size());
         this.mContext = context ;
         this.mThumbUpList = list ;
         this.mInflater = LayoutInflater.from(context);
+
+        map = new HashMap<>();
+        for (int  i = 0 ; i < list.size(); i++){
+            if ( i % 2 == 0 ){
+                // 偶数
+                map.put(i,true) ;
+            }else {
+                map.put(i,false) ;
+            }
+        }
+    }
+    /**
+     * 单选
+     */
+    public void singleSelect(){
+        for (int i = 0; i < mThumbUpList.size(); i++){
+            if (map.get(i)){
+                map.put(i,!map.get(i)) ;  // true
+            }
+        }
+        notifyDataSetChanged();
+        Set<Map.Entry<Integer, Boolean>> entries = map.entrySet();
+        for (Map.Entry<Integer, Boolean> entry : entries) {
+            entry.setValue(false);
+        }
+        map.put(0, true);
+        notifyDataSetChanged();
+
+    }
+    /**
+     * 全选
+     */
+    public void allSelect(){
+
+        for(int i=0;i<mThumbUpList.size();i++){
+            map.put(i,true);
+
+        }
+        notifyDataSetChanged();//注意这一句必须加上，否则checkbox无法正常更新状态
+
     }
 
+    /**
+     * 反选
+     */
+    public void revertSelect(){
 
+        for(int i=0;i<mThumbUpList.size();i++){
+            if(!map.get(i)){
+                map.put(i, true);
+            }else{
+                map.put(i, false);
+            }
+        }
+        notifyDataSetChanged();
 
+    }
     @Override
     public int getCount() {
         return mThumbUpList.size();
@@ -79,6 +135,7 @@ public class ThumbUpAdapter extends BaseAdapter {
 
             viewHolder.imgThumbUp = (ImageView) convertView.findViewById(R.id.img_thumb_up);
             viewHolder.thumbUpCount = (TextView) convertView.findViewById(R.id.tv_thumb_up_count);
+            viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
             viewHolder.thumbUpItem = (LinearLayout) convertView.findViewById(R.id.thumb_up_item) ;
 
             convertView.setTag(viewHolder);
@@ -97,13 +154,19 @@ public class ThumbUpAdapter extends BaseAdapter {
             viewHolder.imgThumbUp.setImageResource(R.drawable.dot_normal);
         }
 
+        if (map.get(position)){
+            //true
+            viewHolder.checkBox.setChecked(true);
+        }else {
+            viewHolder.checkBox.setChecked(false);
+        }
+
         viewHolder.thumbUpItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnThumbUpClickListener != null){
                     mOnThumbUpClickListener.onItemClick(position);
                 }
-
                 Toast.makeText(mContext, "点击了"+position, Toast.LENGTH_SHORT).show();
             }
         });
@@ -116,6 +179,7 @@ public class ThumbUpAdapter extends BaseAdapter {
         LinearLayout thumbUpItem ;
         ImageView imgThumbUp ;
         TextView thumbUpCount ;
+        CheckBox checkBox ;
     }
 
 }
