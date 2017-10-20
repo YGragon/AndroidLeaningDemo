@@ -27,6 +27,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
 import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
 import com.dongxi.rxdemo.update.Update;
@@ -94,6 +95,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     startActivity(new Intent(MainActivity.this, GankTestActivity.class));
                 }else if (itemId == R.id.nav_manage){
                     startActivity(new Intent(MainActivity.this, ThumbUpActivity.class));
+                }else if (itemId == R.id.nav_friend){
+                    startActivity(new Intent(MainActivity.this, CornerLabelActivity.class));
                 }
 
                 mDrawerLayout.closeDrawers();

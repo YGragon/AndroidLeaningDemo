@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_launcher"/>
     <item
         android:id="@+id/nav_friend"
-        android:title="好友"
+        android:title="角标"
         android:icon="@mipmap/ic_launcher"/>
     <item
         android:id="@+id/nav_notification"

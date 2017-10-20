@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dongxi.rxdemo.cornerlableview.CornerLabelActivity">
+
+    <com.dongxi.rxdemo.cornerlableview.CornerLabelView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        custom:bg_color="#FFAD2C"
+        custom:position="left_top"
+        custom:side_length="30dp"
+        custom:text="Java"
+        custom:text_color="#000000"
+        custom:text_size="16sp"/>
+</android.support.constraint.ConstraintLayout>
