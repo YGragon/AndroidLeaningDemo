@@ -6,6 +6,10 @@
     <color name="navColor">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="blue">#5895ed</color>
+    <color name="green">#a2c21d</color>
+    <color name="red">#EF534e</color>
+    <color name="orange">#fe8c2f</color>
 
     <color name="red_light">#ffff4444</color>
     <color name="green_light">#ff99cc00</color>
