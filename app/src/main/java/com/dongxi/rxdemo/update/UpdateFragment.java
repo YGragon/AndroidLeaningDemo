@@ -53,7 +53,7 @@ public class UpdateFragment extends DialogFragment {
         RecyclerView updateDescList = (RecyclerView) view.findViewById(R.id.rv_update_list_desc);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         updateDescList.setLayoutManager(linearLayoutManager);
-        UpdateAdapter updateAdapter = new UpdateAdapter(getActivity(),R.layout.update_desc_item,getStringData()) ;
+        UpdateAdapter updateAdapter = new UpdateAdapter(getActivity(),R.layout.item_update_desc,getStringData()) ;
         updateDescList.setAdapter(updateAdapter);
 
         ImageView cancelUpdateImg = (ImageView) view.findViewById(R.id.cancel_update_img);

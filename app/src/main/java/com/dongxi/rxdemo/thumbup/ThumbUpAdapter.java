@@ -127,7 +127,7 @@ public class ThumbUpAdapter extends BaseAdapter {
         final ViewHolder viewHolder ;
         if ( convertView == null){
             viewHolder = new ViewHolder();
-            convertView =   mInflater.inflate(R.layout.thumb_up_item, null);
+            convertView =   mInflater.inflate(R.layout.item_thumb_up, null);
 
             viewHolder.imgThumbUp = (ImageView) convertView.findViewById(R.id.img_thumb_up);
             viewHolder.thumbUpCount = (TextView) convertView.findViewById(R.id.tv_thumb_up_count);

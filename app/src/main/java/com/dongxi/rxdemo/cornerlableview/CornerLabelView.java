@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -18,6 +19,7 @@ import com.dongxi.rxdemo.R;
  */
 
 public class CornerLabelView extends View {
+    private static final String TAG = "CornerLabelView";
     private int mHalfWidth;//View宽度的一半
     private Paint mPaint;//角标画笔
     private TextPaint mTextPaint;//文字画笔
@@ -26,15 +28,19 @@ public class CornerLabelView extends View {
     private int position;//角标位置，0：右上角、1：右下角、2：左下角、3：左上角
     //角标的显示边长
     private int sideLength = (int) TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
+            TypedValue.COMPLEX_UNIT_DIP,
+            40,
+            getResources().getDisplayMetrics());
     //字体大小
     private int textSize = (int) TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics());
+            TypedValue.COMPLEX_UNIT_SP,
+            14,
+            getResources().getDisplayMetrics());
     //字体颜色
     private int textColor = Color.WHITE;
     private String text;
     //角标背景
-    private int bgColor = Color.RED;
+    private int bgColor = Color.RED;    // 背景可以是颜色或者是图片
     //文字到斜边的距离
     private int marginLeanSide = -1;
 
@@ -48,6 +54,7 @@ public class CornerLabelView extends View {
         init();
     }
 
+    /** 属性的初始化 */
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CornerLabelView, 0, 0);
         for (int i = 0; i < ta.getIndexCount(); i++) {
@@ -87,19 +94,19 @@ public class CornerLabelView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
-        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);  //  return (measureSpec & ~MODE_MASK);
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);  //  return (measureSpec & MODE_MASK);
         int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
 
         if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(sideLength * 2, sideLength * 2);
+            setMeasuredDimension(sideLength * 2, sideLength * 2);   // 宽和高都为最大模式 则宽高的值 为角标的边长*2
         } else if (widthSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(heightSpecSize, heightSpecSize);
+            setMeasuredDimension(heightSpecSize, heightSpecSize);      // 宽为最大模式 则宽高的值 为宽高中高的值
         } else if (heightSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(widthSpecSize, widthSpecSize);
+            setMeasuredDimension(widthSpecSize, widthSpecSize);      // 高为最大模式 则宽高的值 为宽高中宽的值
         } else if (widthSpecSize != heightSpecSize) {
-            int size = Math.min(widthSpecSize, heightSpecSize);
+            int size = Math.min(widthSpecSize, heightSpecSize);      // 宽不等于高 则宽高的值 为宽高中最小值
             setMeasuredDimension(size, size);
         }
     }
@@ -107,7 +114,7 @@ public class CornerLabelView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mHalfWidth = Math.min(w, h) / 2;
+        mHalfWidth = Math.min(w, h) / 2;    // 获取控件的宽、高度，mHalfWidth == 宽高中的最小值
     }
 
     @Override
@@ -115,31 +122,34 @@ public class CornerLabelView extends View {
         super.onDraw(canvas);
         //将原点移动到画布中心
         canvas.translate(mHalfWidth, mHalfWidth);
-        //根据角标位置旋转画布
-        canvas.rotate(position * 90);
+        //根据用户设定的角标位置旋转画布
+        canvas.rotate(position * 90);   // 0：右上角、1：右下角、2：左下角、3：左上角
 
-        if (sideLength > mHalfWidth * 2) {
+        if (sideLength > mHalfWidth * 2) {  // 角标显示的边长 > 整个宽度，则边长为整个宽度的值
             sideLength = mHalfWidth * 2;
         }
 
         //绘制角标背景
-        mPath.moveTo(-mHalfWidth, -mHalfWidth);
-        mPath.lineTo(sideLength - mHalfWidth, -mHalfWidth);
-        mPath.lineTo(mHalfWidth, mHalfWidth - sideLength);
-        mPath.lineTo(mHalfWidth, mHalfWidth);
-        mPath.close();
+        mPath.moveTo(-mHalfWidth, -mHalfWidth); // 移动到画布的起点
+        mPath.lineTo(sideLength - mHalfWidth, -mHalfWidth); // 角标背景的宽度
+        mPath.lineTo(mHalfWidth, mHalfWidth - sideLength);  // 角标背景的高度
+        mPath.lineTo(mHalfWidth, mHalfWidth);   // 角标背景的中间线，最长的线？？？
+        mPath.close();                          // 图形闭合，连接最短的线？？？
         canvas.drawPath(mPath, mPaint);
 
         //绘制文字前画布旋转45度
-        canvas.rotate(45);
+        canvas.rotate(45);  // 文字显示的角度
         //角标实际高度
-        int h1 = (int) (Math.sqrt(2) / 2.0 * sideLength);
-        int h2 = (int) -(mTextPaint.ascent() + mTextPaint.descent());
+        int h1 = (int) (Math.sqrt(2) / 2.0 * sideLength);               // ？？？
+        Log.e(TAG, "onDraw: h1=="+h1);
+        int h2 = (int) -(mTextPaint.ascent() + mTextPaint.descent());   // 文字的上高度+文字的下高度==文字的高度
         //文字绘制坐标
         int x = (int) -mTextPaint.measureText(text) / 2;
         int y;
-        if (marginLeanSide >= 0) { //使用clv:margin_lean_side属性时
-            if (position == 1 || position == 2) {
+        if (marginLeanSide >= 0) { //使用clv:margin_lean_side属性时，文字到斜边的距离 >= 0
+            if (position == 1 || position == 2) {   // 右下方，左下方
+                Log.e(TAG, "onDraw下方: h1---=="+(h1 - (marginLeanSide - mTextPaint.ascent())));
+                Log.e(TAG, "onDraw下方: h1+++=="+((h1 - h2) / 2));
                 if (h1 - (marginLeanSide - mTextPaint.ascent()) < (h1 - h2) / 2) {
                     y = -(h1 - h2) / 2;
                 } else {
@@ -149,7 +159,7 @@ public class CornerLabelView extends View {
                 if (marginLeanSide < mTextPaint.descent()) {
                     marginLeanSide = (int) mTextPaint.descent();
                 }
-
+                Log.e(TAG, "onDraw上方: h1+++=="+((h1 - h2) / 2));
                 if (marginLeanSide > (h1 - h2) / 2) {
                     marginLeanSide = (h1 - h2) / 2;
                 }
@@ -157,7 +167,7 @@ public class CornerLabelView extends View {
             }
         } else { //默认情况下
             if (sideLength > mHalfWidth) {
-                sideLength = mHalfWidth;
+                sideLength = mHalfWidth;    // 角标的边长大于宽度的一半，则用宽度的一半
             }
             y = (int) (-Math.sqrt(2) / 2.0 * sideLength + h2) / 2;
         }
