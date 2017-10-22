@@ -141,7 +141,7 @@ public class CornerLabelView extends View {
         canvas.rotate(45);  // 文字显示的角度
         //角标实际高度
         int h1 = (int) (Math.sqrt(2) / 2.0 * sideLength);               // ？？？
-        Log.e(TAG, "onDraw: h1=="+h1);
+        Log.e(TAG, "onDraw: h1=实际高度="+h1);
         int h2 = (int) -(mTextPaint.ascent() + mTextPaint.descent());   // 文字的上高度+文字的下高度==文字的高度
         //文字绘制坐标
         int x = (int) -mTextPaint.measureText(text) / 2;

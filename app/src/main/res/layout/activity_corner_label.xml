@@ -8,15 +8,29 @@
     android:orientation="vertical"
     tools:context="com.dongxi.rxdemo.cornerlableview.CornerLabelActivity">
 
-    <com.dongxi.rxdemo.cornerlableview.CornerLabelView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        custom:bg_color="#FFAD2C"
-        custom:position="left_top"
-        custom:side_length="30dp"
-        custom:text="Java"
-        custom:text_color="#000000"
-        custom:text_size="16sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/text_corner_label_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:layout_marginLeft="25dp"
+            android:text="角标变换位置"
+            android:layout_centerVertical="true"
+            />
+        <com.dongxi.rxdemo.cornerlableview.CornerLabelView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            custom:bg_color="#FFAD2C"
+            custom:position="right_top"
+            custom:side_length="30dp"
+            custom:text="Java"
+            custom:text_color="#000000"
+            custom:text_size="16sp"/>
+    </RelativeLayout>
     <GridView
         android:id="@+id/grid_view"
         xmlns:android="http://schemas.android.com/apk/res/android"

@@ -11,7 +11,7 @@ public class CornerLabelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_corner_lable);
+        setContentView(R.layout.activity_corner_label);
 
         GridView gridView = (GridView) findViewById(R.id.grid_view);
         gridView.setNumColumns(2);
