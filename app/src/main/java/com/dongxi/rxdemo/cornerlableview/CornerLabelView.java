@@ -26,6 +26,7 @@ public class CornerLabelView extends View {
     private Path mPath;//角标路径
 
     private int position;//角标位置，0：右上角、1：右下角、2：左下角、3：左上角
+
     //角标的显示边长
     private int sideLength = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -102,11 +103,11 @@ public class CornerLabelView extends View {
         if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
             setMeasuredDimension(sideLength * 2, sideLength * 2);   // 宽和高都为最大模式 则宽高的值 为角标的边长*2
         } else if (widthSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(heightSpecSize, heightSpecSize);      // 宽为最大模式 则宽高的值 为宽高中高的值
+            setMeasuredDimension(heightSpecSize, heightSpecSize);      // 宽为最大模式 则宽高的值 为高的值
         } else if (heightSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(widthSpecSize, widthSpecSize);      // 高为最大模式 则宽高的值 为宽高中宽的值
+            setMeasuredDimension(widthSpecSize, widthSpecSize);      // 高为最大模式 则宽高的值 为宽的值
         } else if (widthSpecSize != heightSpecSize) {
-            int size = Math.min(widthSpecSize, heightSpecSize);      // 宽不等于高 则宽高的值 为宽高中最小值
+            int size = Math.min(widthSpecSize, heightSpecSize);      // 宽不等于高 则宽高的值 为宽高中的最小值
             setMeasuredDimension(size, size);
         }
     }
@@ -114,16 +115,20 @@ public class CornerLabelView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mHalfWidth = Math.min(w, h) / 2;    // 获取控件的宽、高度，mHalfWidth == 宽高中的最小值
+        mHalfWidth = Math.min(w, h) / 2;    // 获取控件的宽、高度，mHalfWidth == 宽高中的最小值 / 2
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //将原点移动到画布中心
+        Log.e(TAG, "onDraw: mHalfWidth=="+mHalfWidth);
+        Log.e(TAG, "onDraw: position=="+position);
+        Log.e(TAG, "onDraw: sideLength=="+sideLength);
+        Log.e(TAG, "onDraw: marginLeanSide=="+marginLeanSide);
         canvas.translate(mHalfWidth, mHalfWidth);
         //根据用户设定的角标位置旋转画布
-        canvas.rotate(position * 90);   // 0：右上角、1：右下角、2：左下角、3：左上角
+        canvas.rotate(getPosition() * 90);   // 0：右上角、1：右下角、2：左下角、3：左上角
 
         if (sideLength > mHalfWidth * 2) {  // 角标显示的边长 > 整个宽度，则边长为整个宽度的值
             sideLength = mHalfWidth * 2;
@@ -147,7 +152,7 @@ public class CornerLabelView extends View {
         int x = (int) -mTextPaint.measureText(text) / 2;
         int y;
         if (marginLeanSide >= 0) { //使用clv:margin_lean_side属性时，文字到斜边的距离 >= 0
-            if (position == 1 || position == 2) {   // 右下方，左下方
+            if (getPosition() == 1 || getPosition() == 2) {   // 右下方，左下方
                 Log.e(TAG, "onDraw下方: h1---=="+(h1 - (marginLeanSide - mTextPaint.ascent())));
                 Log.e(TAG, "onDraw下方: h1+++=="+((h1 - h2) / 2));
                 if (h1 - (marginLeanSide - mTextPaint.ascent()) < (h1 - h2) / 2) {
@@ -173,12 +178,55 @@ public class CornerLabelView extends View {
         }
 
         //如果角标在右下、左下则进行画布平移、翻转，已解决绘制的文字显示问题
-        if (position == 1 || position == 2) {
+        if (getPosition() == 1 || getPosition() == 2) {
             canvas.translate(0, (float) (-Math.sqrt(2) / 2.0 * sideLength));
             canvas.scale(-1, -1);
         }
         //绘制文字
         canvas.drawText(text, x, y, mTextPaint);
+    }
+
+    /**
+     * 获取角标的方向
+     * @return
+     */
+    public int getPosition(){
+        return this.position ;
+    }
+
+    /**
+     * 设置角标的方向
+     * @param position
+     */
+    public void setPosition(int position){
+        this.position = position ;
+        invalidate();
+    }
+
+
+    public int getSideLength() {
+        return this.sideLength;
+    }
+    /**
+     * 设置角标显示的边长
+     * @param sideLength
+     */
+    public void setSideLength(int sideLength) {
+        this.sideLength = sideLength;
+        invalidate();
+    }
+
+    public int getMarginLeanSide() {
+        return this.marginLeanSide;
+    }
+
+    /**
+     * 设置文字到斜边的距离
+     * @param marginLeanSide
+     */
+    public void setMarginLeanSide(int marginLeanSide) {
+        this.marginLeanSide = marginLeanSide;
+        invalidate();
     }
 
     /**
