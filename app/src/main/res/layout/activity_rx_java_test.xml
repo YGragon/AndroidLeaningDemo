@@ -13,14 +13,14 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <com.dongxi.rxdemo.CustomToolbar
+            <com.dongxi.rxdemo.widget.CustomToolbar
                 android:id="@+id/custom_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 >
-            </com.dongxi.rxdemo.CustomToolbar>
+            </com.dongxi.rxdemo.widget.CustomToolbar>
 
 
         </android.support.design.widget.AppBarLayout>
@@ -31,13 +31,13 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
-            <android.support.v7.widget.RecyclerView
+            <com.dongxi.rxdemo.widget.EmptyRecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 >
-            </android.support.v7.widget.RecyclerView>
+            </com.dongxi.rxdemo.widget.EmptyRecyclerView>
         </android.support.v4.widget.SwipeRefreshLayout>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"

@@ -29,14 +29,14 @@
                 app:layout_collapseMode="parallax"
                 android:fitsSystemWindows="true"
                 />
-            <com.dongxi.rxdemo.CustomToolbar
+            <com.dongxi.rxdemo.widget.CustomToolbar
                 android:id="@+id/m_custom_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:isShowSearchView="true"
                 app:layout_collapseMode="pin"
                 >
-            </com.dongxi.rxdemo.CustomToolbar>
+            </com.dongxi.rxdemo.widget.CustomToolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView

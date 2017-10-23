@@ -7,9 +7,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
+
+import com.dongxi.rxdemo.widget.CustomToolbar;
+import com.dongxi.rxdemo.widget.EmptyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ public class CardRecycleViewActivity extends AppCompatActivity{
     @BindView(R.id.fab)
     FloatingActionButton mFab;
     @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+    EmptyRecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
 
@@ -75,6 +78,8 @@ public class CardRecycleViewActivity extends AppCompatActivity{
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mMyAdapter = new CardItemAdapter(this, mStringList);
         mRecyclerView.setAdapter(mMyAdapter);
+        View emptyView = LayoutInflater.from(this).inflate(R.layout.recyclerview_empty_layout, null);
+        mRecyclerView.setEmptyView(emptyView);
 
         mMyAdapter.setCardClickListener(new CardItemAdapter.OnMyClickListener() {
             @Override
@@ -114,10 +119,14 @@ public class CardRecycleViewActivity extends AppCompatActivity{
         }).start();
     }
 
+    /**
+     * 模拟数据延迟出现，显示空的界面
+     */
     private void initTextData() {
         for (int i = 0; i < 50; i++) {
             mStringList.add("card " + i);
         }
+
     }
 
     @OnClick(R.id.fab)
