@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:dong="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,22 +36,30 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/colorPrimary"/>
-        <Button
-            android:id="@+id/btn_1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hello"
-            android:background="@drawable/selector_bg_btn"
-            android:textColor="@color/selector_bg_text"
-            />
-        <Button
-            android:id="@+id/btn_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hello"
-            android:background="@drawable/layer_list_shadow"
-            android:textColor="@color/selector_bg_text"
-            />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hello"
+                android:background="@drawable/selector_bg_btn"
+                android:textColor="@color/selector_bg_text"
+                />
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hello"
+                android:background="@drawable/layer_list_shadow"
+                android:textColor="@color/selector_bg_text"
+                />
+            <!--有问题-->
+
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -81,6 +90,15 @@
             android:isIndicator="true"
             android:progressTint="#559911"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赏"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:background="@drawable/textview_border_shape"/>
     </LinearLayout>
 
 </ScrollView>
