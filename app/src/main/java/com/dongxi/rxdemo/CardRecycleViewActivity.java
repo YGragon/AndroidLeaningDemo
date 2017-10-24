@@ -7,7 +7,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -78,7 +77,7 @@ public class CardRecycleViewActivity extends AppCompatActivity{
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mMyAdapter = new CardItemAdapter(this, mStringList);
         mRecyclerView.setAdapter(mMyAdapter);
-        View emptyView = LayoutInflater.from(this).inflate(R.layout.recyclerview_empty_layout, null);
+        View emptyView = findViewById(R.id.empty_view) ;
         mRecyclerView.setEmptyView(emptyView);
 
         mMyAdapter.setCardClickListener(new CardItemAdapter.OnMyClickListener() {
@@ -109,9 +108,12 @@ public class CardRecycleViewActivity extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        initTextData();
-                        mMyAdapter.notifyDataSetChanged();
+                        mStringList.removeAll(mStringList) ;
+//                        mStringList.remove(mStringList.size()) ;
+//                        initTextData();
+//                        mMyAdapter.notifyDataSetChanged();
                         mSwipeRefresh.setRefreshing(false);
+                        mMyAdapter.notifyDataSetChanged();
                         Toast.makeText(CardRecycleViewActivity.this, "刷新成功哟", Toast.LENGTH_SHORT).show();
                     }
                 });

@@ -35,9 +35,10 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 >
             </com.dongxi.rxdemo.widget.EmptyRecyclerView>
+            <include android:id="@+id/empty_view"
+                     layout="@layout/recyclerview_empty_layout"/>
         </android.support.v4.widget.SwipeRefreshLayout>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
