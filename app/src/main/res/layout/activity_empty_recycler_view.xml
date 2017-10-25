@@ -7,4 +7,8 @@
     android:layout_height="match_parent"
     tools:context="com.dongxi.rxdemo.empety_recyclerview.EmptyRecyclerViewActivity">
 
+    <com.dongxi.rxdemo.widget.EmptyRecyclerView
+        android:id="@+id/empty_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </android.support.constraint.ConstraintLayout>
