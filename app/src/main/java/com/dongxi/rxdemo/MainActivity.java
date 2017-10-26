@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
+import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,10 +42,10 @@ import android.widget.Toast;
 
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
-import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
-import com.dongxi.rxdemo.update.Update;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.dongxi.rxdemo.pinsenction.IndexActivity;
+import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
+import com.dongxi.rxdemo.update.Update;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
@@ -48,11 +61,16 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     private static final String TAG = "MainActivity";
 
-    String[] tags = {"婚姻育儿", "散文", "设计", "上班这点事儿", "影视天堂", "大学生活", "美人说", "运动和健身", "工具癖", "生活家", "程序员", "想法", "短篇小说", "美食", "教育", "心理", "奇思妙想", "美食", "摄影"};
+    String[] tags = {"婚姻育儿", "散文", "设计", "上班这点事儿", "影视天堂", "大学生活", "美人说", "运动和健身"};
     @BindView(R.id.btn_1)
     Button btn1;
     @BindView(R.id.btn_2)
     Button btn2;
+    @BindView(R.id.tv_test_html_text)
+    TextView mTvTestHtmlText;
+    @BindView(R.id.tv_test_spanner_text)
+    TextView mTvTestSpannerText;
+
 
     private FlexboxLayout mFlexboxLayout;
 
@@ -91,11 +109,11 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
                 } else if (itemId == R.id.nav_me) {
                     permission();
-                }else if (itemId == R.id.nav_setting){
+                } else if (itemId == R.id.nav_setting) {
                     startActivity(new Intent(MainActivity.this, GankTestActivity.class));
-                }else if (itemId == R.id.nav_manage){
+                } else if (itemId == R.id.nav_manage) {
                     startActivity(new Intent(MainActivity.this, ThumbUpActivity.class));
-                }else if (itemId == R.id.nav_friend){
+                } else if (itemId == R.id.nav_friend) {
                     startActivity(new Intent(MainActivity.this, CornerLabelActivity.class));
                 }
 
@@ -140,6 +158,38 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         RatingBar ratingBar = (RatingBar) findViewById(R.id.rating_bar);
         ratingBar.setNumStars(3);
         ratingBar.setRating(3f);
+
+        // 字符串动态设置,虽然能够加载图片，但是代码实现太麻烦
+        String str1 = "我要打赏这个内容，作者太帅了balabala，谁也不许拦我，除非她给我发红包，或者点个Star";
+        String str2 = "我要<font color='#FF4081'>打赏</font>这个内容，<strong><font color='#FF4081'>作者太TM帅</font></strong>了balabala，谁也不许拦我，除非她给我发红包，或者点个Star";
+
+        SpannableStringBuilder builder = new SpannableStringBuilder(str1);
+        // "我要"字体颜色变为粉色，Spanned.SPAN_EXCLUSIVE_INCLUSIVE 表示起始和终止的模式为：包左不包右
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF4081")),0,2, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        // 设置背景色
+        builder.setSpan(new BackgroundColorSpan(Color.parseColor("#009ad6")),4,6, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        // 设置字体大小
+        builder.setSpan(new AbsoluteSizeSpan(80),12,14, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        // 设置粗体和斜体
+        builder.setSpan(new StyleSpan(Typeface.BOLD_ITALIC),15,23, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        // 设置删除线
+        builder.setSpan(new StrikethroughSpan(),23,29, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        // 设置下划线
+        builder.setSpan(new UnderlineSpan(),29,35, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        // 设置图片
+        builder.setSpan(new ImageSpan(this,R.mipmap.ic_launcher),35,38, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        // 设置点击
+        builder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                Toast.makeText(MainActivity.this, "点击了打赏", Toast.LENGTH_SHORT).show();
+            }
+        }, 2, 4, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        mTvTestSpannerText.setText(builder);
+        // 设置点击
+        mTvTestSpannerText.setMovementMethod(LinkMovementMethod.getInstance());
+        mTvTestHtmlText.setText(Html.fromHtml(str2));
     }
 
     private View getFlexboxLayoutItemView(final int position) {

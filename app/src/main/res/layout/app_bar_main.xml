@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingBottom="20dp"
         >
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -43,21 +44,23 @@
 
             <Button
                 android:id="@+id/btn_1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="hello"
                 android:background="@drawable/selector_bg_btn"
                 android:textColor="@color/selector_bg_text"
                 />
             <Button
                 android:id="@+id/btn_2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="hello"
                 android:background="@drawable/layer_list_shadow"
                 android:textColor="@color/selector_bg_text"
                 />
-            <!--有问题-->
+
 
         </LinearLayout>
         <View
@@ -99,6 +102,48 @@
             android:layout_gravity="center"
             android:textSize="24sp"
             android:background="@drawable/textview_border_shape"/>
+        <TextView
+            android:id="@+id/tv_test_html_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            android:text="Html.fromHtml 效果"/>
+        <TextView
+            android:id="@+id/tv_test_html_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="14sp"
+            android:text=""/>
+        <TextView
+            android:id="@+id/tv_test_spanner_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            android:text="SpannableStringBuilder 效果"/>
+        <TextView
+            android:id="@+id/tv_test_spanner_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="14sp"
+            android:text=""/>
     </LinearLayout>
 
 </ScrollView>
