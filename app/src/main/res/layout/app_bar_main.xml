@@ -104,14 +104,14 @@
             android:background="@drawable/textview_border_shape"/>
         <TextView
             android:id="@+id/tv_test_html_text_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="3dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="14sp"
-            android:textColor="@color/colorAccent"
+            android:background="@drawable/txt_boder_shape"
             android:text="Html.fromHtml 效果"/>
         <TextView
             android:id="@+id/tv_test_html_text"
@@ -132,7 +132,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="14sp"
-            android:textColor="@color/colorAccent"
+            android:background="@drawable/txt_boder_shape"
             android:text="SpannableStringBuilder 效果"/>
         <TextView
             android:id="@+id/tv_test_spanner_text"
