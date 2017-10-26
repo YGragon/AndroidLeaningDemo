@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo.cornerlableview;
+package com.dongxi.rxdemo.cornerlableview.drawbale;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,13 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.dongxi.rxdemo.R;
-import com.dongxi.rxdemo.cornerlableview.drawbale.BookMarkDrawable;
-import com.dongxi.rxdemo.cornerlableview.drawbale.CornerMarkDrawable;
-import com.dongxi.rxdemo.cornerlableview.drawbale.CornerMarkLocation;
-import com.dongxi.rxdemo.cornerlableview.drawbale.CornerMarkType;
-import com.dongxi.rxdemo.cornerlableview.drawbale.CornerMarkView;
-import com.dongxi.rxdemo.cornerlableview.drawbale.RectangleMarkDrawable;
-import com.dongxi.rxdemo.cornerlableview.drawbale.TrapezoidMarkDrawable;
 
 import java.util.ArrayList;
 import java.util.List;

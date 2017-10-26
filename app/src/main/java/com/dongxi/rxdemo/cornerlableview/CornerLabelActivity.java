@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dongxi.rxdemo.R;
+import com.dongxi.rxdemo.cornerlableview.drawbale.Adapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
