@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -70,6 +71,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     TextView mTvTestHtmlText;
     @BindView(R.id.tv_test_spanner_text)
     TextView mTvTestSpannerText;
+    @BindView(R.id.reward_tv)
+    TextView mRewardTv;
 
 
     private FlexboxLayout mFlexboxLayout;
@@ -165,19 +168,19 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
         SpannableStringBuilder builder = new SpannableStringBuilder(str1);
         // "我要"字体颜色变为粉色，Spanned.SPAN_EXCLUSIVE_INCLUSIVE 表示起始和终止的模式为：包左不包右
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF4081")),0,2, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF4081")), 0, 2, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置背景色
-        builder.setSpan(new BackgroundColorSpan(Color.parseColor("#009ad6")),4,6, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        builder.setSpan(new BackgroundColorSpan(Color.parseColor("#009ad6")), 4, 6, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置字体大小
-        builder.setSpan(new AbsoluteSizeSpan(80),12,14, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        builder.setSpan(new AbsoluteSizeSpan(80), 12, 14, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置粗体和斜体
-        builder.setSpan(new StyleSpan(Typeface.BOLD_ITALIC),15,23, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        builder.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 15, 23, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置删除线
-        builder.setSpan(new StrikethroughSpan(),23,29, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        builder.setSpan(new StrikethroughSpan(), 23, 29, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置下划线
-        builder.setSpan(new UnderlineSpan(),29,35, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        builder.setSpan(new UnderlineSpan(), 29, 35, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置图片
-        builder.setSpan(new ImageSpan(this,R.mipmap.ic_launcher),35,38, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        builder.setSpan(new ImageSpan(this, R.mipmap.ic_launcher), 35, 38, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置点击
         builder.setSpan(new ClickableSpan() {
             @Override
@@ -361,5 +364,14 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 startActivity(new Intent(MainActivity.this, IndexActivity.class));
                 break;
         }
+    }
+
+    @OnClick(R.id.reward_tv)
+    public void onViewClicked() {
+        mRewardTv.setBackgroundResource(R.drawable.boom);
+        AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
+        resources.start();
+        resources
+        resources.setOneShot(true);
     }
 }

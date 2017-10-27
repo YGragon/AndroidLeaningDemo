@@ -94,6 +94,7 @@
             android:progressTint="#559911"
             />
         <TextView
+            android:id="@+id/reward_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="赏"
@@ -111,7 +112,6 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="14sp"
-            android:background="@drawable/txt_boder_shape"
             android:text="Html.fromHtml 效果"/>
         <TextView
             android:id="@+id/tv_test_html_text"
@@ -122,6 +122,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="14sp"
+            android:background="@drawable/txt_boder_shape"
             android:text=""/>
         <TextView
             android:id="@+id/tv_test_spanner_text_title"
@@ -132,7 +133,6 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="14sp"
-            android:background="@drawable/txt_boder_shape"
             android:text="SpannableStringBuilder 效果"/>
         <TextView
             android:id="@+id/tv_test_spanner_text"
@@ -140,6 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="3dp"
+            android:background="@drawable/txt_boder_shape"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="14sp"
