@@ -372,7 +372,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mRewardTv.setBackgroundResource(R.drawable.boom);
         AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
         resources.start();
-        resources.setOneShot(true);
+        resources.setOneShot(false);
         int duration = 0;
 
         for(int i=0;i<resources.getNumberOfFrames();i++){
@@ -388,6 +388,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             public void run() {
 
                 //此处调用第二个动画播放方法
+                // 隐藏显示的图片
                 Toast.makeText(MainActivity.this, "动画执行完毕", Toast.LENGTH_SHORT).show();
 
             }
