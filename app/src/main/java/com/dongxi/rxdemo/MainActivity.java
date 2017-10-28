@@ -10,6 +10,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -371,7 +372,26 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mRewardTv.setBackgroundResource(R.drawable.boom);
         AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
         resources.start();
-        resources
         resources.setOneShot(true);
+        int duration = 0;
+
+        for(int i=0;i<resources.getNumberOfFrames();i++){
+
+            duration += resources.getDuration(i);
+
+        }
+
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+
+            public void run() {
+
+                //此处调用第二个动画播放方法
+                Toast.makeText(MainActivity.this, "动画执行完毕", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }, duration);
     }
 }
