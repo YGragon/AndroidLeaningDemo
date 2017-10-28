@@ -372,7 +372,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mRewardTv.setBackgroundResource(R.drawable.boom);
         AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
         resources.start();
-        resources.setOneShot(false);
+//        resources.setOneShot(true); // 已经在boom中设置
         int duration = 0;
 
         for(int i=0;i<resources.getNumberOfFrames();i++){
