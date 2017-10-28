@@ -389,6 +389,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
                 //此处调用第二个动画播放方法
                 // 隐藏显示的图片
+                mRewardTv.setBackground(getResources().getDrawable(R.drawable.textview_border_shape));
                 Toast.makeText(MainActivity.this, "动画执行完毕", Toast.LENGTH_SHORT).show();
 
             }

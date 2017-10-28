@@ -5,6 +5,5 @@
 <item android:drawable="@drawable/android_guide_step_2" android:duration="200"/>
 <item android:drawable="@drawable/android_guide_step_3" android:duration="200"/>
 <item android:drawable="@drawable/guitar" android:duration="200"/>
-    <item android:drawable="@android:id/empty" android:duration="100" />
 
 </animation-list>
