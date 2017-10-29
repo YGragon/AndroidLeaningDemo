@@ -172,7 +172,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF4081")), 0, 2, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置背景色
         builder.setSpan(new BackgroundColorSpan(Color.parseColor("#009ad6")), 4, 6, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-        // 设置字体大小
+        // 设置字体大小（绝对值,单位：像素）
         builder.setSpan(new AbsoluteSizeSpan(80), 12, 14, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         // 设置粗体和斜体
         builder.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 15, 23, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -369,6 +369,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @OnClick(R.id.reward_tv)
     public void onViewClicked() {
+        // TODO: 2017/10/28 弹出一个弹窗后再播放动画
         mRewardTv.setBackgroundResource(R.drawable.boom);
         AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
         resources.start();
