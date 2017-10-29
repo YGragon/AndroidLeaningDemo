@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo.commen;
+package com.dongxi.rxdemo.common;
 
 import android.view.View;
 

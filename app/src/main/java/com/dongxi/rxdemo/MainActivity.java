@@ -6,11 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -42,6 +40,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongxi.rxdemo.anim.ShowAnimaFragment;
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
@@ -369,32 +368,35 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @OnClick(R.id.reward_tv)
     public void onViewClicked() {
+        // 弹窗出来在显示帧动画
+        ShowAnimaFragment showAnimaFragment = new ShowAnimaFragment();
+        showAnimaFragment.show(getSupportFragmentManager(),"showAnimaFragment");
         // TODO: 2017/10/28 弹出一个弹窗后再播放动画
-        mRewardTv.setBackgroundResource(R.drawable.boom);
-        AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
-        resources.start();
-//        resources.setOneShot(true); // 已经在boom中设置
-        int duration = 0;
-
-        for(int i=0;i<resources.getNumberOfFrames();i++){
-
-            duration += resources.getDuration(i);
-
-        }
-
-        Handler handler = new Handler();
-
-        handler.postDelayed(new Runnable() {
-
-            public void run() {
-
-                //此处调用第二个动画播放方法
-                // 隐藏显示的图片
-                mRewardTv.setBackground(getResources().getDrawable(R.drawable.textview_border_shape));
-                Toast.makeText(MainActivity.this, "动画执行完毕", Toast.LENGTH_SHORT).show();
-
-            }
-
-        }, duration);
+//        mRewardTv.setBackgroundResource(R.drawable.boom);
+//        AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
+//        resources.start();
+////        resources.setOneShot(true); // 已经在boom中设置
+//        int duration = 0;
+//
+//        for(int i=0;i<resources.getNumberOfFrames();i++){
+//
+//            duration += resources.getDuration(i);
+//
+//        }
+//
+//        Handler handler = new Handler();
+//
+//        handler.postDelayed(new Runnable() {
+//
+//            public void run() {
+//
+//                //此处调用第二个动画播放方法
+//                // 隐藏显示的图片
+//                mRewardTv.setBackground(getResources().getDrawable(R.drawable.textview_border_shape));
+//                Toast.makeText(MainActivity.this, "动画执行完毕", Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        }, duration);
     }
 }

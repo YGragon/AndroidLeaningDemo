@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo.commen;
+package com.dongxi.rxdemo.common;
 
 import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
