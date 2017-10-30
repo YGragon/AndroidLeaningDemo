@@ -40,6 +40,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dongxi.rxdemo.callback.Li;
+import com.dongxi.rxdemo.callback.Wang;
 import com.dongxi.rxdemo.common.dialog.DialogFragmentHelper;
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
@@ -186,6 +188,10 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             @Override
             public void onClick(View widget) {
                 Toast.makeText(MainActivity.this, "点击了打赏", Toast.LENGTH_SHORT).show();
+                // 测试回掉接口
+                Li li = new Li();
+                Wang wang = new Wang(li);
+                wang.askQuestion("1 + 1 = ?");
             }
         }, 2, 4, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
