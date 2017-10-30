@@ -1,19 +1,14 @@
 package com.dongxi.rxdemo.anim;
 
 import android.app.Dialog;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -25,10 +20,6 @@ import butterknife.Unbinder;
 
 public class ShowAnimaFragment extends DialogFragment {
 
-//    @BindView(R.id.dialog_cancel)
-//    TextView mDialogCancel;
-//    @BindView(R.id.dialog_commit)
-//    TextView mDialogCommit;
     Unbinder unbinder;
     @BindView(R.id.dialog_layout)
     FrameLayout mDialogLayout;
@@ -48,14 +39,7 @@ public class ShowAnimaFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE); // 去掉标题
-        // 设置宽度为屏宽, 靠近屏幕底部。
-        Window window = getDialog().getWindow();
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));     // 必须设置
-        WindowManager.LayoutParams lp = window.getAttributes();
-        lp.gravity = Gravity.CENTER; // 紧贴底部
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT; // 宽度持平
-        window.setAttributes(lp);
+
         View view = inflater.inflate(R.layout.fragment_show_anima, container, false);
         unbinder = ButterKnife.bind(this, view);
 

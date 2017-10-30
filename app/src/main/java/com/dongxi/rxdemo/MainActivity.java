@@ -40,7 +40,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dongxi.rxdemo.anim.ShowAnimaFragment;
+import com.dongxi.rxdemo.common.dialog.DialogFragmentHelper;
+import com.dongxi.rxdemo.common.dialog.IDialogResultListener;
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
@@ -369,8 +370,15 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @OnClick(R.id.reward_tv)
     public void onViewClicked() {
         // 弹窗出来在显示帧动画
-        ShowAnimaFragment showAnimaFragment = new ShowAnimaFragment();
-        showAnimaFragment.show(getSupportFragmentManager(),"showAnimaFragment");
+        DialogFragmentHelper.showEmptyDialog(getSupportFragmentManager(), new IDialogResultListener<String[]>() {
+            @Override
+            public void onDataResult(String[] result) {
+
+            }
+        },true);
+
+//        ShowAnimaFragment showAnimaFragment = new ShowAnimaFragment();
+//        showAnimaFragment.show(getSupportFragmentManager(),"showAnimaFragment");
         // TODO: 2017/10/28 弹出一个弹窗后再播放动画
 //        mRewardTv.setBackgroundResource(R.drawable.boom);
 //        AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
