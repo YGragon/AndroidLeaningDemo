@@ -41,7 +41,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongxi.rxdemo.common.dialog.DialogFragmentHelper;
-import com.dongxi.rxdemo.common.dialog.IDialogResultListener;
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
@@ -370,12 +369,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @OnClick(R.id.reward_tv)
     public void onViewClicked() {
         // 弹窗出来在显示帧动画
-        DialogFragmentHelper.showEmptyDialog(getSupportFragmentManager(), new IDialogResultListener<String[]>() {
-            @Override
-            public void onDataResult(String[] result) {
-
-            }
-        },true);
+        DialogFragmentHelper.showEmptyDialog(getSupportFragmentManager(),true);
 
 //        ShowAnimaFragment showAnimaFragment = new ShowAnimaFragment();
 //        showAnimaFragment.show(getSupportFragmentManager(),"showAnimaFragment");

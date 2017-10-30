@@ -37,13 +37,17 @@ public class CommonDialogFragment extends DialogFragment {
         Dialog getDialog(Context context);
     }
 
+    public static CommonDialogFragment newInstance(boolean cancelable) {
+        return newInstance(null, cancelable, null);
+    }
+
     public static CommonDialogFragment newInstance(OnCallDialog callDialog, boolean cancelable) {
         return newInstance(callDialog, cancelable, null);
     }
 
     public static CommonDialogFragment newInstance(OnCallDialog callDialog, boolean cancelable, OnDialogCancelListener cancelListener) {
         CommonDialogFragment instance = new CommonDialogFragment();
-        instance.setCancelable(cancelable);
+        instance.setCancelable(cancelable); // 对话框是否能被取消
         instance.mCancelListener = cancelListener;
         instance.mOnCallDialog = callDialog;
         return instance;

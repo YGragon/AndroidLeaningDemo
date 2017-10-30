@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -16,17 +18,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TimePicker;
 
 import com.dongxi.rxdemo.R;
+import com.dongxi.rxdemo.global.BaseApplication;
+import com.dongxi.rxdemo.utils.ToastUtil;
 
 import java.util.Calendar;
+
 
 /**
  * Created by Administrator on 2017/10/30.
  */
 
 public class DialogFragmentHelper {
+
+    private static final String TAG = "DialogFragmentHelper";
+
     private static final String DIALOG_POSITIVE = "确定";
     private static final String DIALOG_NEGATIVE = "取消";
 
@@ -326,13 +335,42 @@ public class DialogFragmentHelper {
      */
     private static final int EMPTY = R.style.Base_AlertDialog;
     private static final String EMPTY_TAG = TAG_HEAD + ":empty";
+    private static int duration = 0;
 
-    public static void showEmptyDialog(FragmentManager manager, final IDialogResultListener<String []> resultListener, final boolean cancelable){
-        CommonDialogFragment dialogFragment = CommonDialogFragment.newInstance(new CommonDialogFragment.OnCallDialog() {
+    public static void showEmptyDialog(FragmentManager manager,  final boolean cancelable){
+        final CommonDialogFragment dialogFragment = CommonDialogFragment.newInstance(new CommonDialogFragment.OnCallDialog() {
             @Override
             public Dialog getDialog(Context context) {
                 View view = LayoutInflater.from(context).inflate(R.layout.fragment_show_anima, null);
-                AlertDialog.Builder builder = new AlertDialog.Builder(context, EMPTY);
+                final FrameLayout mDialogLayout = (FrameLayout) view.findViewById(R.id.dialog_layout);
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context, EMPTY);
+
+                mDialogLayout.setBackgroundResource(R.drawable.boom);
+                AnimationDrawable resources = (AnimationDrawable) mDialogLayout.getBackground();
+                resources.start();
+//        resources.setOneShot(true); // 已经在boom中设置
+
+                for (int i = 0; i < resources.getNumberOfFrames(); i++) {
+
+                    duration += resources.getDuration(i);
+
+                }
+
+                Handler handler = new Handler();
+
+                handler.postDelayed(new Runnable() {
+
+                    public void run() {
+
+                        //此处调用第二个动画播放方法
+                        // 隐藏显示的图片
+                        mDialogLayout.setBackground(BaseApplication.getApplication().getResources().getDrawable(R.drawable.guitar));
+                        ToastUtil.showShortToast("完事");
+
+                    }
+                }, duration);
+
                 return builder.setView(view).create();
             }
         }, cancelable, null);
