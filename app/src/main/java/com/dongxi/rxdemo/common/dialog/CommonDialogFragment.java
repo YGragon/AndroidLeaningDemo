@@ -80,6 +80,11 @@ public class CommonDialogFragment extends DialogFragment {
             WindowManager.LayoutParams windowParams = window.getAttributes();
             windowParams.dimAmount = 0.0f;
             window.setAttributes(windowParams);
+
+//            // 去掉标题栏
+//            DisplayMetrics displayMetrics = new DisplayMetrics();
+//            getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
     }
 

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Handler;
@@ -22,7 +23,6 @@ import android.widget.FrameLayout;
 import android.widget.TimePicker;
 
 import com.dongxi.rxdemo.R;
-import com.dongxi.rxdemo.global.BaseApplication;
 import com.dongxi.rxdemo.utils.ToastUtil;
 
 import java.util.Calendar;
@@ -340,12 +340,11 @@ public class DialogFragmentHelper {
     public static void showEmptyDialog(FragmentManager manager,  final boolean cancelable){
         final CommonDialogFragment dialogFragment = CommonDialogFragment.newInstance(new CommonDialogFragment.OnCallDialog() {
             @Override
-            public Dialog getDialog(Context context) {
-                View view = LayoutInflater.from(context).inflate(R.layout.fragment_show_anima, null);
+            public Dialog getDialog(final Context context) {
+                final View view = LayoutInflater.from(context).inflate(R.layout.fragment_show_anima, null);
                 final FrameLayout mDialogLayout = (FrameLayout) view.findViewById(R.id.dialog_layout);
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context, EMPTY);
-
                 mDialogLayout.setBackgroundResource(R.drawable.boom);
                 AnimationDrawable resources = (AnimationDrawable) mDialogLayout.getBackground();
                 resources.start();
@@ -365,7 +364,8 @@ public class DialogFragmentHelper {
 
                         //此处调用第二个动画播放方法
                         // 隐藏显示的图片
-                        mDialogLayout.setBackground(BaseApplication.getApplication().getResources().getDrawable(R.drawable.guitar));
+                        mDialogLayout.setBackground(null);
+                        mDialogLayout.setBackgroundColor(Color.TRANSPARENT);
                         ToastUtil.showShortToast("完事");
 
                     }
