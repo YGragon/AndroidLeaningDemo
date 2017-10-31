@@ -348,7 +348,6 @@ public class DialogFragmentHelper {
                 mDialogLayout.setBackgroundResource(R.drawable.boom);
                 AnimationDrawable resources = (AnimationDrawable) mDialogLayout.getBackground();
                 resources.start();
-//        resources.setOneShot(true); // 已经在boom中设置
 
                 for (int i = 0; i < resources.getNumberOfFrames(); i++) {
 

@@ -46,7 +46,6 @@ public class ShowAnimaFragment extends DialogFragment {
         mDialogLayout.setBackgroundResource(R.drawable.boom);
         AnimationDrawable resources = (AnimationDrawable) mDialogLayout.getBackground();
         resources.start();
-//        resources.setOneShot(true); // 已经在boom中设置
         int duration = 0;
 
         for (int i = 0; i < resources.getNumberOfFrames(); i++) {
