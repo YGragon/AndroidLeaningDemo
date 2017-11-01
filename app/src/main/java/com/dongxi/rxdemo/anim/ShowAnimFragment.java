@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class ShowAnimaFragment extends DialogFragment {
+public class ShowAnimFragment extends DialogFragment {
 
     Unbinder unbinder;
     @BindView(R.id.dialog_layout)

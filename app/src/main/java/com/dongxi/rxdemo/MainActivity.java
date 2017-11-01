@@ -385,7 +385,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         // 弹窗出来在显示帧动画
         DialogFragmentHelper.showEmptyDialog(getSupportFragmentManager(),true);
 
-//        ShowAnimaFragment showAnimaFragment = new ShowAnimaFragment();
+//        ShowAnimFragment showAnimaFragment = new ShowAnimFragment();
 //        showAnimaFragment.show(getSupportFragmentManager(),"showAnimaFragment");
 
     }
