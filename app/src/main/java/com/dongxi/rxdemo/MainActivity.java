@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.dongxi.rxdemo.callback.Li;
 import com.dongxi.rxdemo.callback.Wang;
 import com.dongxi.rxdemo.common.dialog.DialogFragmentHelper;
+import com.dongxi.rxdemo.common.dialog.IDialogResultListener;
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
@@ -52,6 +53,7 @@ import com.dongxi.rxdemo.update.Update;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -364,6 +366,12 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_1:
+                DialogFragmentHelper.showTimeDialog(getSupportFragmentManager(), "日期选择器",Calendar.getInstance(), new IDialogResultListener<Calendar>() {
+                    @Override
+                    public void onDataResult(Calendar result) {
+
+                    }
+                },true);
                 break;
             case R.id.btn_2:
                 // 跳转悬浮头的列表页
@@ -379,32 +387,6 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
 //        ShowAnimaFragment showAnimaFragment = new ShowAnimaFragment();
 //        showAnimaFragment.show(getSupportFragmentManager(),"showAnimaFragment");
-        // TODO: 2017/10/28 弹出一个弹窗后再播放动画
-//        mRewardTv.setBackgroundResource(R.drawable.boom);
-//        AnimationDrawable resources = (AnimationDrawable) mRewardTv.getBackground();
-//        resources.start();
-////        resources.setOneShot(true); // 已经在boom中设置
-//        int duration = 0;
-//
-//        for(int i=0;i<resources.getNumberOfFrames();i++){
-//
-//            duration += resources.getDuration(i);
-//
-//        }
-//
-//        Handler handler = new Handler();
-//
-//        handler.postDelayed(new Runnable() {
-//
-//            public void run() {
-//
-//                //此处调用第二个动画播放方法
-//                // 隐藏显示的图片
-//                mRewardTv.setBackground(getResources().getDrawable(R.drawable.textview_border_shape));
-//                Toast.makeText(MainActivity.this, "动画执行完毕", Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//        }, duration);
+
     }
 }
