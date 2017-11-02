@@ -1,7 +1,9 @@
 package com.dongxi.rxdemo.mulit_layout;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dongxi.rxdemo.R;
 import com.dongxi.rxdemo.utils.recyclerview.CommonViewHolder;
@@ -24,6 +26,14 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
     private String str2 ;
 
     private ArrayList<MulitLayoutActivity.Test> mTestArrayList = new ArrayList<>() ;
+    private OnItemInterface mClickListener ;
+    public interface OnItemInterface{
+        void onItemClick(int position) ;
+    }
+    public void setOnClick(OnItemInterface onItemInterface){
+        this.mClickListener = onItemInterface ;
+    }
+
 
     public MulitAdapter(Context context, int[] layoutIds, ArrayList<MulitLayoutActivity.Test> datas) {
         super(context, layoutIds, datas);
@@ -50,7 +60,7 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
     }
 
     @Override
-    public void onBinds(CommonViewHolder holder, MulitLayoutActivity.Test test, int position, int itemType) {
+    public void onBinds(CommonViewHolder holder, MulitLayoutActivity.Test test, final int position, int itemType) {
         switch (itemType) {
             case LAYOUT1:
                 TextView tv1 = holder.getView(R.id.mulit_tv1);
@@ -64,7 +74,21 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
                 break;
             case LAYOUT3:
                 TextView tv3 = holder.getView(R.id.mulit_tv3);
+
                 tv3.setText(test.text);
+
+                if (  position == mTestArrayList.size()-1){
+                    tv3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (mClickListener != null){
+                                mClickListener.onItemClick(position);
+                            }
+                            Toast.makeText(mContext, "显示数据", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
 
                 break;
             default:

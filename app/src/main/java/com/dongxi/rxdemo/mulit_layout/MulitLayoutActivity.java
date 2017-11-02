@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.dongxi.rxdemo.R;
 
@@ -17,14 +19,19 @@ import butterknife.ButterKnife;
  */
 public class MulitLayoutActivity extends AppCompatActivity {
 
+    private static final String TAG = "MulitLayoutActivity";
+
     @BindView(R.id.mulit_layout_recyclerView)
     RecyclerView mMulitLayoutRecyclerView;
+    private ArrayList<Test> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mulit_layout);
         ButterKnife.bind(this);
+
+        intiData() ;
 
         int[] layoutId = new int[]{
                 R.layout.mulit_layout1,
@@ -33,35 +40,49 @@ public class MulitLayoutActivity extends AppCompatActivity {
         };
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mMulitLayoutRecyclerView.setLayoutManager(linearLayoutManager);
-        MulitSlefAdapter mulitAdapter = new MulitSlefAdapter(this,intiData());
-//        MulitAdapter mulitAdapter = new MulitAdapter(this,layoutId,intiData());
+//        MulitSlefAdapter mulitAdapter = new MulitSlefAdapter(this,intiData());
+        final MulitAdapter mulitAdapter = new MulitAdapter(this,layoutId,mList);
 
         // tv1 setText
-        mulitAdapter.setTv1("第一条");
+//        mulitAdapter.setTv1("第一条");
 
         // tv2 setText
-        mulitAdapter.setTv2("第二条");
+//        mulitAdapter.setTv2("第二条");
 
         mMulitLayoutRecyclerView.setAdapter(mulitAdapter);
+
+        mulitAdapter.setOnClick(new MulitAdapter.OnItemInterface() {
+            @Override
+            public void onItemClick(int position) {
+                for (int i = 0 ; i < 5 ; i++){
+                    Test test = new Test();
+                    test.text = "position: " + position + i ;
+                    mList.add(test) ;
+                }
+                Log.e(TAG, "onItemClick: size=="+mList.size());
+                Toast.makeText(MulitLayoutActivity.this, "刷新数据啦", Toast.LENGTH_SHORT).show();
+                mulitAdapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
     private ArrayList<Test> intiData() {
-        ArrayList<Test> list = new ArrayList<>();
+        mList = new ArrayList<>();
         Test tv1 = new Test();
         tv1.text = "哈哈" ;
-        list.add(tv1) ;
+        mList.add(tv1) ;
         Test tv2 = new Test();
         tv2.text = "嘻嘻" ;
-        list.add(tv2) ;
+        mList.add(tv2) ;
 
-        for (int i = 0 ; i < 5; i++){
+        for (int i = 0 ; i < 10; i++){
             Test test = new Test();
             test.text = "position: "+i ;
-            list.add(test) ;
+            mList.add(test) ;
         }
 
-        return list;
+        return mList;
     }
 
     public class Test{
