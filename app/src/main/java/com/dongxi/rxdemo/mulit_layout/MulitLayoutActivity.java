@@ -33,13 +33,14 @@ public class MulitLayoutActivity extends AppCompatActivity {
         };
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mMulitLayoutRecyclerView.setLayoutManager(linearLayoutManager);
-        MulitAdapter mulitAdapter = new MulitAdapter(this,layoutId,intiData());
+        MulitSlefAdapter mulitAdapter = new MulitSlefAdapter(this,intiData());
+//        MulitAdapter mulitAdapter = new MulitAdapter(this,layoutId,intiData());
 
         // tv1 setText
-//        mulitAdapter.setTv1("第一条");
+        mulitAdapter.setTv1("第一条");
 
         // tv2 setText
-//        mulitAdapter.setTv2("第二条");
+        mulitAdapter.setTv2("第二条");
 
         mMulitLayoutRecyclerView.setAdapter(mulitAdapter);
 
