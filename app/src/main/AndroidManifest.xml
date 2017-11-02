@@ -59,6 +59,8 @@
         </activity>
         <activity android:name=".empety_recyclerview.EmptyRecyclerViewActivity">
         </activity>
+        <activity android:name=".mulit_layout.MulitLayoutActivity">
+        </activity>
     </application>
 
 </manifest>

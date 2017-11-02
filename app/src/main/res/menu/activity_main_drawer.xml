@@ -11,7 +11,7 @@
         android:icon="@mipmap/ic_launcher"/>
     <item
         android:id="@+id/nav_notification"
-        android:title="通知"
+        android:title="多布局"
         android:icon="@mipmap/ic_launcher"/>
     <item
         android:id="@+id/nav_message"
