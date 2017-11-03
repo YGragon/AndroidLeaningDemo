@@ -1,7 +1,6 @@
 package com.dongxi.rxdemo.utils.recyclerview;
 
 import android.content.Context;
-import android.view.View;
 
 import java.util.List;
 
@@ -10,23 +9,6 @@ import java.util.List;
  */
 
 public abstract class MultiLayoutsCommoAdapter<T> extends CommonAdapter<T> {
-
-    // 头部控件
-    private View mHeaderView;
-
-    // 底部控件
-    private View mFooterView;
-
-
-    // item 的三种类型
-    public static final int ITEM_TYPE_NORMAL = 0X1111; // 正常的item类型
-    public static final int ITEM_TYPE_HEADER = 0X1112; // header
-    public static final int ITEM_TYPE_FOOTER = 0X1113; // footer
-
-
-    private boolean isHasHeader = false;
-
-    private boolean isHasFooter = false;
 
     public MultiLayoutsCommoAdapter(Context context, int[] layoutIds, List<T> datas) {
         super(context, layoutIds, datas);

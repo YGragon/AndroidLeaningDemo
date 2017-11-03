@@ -50,10 +50,6 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
         this.str2 = tv2 ;
     }
 
-    @Override
-    public int getItemCount() {
-        return super.getItemCount();
-    }
 
     @Override
     public int getItemsType(int position) {
@@ -63,9 +59,11 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
             return LAYOUT1 ;
         }else if (position == LAYOUT2){
             return LAYOUT2 ;
-        }else if (position + 1 == mTestArrayList.size()){
-            return LAYOUT4 ;
-        }else {
+        }
+//        else if (position + 1 == mTestArrayList.size()){
+//            return LAYOUT4 ;
+//        }
+        else {
             return LAYOUT3 ;
         }
     }

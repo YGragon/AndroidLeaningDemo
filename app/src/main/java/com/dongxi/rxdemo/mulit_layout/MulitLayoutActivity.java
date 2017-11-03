@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.dongxi.rxdemo.R;
@@ -65,7 +66,7 @@ public class MulitLayoutActivity extends AppCompatActivity {
                 mulitAdapter.notifyDataSetChanged();
             }
         });
-
+        mulitAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.mulit_layout4,null));
     }
 
     private ArrayList<Test> intiData() {
