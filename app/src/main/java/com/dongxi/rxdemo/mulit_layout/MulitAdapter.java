@@ -1,6 +1,7 @@
 package com.dongxi.rxdemo.mulit_layout;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
     private static final int LAYOUT1 = 0;
     private static final int LAYOUT2 = 1;
     private static final int LAYOUT3 = 2;
+    private static final int LAYOUT4 = 3;
 
     private String str1 ;
     private String str2 ;
@@ -49,11 +51,20 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
     }
 
     @Override
+    public int getItemCount() {
+        return super.getItemCount();
+    }
+
+    @Override
     public int getItemsType(int position) {
+        Log.e(TAG, "getItemsType: position == "+position);
+        Log.e(TAG, "getItemsType:  mTestArrayList.size() == "+ mTestArrayList.size());
         if (position == LAYOUT1){
             return LAYOUT1 ;
         }else if (position == LAYOUT2){
             return LAYOUT2 ;
+        }else if (position + 1 == mTestArrayList.size()){
+            return LAYOUT4 ;
         }else {
             return LAYOUT3 ;
         }
@@ -77,19 +88,29 @@ public class MulitAdapter extends MultiLayoutsCommoAdapter<MulitLayoutActivity.T
 
                 tv3.setText(test.text);
 
-                if (  position == mTestArrayList.size()-1){
-                    tv3.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (mClickListener != null){
-                                mClickListener.onItemClick(position);
-                            }
-                            Toast.makeText(mContext, "显示数据", Toast.LENGTH_SHORT).show();
+//                if ( position == mTestArrayList.size()-1){
+//                    tv3.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//
+//                        }
+//                    });
+//                }
+
+
+                break;
+            case LAYOUT4:
+                Log.e(TAG, "onBinds: look more");
+                TextView lookMoreTv = holder.getView(R.id.tv_look_more) ;
+                lookMoreTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mClickListener != null){
+                            mClickListener.onItemClick(position);
                         }
-                    });
-                }
-
-
+                        Toast.makeText(mContext, "显示数据", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             default:
 

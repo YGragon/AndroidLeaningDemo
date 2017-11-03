@@ -67,7 +67,7 @@ public class MulitSlefAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //            ((ViewHolderTV1) holder).mTextView1.setText(str1);
         }else if (holder instanceof ViewHolderTV2){
             ((ViewHolderTV2) holder).mTextView2.setText(mTestArrayList.get(position).text);
-//            ((ViewHolderTV2) holder).mTextView2.setText(str2);
+            ((ViewHolderTV2) holder).mTextView2.setText(str2);
         }else {
             ((ViewHolderTV3) holder).mTextView3.setText(mTestArrayList.get(position).text);
         }

@@ -36,7 +36,8 @@ public class MulitLayoutActivity extends AppCompatActivity {
         int[] layoutId = new int[]{
                 R.layout.mulit_layout1,
                 R.layout.mulit_layout2,
-                R.layout.mulit_layout3
+                R.layout.mulit_layout3,
+                R.layout.mulit_layout4
         };
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mMulitLayoutRecyclerView.setLayoutManager(linearLayoutManager);
@@ -81,6 +82,10 @@ public class MulitLayoutActivity extends AppCompatActivity {
             test.text = "position: "+i ;
             mList.add(test) ;
         }
+//        // 用于显示查看更多的position
+        Test test = new Test();
+//        test.text = "position: last normal";
+        mList.add(test) ;
 
         return mList;
     }

@@ -23,6 +23,8 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
         this.mLayoutId = new int[]{layoutId};
 //        mInflater = LayoutInflater.from(mContext) ;
     }
+
+
     //使用多布局时的构造函数，可以接收传入的布局资源Id数组
     public CommonAdapter(Context context, int[] layoutIds, List<T> datas ) {
         this.mContext = context;
@@ -39,7 +41,12 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHo
 
     @Override
     public int getItemCount() {
-        return mDatas == null ? 0 : mDatas.size();
+        int size = mDatas.size() ;
+//        if(isHasFooter)
+//            size ++;
+//        if(isHasHeader)
+//            size++;
+        return mDatas == null ? 0 : size;
     }
     @Override
     public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
