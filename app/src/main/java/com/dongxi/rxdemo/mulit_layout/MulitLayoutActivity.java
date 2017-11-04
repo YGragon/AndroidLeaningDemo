@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -93,7 +92,7 @@ public class MulitLayoutActivity extends AppCompatActivity {
     }
 
     private ArrayList<String> intiData() {
-        for (int i = 0 ; i < 30; i++){
+        for (int i = 0 ; i < 10; i++){
             mList.add("position: "+i) ;
         }
         return mList;
