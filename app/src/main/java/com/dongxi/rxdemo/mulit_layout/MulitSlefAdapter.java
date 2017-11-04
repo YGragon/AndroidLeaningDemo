@@ -1,7 +1,9 @@
 package com.dongxi.rxdemo.mulit_layout;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,102 +17,158 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/11/2.
  */
 
-public class MulitSlefAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MulitSlefAdapter extends RecyclerView.Adapter<MulitSlefAdapter.MyHolder> {
 
     private static final String TAG = "MulitSlefAdapter";
-    private static final int LAYOUT1 = 0;
-    private static final int LAYOUT2 = 1;
-    private static final int LAYOUT3 = 2;
+
     private Context mContext ;
+    private ArrayList<String> mData = new ArrayList<>();
 
-    private ArrayList<MulitLayoutActivity.Test> mTestArrayList ;
+    private RecyclerView mRecyclerView;
 
-    private String str1 ;
-    private String str2 ;
+    private View VIEW_FOOTER;
+    private View VIEW_HEADER;
 
-    public MulitSlefAdapter(MulitLayoutActivity mulitLayoutActivity, ArrayList<MulitLayoutActivity.Test> testArrayList) {
-        mTestArrayList = testArrayList;
-        mContext = mulitLayoutActivity ;
+    //Type
+    private int TYPE_NORMAL = 1000;
+    private int TYPE_HEADER = 1001;
+    private int TYPE_FOOTER = 1002;
+
+
+    public MulitSlefAdapter(ArrayList<String> data, Context mContext) {
+        this.mData = data;
+        this.mContext = mContext;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view ;
-        RecyclerView.ViewHolder holder ;
-        if (viewType == LAYOUT1){
-            view = LayoutInflater.from(mContext).inflate(R.layout.mulit_layout1,parent,false) ;
-            holder = new ViewHolderTV1(view) ;
-        }else if (viewType == LAYOUT2){
-            view = LayoutInflater.from(mContext).inflate(R.layout.mulit_layout2,parent,false) ;
-            holder = new ViewHolderTV2(view) ;
-        }else {
-            view = LayoutInflater.from(mContext).inflate(R.layout.mulit_layout3,parent,false) ;
-            holder = new ViewHolderTV3(view) ;
+    public MulitSlefAdapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_FOOTER) {
+            return new MyHolder(VIEW_FOOTER);
+        } else if (viewType == TYPE_HEADER) {
+            return new MyHolder(VIEW_HEADER);
+        } else {
+            return new MyHolder(getLayout(R.layout.item_list_layout));
         }
-        return holder;
     }
-
-    public void setTv1(String tv1){
-        this.str1 = tv1 ;
-    }
-
-    public void setTv2(String tv2){
-        this.str2 = tv2 ;
-    }
-
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-        if (holder instanceof ViewHolderTV1){
-            ((ViewHolderTV1) holder).mTextView1.setText(mTestArrayList.get(position).text);
-//            ((ViewHolderTV1) holder).mTextView1.setText(str1);
-        }else if (holder instanceof ViewHolderTV2){
-            ((ViewHolderTV2) holder).mTextView2.setText(mTestArrayList.get(position).text);
-            ((ViewHolderTV2) holder).mTextView2.setText(str2);
-        }else {
-            ((ViewHolderTV3) holder).mTextView3.setText(mTestArrayList.get(position).text);
+    public void onBindViewHolder(MyHolder holder, int position) {
+        if (!isHeaderView(position) && !isFooterView(position)) {
+            if (haveHeaderView()) position--;
+            TextView content = (TextView) holder.itemView.findViewById(R.id.item_content);
+            TextView time = (TextView) holder.itemView.findViewById(R.id.item_time);
+            content.setText(mData.get(position));
+            time.setText("2016-1-1");
         }
     }
+
 
     @Override
     public int getItemViewType(int position) {
-        if (position == LAYOUT1){
-            return LAYOUT1 ;
-        }else if (position == LAYOUT2){
-            return LAYOUT2 ;
-        }else {
-            return LAYOUT3 ;
+        if (isHeaderView(position)) {
+            return TYPE_HEADER;
+        } else if (isFooterView(position)) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_NORMAL;
+        }
+
+    }
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        try {
+            if (mRecyclerView == null && mRecyclerView != recyclerView) {
+                mRecyclerView = recyclerView;
+            }
+            ifGridLayoutManager();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    private View getLayout(int layoutId) {
+        return LayoutInflater.from(mContext).inflate(layoutId, null);
+    }
+
 
     @Override
     public int getItemCount() {
-        return mTestArrayList.size();
+        int count = (mData == null ? 0 : mData.size());
+        if (VIEW_FOOTER != null) {
+            count++;
+        }
+
+        if (VIEW_HEADER != null) {
+            count++;
+        }
+        return count;
     }
 
-    class ViewHolderTV1 extends RecyclerView.ViewHolder{
-        TextView mTextView1 ;
+    public void addHeaderView(View headerView) {
+        if (haveHeaderView()) {
+            throw new IllegalStateException("hearview has already exists!");
+        } else {
+            //避免出现宽度自适应
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            headerView.setLayoutParams(params);
+            VIEW_HEADER = headerView;
+            ifGridLayoutManager();
+            notifyItemInserted(0);
+        }
 
-        public ViewHolderTV1(View itemView) {
-            super(itemView);
-            mTextView1 = (TextView) itemView.findViewById(R.id.mulit_tv1);
+    }
+
+    public void addFooterView(View footerView) {
+        if (haveFooterView()) {
+            throw new IllegalStateException("footerView has already exists!");
+        } else {
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            footerView.setLayoutParams(params);
+            VIEW_FOOTER = footerView;
+            ifGridLayoutManager();
+            notifyItemInserted(getItemCount() - 1);
         }
     }
-    class ViewHolderTV2 extends RecyclerView.ViewHolder{
-        TextView mTextView2 ;
 
-        public ViewHolderTV2(View itemView) {
-            super(itemView);
-            mTextView2 = (TextView) itemView.findViewById(R.id.mulit_tv2);
+    private void ifGridLayoutManager() {
+        if (mRecyclerView == null) return;
+        final RecyclerView.LayoutManager layoutManager = mRecyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            final GridLayoutManager.SpanSizeLookup originalSpanSizeLookup =
+                    ((GridLayoutManager) layoutManager).getSpanSizeLookup();
+            ((GridLayoutManager) layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    return (isHeaderView(position) || isFooterView(position)) ?
+                            ((GridLayoutManager) layoutManager).getSpanCount() :
+                            1;
+                }
+            });
         }
     }
-    class ViewHolderTV3 extends RecyclerView.ViewHolder{
-        TextView mTextView3 ;
 
-        public ViewHolderTV3(View itemView) {
+    private boolean haveHeaderView() {
+        return VIEW_HEADER != null;
+    }
+
+    public boolean haveFooterView() {
+        return VIEW_FOOTER != null;
+    }
+
+    private boolean isHeaderView(int position) {
+        return haveHeaderView() && position == 0;
+    }
+
+    private boolean isFooterView(int position) {
+        return haveFooterView() && position == getItemCount() - 1;
+    }
+
+
+    public static class MyHolder extends RecyclerView.ViewHolder {
+
+        public MyHolder(View itemView) {
             super(itemView);
-            mTextView3 = (TextView) itemView.findViewById(R.id.mulit_tv3);
         }
     }
+
 }
