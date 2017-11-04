@@ -3,7 +3,9 @@ package com.dongxi.rxdemo.mulit_layout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -27,6 +29,8 @@ public class MulitLayoutActivity extends AppCompatActivity {
     RecyclerView mMulitLayoutRecyclerView;
     private ArrayList<String> mList = new ArrayList<>();
     private MulitSlefAdapter mulitAdapter;
+    private GridLayoutManager gridLayoutManager;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +40,12 @@ public class MulitLayoutActivity extends AppCompatActivity {
 
         intiData() ;
 
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);  // 通过
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3); // 通过
+        // 通过
+        linearLayoutManager = new LinearLayoutManager(this);
+        // 通过
+//        gridLayoutManager = new GridLayoutManager(this, 3);
 //        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);     // 不支持
-        mMulitLayoutRecyclerView.setLayoutManager(gridLayoutManager);
+        mMulitLayoutRecyclerView.setLayoutManager(linearLayoutManager);
         mulitAdapter = new MulitSlefAdapter(mList,this);
 
         View inflate = LayoutInflater.from(this).inflate(R.layout.mulit_layout4, null);
@@ -51,11 +57,30 @@ public class MulitLayoutActivity extends AppCompatActivity {
             }
         });
         mulitAdapter.addFooterView(inflate);
-        mulitAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.mulit_layout3,null));
         mulitAdapter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.mulit_layout1,null));
-        mulitAdapter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.mulit_layout2,null));
         mMulitLayoutRecyclerView.setAdapter(mulitAdapter);
         mulitAdapter.notifyDataSetChanged();
+
+        mMulitLayoutRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    // 停止
+
+                    if (linearLayoutManager.findLastVisibleItemPosition() == mList.size()+1){
+                        // 添加了尾布局
+                        refreshData();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
     }
 
@@ -68,7 +93,7 @@ public class MulitLayoutActivity extends AppCompatActivity {
     }
 
     private ArrayList<String> intiData() {
-        for (int i = 0 ; i < 10; i++){
+        for (int i = 0 ; i < 30; i++){
             mList.add("position: "+i) ;
         }
         return mList;
