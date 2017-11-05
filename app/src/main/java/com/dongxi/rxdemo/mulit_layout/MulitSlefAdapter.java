@@ -3,7 +3,6 @@ package com.dongxi.rxdemo.mulit_layout;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,9 @@ import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2017/11/2.
+ *
+ * 允许添加一个头布局和尾布局
+ *  // TODO: 2017/11/5 设置头布局和尾布局的数据 
  */
 
 public class MulitSlefAdapter extends RecyclerView.Adapter<MulitSlefAdapter.MyHolder> {
@@ -59,6 +61,10 @@ public class MulitSlefAdapter extends RecyclerView.Adapter<MulitSlefAdapter.MyHo
             TextView time = (TextView) holder.itemView.findViewById(R.id.item_time);
             content.setText(mData.get(position));
             time.setText("2016-1-1");
+        }else if (isHeaderView(position)){
+            // 设置头布局的内容
+        }else if (isFooterView(position)){
+            // 设置尾布局的内容
         }
     }
 
