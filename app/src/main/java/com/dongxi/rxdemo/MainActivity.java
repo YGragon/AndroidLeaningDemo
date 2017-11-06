@@ -429,25 +429,26 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.top_view_notify, null);
                 view.setLayoutParams(lp);
                 mContenTopView.addView(view);
+                String str1 = "我要打赏这个内容";
                 final TextView topViewTv = (TextView) view.findViewById(R.id.top_view_tv);
-//                topViewTv.setVisibility(View.VISIBLE);
-//                Timer timer = new Timer();
-//                timer.schedule(new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        Log.e(TAG, "run: 等待两秒试试看");
-//                        topViewTv.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                Log.e(TAG, "onClick: 点击了");
-////                                topViewTv.setVisibility(View.GONE);
-//                                mContenTopView.removeView(view);
-//                                startActivity(new Intent(MainActivity.this,MulitLayoutActivity.class));
-//                            }
-//                        });
-////                        mContenTopView.removeView(view);
-//                    }
-//                },2000);
+
+                SpannableStringBuilder builder = new SpannableStringBuilder(str1);
+                // "我要"字体颜色变为粉色，Spanned.SPAN_EXCLUSIVE_INCLUSIVE 表示起始和终止的模式为：包左不包右
+                builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF4081")), 2, 4, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+                // 设置下划线
+                builder.setSpan(new UnderlineSpan(), 2, 4, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                // 设置点击
+                builder.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(View widget) {
+                        startActivity(new Intent(MainActivity.this,MulitLayoutActivity.class));
+                    }
+                }, 2, 4, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+                topViewTv.setText(builder);
+                // 设置点击
+                topViewTv.setMovementMethod(LinkMovementMethod.getInstance());
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
 
@@ -458,12 +459,12 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                         view.setVisibility(View.GONE); //view是要隐藏的控件
                     }
                 }, 3000);  //3000毫秒后执行
-                topViewTv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(MainActivity.this,MulitLayoutActivity.class));
-                    }
-                });
+//                topViewTv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                });
             }
         }
     }
