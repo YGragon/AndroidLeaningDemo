@@ -2,13 +2,17 @@ package com.dongxi.rxdemo;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -30,12 +34,15 @@ import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,6 +85,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     TextView mTvTestSpannerText;
     @BindView(R.id.reward_tv)
     TextView mRewardTv;
+    @BindView(R.id.content_top_view)
+    FrameLayout mContenTopView ;
 
 
     private FlexboxLayout mFlexboxLayout;
@@ -86,6 +95,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private RecyclerView mRecyclerViewRightMenu;
+    private TopViewBroadcastReceiver mTopViewBroadcastReceiver;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -95,6 +105,11 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         ButterKnife.bind(this);
         iniView();
         iniData();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("topview");
+        mTopViewBroadcastReceiver = new TopViewBroadcastReceiver();
+        registerReceiver(mTopViewBroadcastReceiver,intentFilter) ;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -366,6 +381,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         return true;
     }
 
+
     @OnClick({R.id.btn_1, R.id.btn_2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -386,11 +402,75 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @OnClick(R.id.reward_tv)
     public void onViewClicked() {
+        Log.e(TAG, "onViewClicked: 发送");
+        //  发送广播
+        Intent intent = new Intent();
+        intent.setAction("topview") ;
+        sendBroadcast(intent);
+
+
+
         // 弹窗出来在显示帧动画
-        DialogFragmentHelper.showEmptyDialog(getSupportFragmentManager(),true);
+//        DialogFragmentHelper.showEmptyDialog(getSupportFragmentManager(),true);
 
 //        ShowAnimFragment showAnimaFragment = new ShowAnimFragment();
 //        showAnimaFragment.show(getSupportFragmentManager(),"showAnimaFragment");
 
+    }
+
+    class TopViewBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("topview")){
+                // TODO: 2017/11/6 show top view
+                Log.e(TAG, "onReceive: show top view");
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.top_view_notify, null);
+                view.setLayoutParams(lp);
+                mContenTopView.addView(view);
+                final TextView topViewTv = (TextView) view.findViewById(R.id.top_view_tv);
+//                topViewTv.setVisibility(View.VISIBLE);
+//                Timer timer = new Timer();
+//                timer.schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        Log.e(TAG, "run: 等待两秒试试看");
+//                        topViewTv.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                Log.e(TAG, "onClick: 点击了");
+////                                topViewTv.setVisibility(View.GONE);
+//                                mContenTopView.removeView(view);
+//                                startActivity(new Intent(MainActivity.this,MulitLayoutActivity.class));
+//                            }
+//                        });
+////                        mContenTopView.removeView(view);
+//                    }
+//                },2000);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        Log.e(TAG, "run: 隐藏啦");
+                        view.setVisibility(View.GONE); //view是要隐藏的控件
+                    }
+                }, 3000);  //3000毫秒后执行
+                topViewTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this,MulitLayoutActivity.class));
+                    }
+                });
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mTopViewBroadcastReceiver);
     }
 }

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/11/2.
  *
  * 允许添加一个头布局和尾布局
- *  // TODO: 2017/11/5 设置头布局和尾布局的数据 
+ *  // TODO: 2017/11/5 设置头布局和尾布局的数据
  */
 
 public class MulitSlefAdapter extends RecyclerView.Adapter<MulitSlefAdapter.MyHolder> {
