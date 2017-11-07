@@ -1,6 +1,7 @@
 package com.dongxi.rxdemo;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -429,8 +430,17 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.top_view_notify, null);
                 view.setLayoutParams(lp);
                 mContenTopView.addView(view);
+
+//                ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f, 1f);
+//                alpha.setDuration(2000);
+//                alpha.start();
+
+
                 String str1 = "我要打赏这个内容";
                 final TextView topViewTv = (TextView) view.findViewById(R.id.top_view_tv);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(topViewTv, "scaleY", 1f, 1.5f, 1f);
+                scaleY.setDuration(3000) ;
+                scaleY.start();
 
                 SpannableStringBuilder builder = new SpannableStringBuilder(str1);
                 // "我要"字体颜色变为粉色，Spanned.SPAN_EXCLUSIVE_INCLUSIVE 表示起始和终止的模式为：包左不包右
