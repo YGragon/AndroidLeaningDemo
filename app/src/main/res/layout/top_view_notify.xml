@@ -8,8 +8,9 @@
         android:id="@+id/top_view_tv"
         android:layout_width="match_parent"
         android:layout_marginTop="56dp"
-        android:layout_height="32dp"
+        android:layout_height="56dp"
         android:text="你好"
+        android:textSize="18sp"
         android:gravity="center"
         android:textColor="@color/colorAccent"
         android:background="@color/green"/>
