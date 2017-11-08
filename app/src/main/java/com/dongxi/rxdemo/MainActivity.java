@@ -428,7 +428,6 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
                 final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.top_view_notify, null);
-                lp.setMargins(0,112,0,0);
                 view.setLayoutParams(lp);
 
                 mContenTopView.addView(view);
