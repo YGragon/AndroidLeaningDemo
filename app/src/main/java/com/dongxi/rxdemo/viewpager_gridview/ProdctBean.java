@@ -7,10 +7,20 @@ package com.dongxi.rxdemo.viewpager_gridview;
 public class ProdctBean {
     private String name ;
     private int url ;
+    private boolean isSelect ;
 
-    public ProdctBean(String name, int image) {
+    public ProdctBean(String name, int image, boolean isSelect) {
         this.name = name ;
         this.url = image ;
+        this.isSelect = isSelect ;
+    }
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
     }
 
     public String getName() {
