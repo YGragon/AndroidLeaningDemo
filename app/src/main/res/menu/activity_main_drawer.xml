@@ -15,7 +15,7 @@
         android:icon="@mipmap/ic_launcher"/>
     <item
         android:id="@+id/nav_message"
-        android:title="私信"
+        android:title="viewPager+GridView"
         android:icon="@mipmap/ic_launcher"
         />
     </group>

@@ -59,6 +59,7 @@ import com.dongxi.rxdemo.mulit_layout.MulitLayoutActivity;
 import com.dongxi.rxdemo.pinsenction.IndexActivity;
 import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
 import com.dongxi.rxdemo.update.Update;
+import com.dongxi.rxdemo.viewpager_gridview.MyActivity;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.nav_message) {
-                    Toast.makeText(MainActivity.this, "点击了私信", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, MyActivity.class));
                 } else if (itemId == R.id.nav_me) {
                     permission();
                 } else if (itemId == R.id.nav_setting) {
@@ -143,6 +144,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     //
                     startActivity(new Intent(MainActivity.this, MulitLayoutActivity.class));
                 }
+
 
                 mDrawerLayout.closeDrawers();
                 return true;
@@ -470,12 +472,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                         view.setVisibility(View.GONE); //view是要隐藏的控件
                     }
                 }, 3000);  //3000毫秒后执行
-//                topViewTv.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
 //
-//                    }
-//                });
             }
         }
     }

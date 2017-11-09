@@ -61,6 +61,8 @@
         </activity>
         <activity android:name=".mulit_layout.MulitLayoutActivity">
         </activity>
+        <activity android:name=".viewpager_gridview.MyActivity">
+        </activity>
     </application>
 
 </manifest>
