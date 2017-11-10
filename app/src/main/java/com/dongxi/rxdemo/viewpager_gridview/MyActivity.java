@@ -30,7 +30,6 @@ public class MyActivity extends AppCompatActivity {
     private String[] proName = {"名称0","名称1","名称2","名称3","名称4","名称5",
             "名称6","名称7","名称8","名称9","名称10","名称11","名称12","名称13",
             "名称14","名称15","名称16","名称17","名称18","名称19","名称20"};
-    private MyGridViewAdpter mMyGridViewAdpter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,11 @@ public class MyActivity extends AppCompatActivity {
         group = (LinearLayout)findViewById(R.id.points);
         listDatas = new ArrayList<ProdctBean>();
         for(int i =0 ; i < proName.length; i++){
-            listDatas.add(new ProdctBean(proName[i], R.mipmap.ic_launcher,false));
+            if (i == 1){
+                listDatas.add(new ProdctBean(proName[i], R.mipmap.ic_launcher,true));
+            }else {
+                listDatas.add(new ProdctBean(proName[i], R.mipmap.ic_launcher,false));
+            }
         }
     }
     private void initData() {
@@ -60,30 +63,22 @@ public class MyActivity extends AppCompatActivity {
         for(int i = 0; i < totalPage; i++){
             //每个页面都是inflate出一个新实例
             final GridView gridView = (GridView) View.inflate(this, R.layout.item_gridview, null);
-            mMyGridViewAdpter = new MyGridViewAdpter(this, listDatas, i, mPageSize);
+            final MyGridViewAdpter mMyGridViewAdpter = new MyGridViewAdpter(this, listDatas, i, mPageSize);
             gridView.setAdapter(mMyGridViewAdpter);
 
-
-            //添加item点击监听
-//            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//                @Override
-//                public void onItemClick(AdapterView<?> arg0, View arg1,
-//                                        int position, long arg3) {
-//                    // TODO Auto-generated method stub
-//                    ProdctBean obj = (ProdctBean) gridView.getItemAtPosition(position);
-//                    if(obj != null){
-//                        System.out.println(obj);
-//                        mMyGridViewAdpter.setSelect(position);
-//
-//                        mMyGridViewAdpter.notifyDataSetChanged();
-//                        Toast.makeText(MyActivity.this, ((ProdctBean)obj).getName(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
             mMyGridViewAdpter.setOnPositionClick(new MyGridViewAdpter.OnPositionClick() {
                 @Override
                 public void click(int position,int pos) {
+
+//                    mMyGridViewAdpter.setSelection(position);
+
+                    for (int i = 0 ; i < listDatas.size(); i++){
+                        if (i == pos){
+                            listDatas.get(i).setSelect(true);
+                        }else {
+                            listDatas.get(i).setSelect(false);
+                        }
+                    }
 
                     mMyGridViewAdpter.notifyDataSetChanged();
 
@@ -95,7 +90,9 @@ public class MyActivity extends AppCompatActivity {
         }
 
         //设置ViewPager适配器
-        viewPager.setAdapter(new MyViewPagerAdapter(viewPagerList));
+        MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(viewPagerList);
+        viewPager.setAdapter(myViewPagerAdapter);
+        myViewPagerAdapter.notifyDataSetChanged();
 
         //添加小圆点
         ivPoints = new ImageView[totalPage];

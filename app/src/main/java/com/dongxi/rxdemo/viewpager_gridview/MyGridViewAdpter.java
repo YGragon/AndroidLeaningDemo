@@ -2,7 +2,6 @@ package com.dongxi.rxdemo.viewpager_gridview;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,13 +13,13 @@ import com.dongxi.rxdemo.R;
 
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by Administrator on 2017/11/9.
  */
 
 public class MyGridViewAdpter extends BaseAdapter {
+
+    private static final String TAG = "MyGridViewAdpter";
     private Context context;
     private List<ProdctBean> lists;//数据源
     private int mIndex; // 页数下标，标示第几页，从0开始
@@ -43,14 +42,11 @@ public class MyGridViewAdpter extends BaseAdapter {
         this.mPargerSize = mPargerSize;
     }
 
-    public void setSelect(int position){
+    public void setSelection(int position){
         clickTemp = position ;
-        notifyDataSetChanged();
     }
 
-    public void setData(List<ProdctBean> lists){
-        this.lists = lists ;
-    }
+
 
     /**
      * 先判断数据及的大小是否显示满本页lists.size() > (mIndex + 1)*mPagerSize
@@ -95,13 +91,18 @@ public class MyGridViewAdpter extends BaseAdapter {
         //假设mPagerSize=8，假如点击的是第二页（即mIndex=1）上的第二个位置item(position=1),那么这个item的实际位置就是pos=9
         holder.tv_name.setText(lists.get(pos).getName() + "");
         holder.iv_nul.setImageResource(lists.get(pos).getUrl());
-        Log.e(TAG, "getView: 再走一遍");
-        if (clickTemp == position){
+//
+        if (lists.get(pos).isSelect()){
             holder.itemLayout.setBackgroundColor(Color.YELLOW);
         }else {
             holder.itemLayout.setBackgroundColor(Color.TRANSPARENT);
         }
 
+//        if (clickTemp == position){
+//            holder.itemLayout.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+//        }else {
+//            holder.itemLayout.setBackgroundColor(Color.TRANSPARENT);
+//        }
         //添加item监听
         convertView.setOnClickListener(new View.OnClickListener() {
 
@@ -109,8 +110,9 @@ public class MyGridViewAdpter extends BaseAdapter {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 if (mOnPositionClick != null){
-                    setSelect(position);
+//                    setSelection(position);
                     mOnPositionClick.click(position,pos);
+//                    notifyDataSetChanged();
                 }
 //                notifyDataSetChanged();
 //                Toast.makeText(context, "您点击了"  + lists.get(pos).getName(), Toast.LENGTH_SHORT).show();
