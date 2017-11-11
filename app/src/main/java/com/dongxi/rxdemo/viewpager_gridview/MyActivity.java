@@ -30,6 +30,7 @@ public class MyActivity extends AppCompatActivity {
     private String[] proName = {"名称0","名称1","名称2","名称3","名称4","名称5",
             "名称6","名称7","名称8","名称9","名称10","名称11","名称12","名称13",
             "名称14","名称15","名称16","名称17","名称18","名称19","名称20"};
+    private MyGridViewAdpter mMyGridViewAdpter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,31 +64,30 @@ public class MyActivity extends AppCompatActivity {
         for(int i = 0; i < totalPage; i++){
             //每个页面都是inflate出一个新实例
             final GridView gridView = (GridView) View.inflate(this, R.layout.item_gridview, null);
-            final MyGridViewAdpter mMyGridViewAdpter = new MyGridViewAdpter(this, listDatas, i, mPageSize);
+            mMyGridViewAdpter = new MyGridViewAdpter(this, listDatas, i, mPageSize);    // adapter 三个不一样
             gridView.setAdapter(mMyGridViewAdpter);
 
-            mMyGridViewAdpter.setOnPositionClick(new MyGridViewAdpter.OnPositionClick() {
-                @Override
-                public void click(int position,int pos) {
 
-//                    mMyGridViewAdpter.setSelection(position);
-
-                    for (int i = 0 ; i < listDatas.size(); i++){
-                        if (i == pos){
-                            listDatas.get(i).setSelect(true);
-                        }else {
-                            listDatas.get(i).setSelect(false);
-                        }
-                    }
-
-                    mMyGridViewAdpter.notifyDataSetChanged();
-
-                    ToastUtil.showShortToast(listDatas.get(pos).getName());
-                }
-            });
             //每一个GridView作为一个View对象添加到ViewPager集合中
             viewPagerList.add(gridView);
         }
+        mMyGridViewAdpter.setOnPositionClick(new MyGridViewAdpter.OnPositionClick() {
+            @Override
+            public void click(int pos) {
+
+                for (int i = 0 ; i < listDatas.size(); i++){
+                    if (i == pos){
+                        listDatas.get(pos).setSelect(true);
+                    }else {
+                        listDatas.get(i).setSelect(false);
+                    }
+                }
+                mMyGridViewAdpter.notifyDataSetChanged();
+
+
+                ToastUtil.showShortToast(listDatas.get(pos).getName());
+            }
+        });
 
         //设置ViewPager适配器
         MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(viewPagerList);

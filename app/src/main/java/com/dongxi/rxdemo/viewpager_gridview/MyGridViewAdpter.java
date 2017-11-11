@@ -2,6 +2,7 @@ package com.dongxi.rxdemo.viewpager_gridview;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -28,21 +29,22 @@ public class MyGridViewAdpter extends BaseAdapter {
 
     private OnPositionClick mOnPositionClick ;
     public interface OnPositionClick{
-        void click(int position,int pos) ;
+        void click(int pos) ;
     }
     public void setOnPositionClick(OnPositionClick onPositionClick){
         this.mOnPositionClick = onPositionClick ;
     }
 
-    public MyGridViewAdpter(Context context, List<ProdctBean> lists,
-                            int mIndex, int mPargerSize) {
+    public MyGridViewAdpter(Context context, List<ProdctBean> lists, int mIndex, int mPargerSize) {
+        Log.e(TAG, "MyGridViewAdpter: 走这里");
+        Log.e(TAG, "MyGridViewAdpter: size"+lists.size());
         this.context = context;
         this.lists = lists;
         this.mIndex = mIndex;
         this.mPargerSize = mPargerSize;
     }
 
-    public void setSelection(int position){
+    public void setSeclection(int position){
         clickTemp = position ;
     }
 
@@ -108,14 +110,11 @@ public class MyGridViewAdpter extends BaseAdapter {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
+//                setSeclection(position);
                 if (mOnPositionClick != null){
-//                    setSelection(position);
-                    mOnPositionClick.click(position,pos);
-//                    notifyDataSetChanged();
+                    mOnPositionClick.click(pos);
+                    notifyDataSetChanged();
                 }
-//                notifyDataSetChanged();
-//                Toast.makeText(context, "您点击了"  + lists.get(pos).getName(), Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;
