@@ -3,6 +3,7 @@ package com.dongxi.rxdemo.viewpager_gridview;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -12,7 +13,9 @@ import com.dongxi.rxdemo.R;
 import com.dongxi.rxdemo.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyActivity extends AppCompatActivity {
 
@@ -31,6 +34,9 @@ public class MyActivity extends AppCompatActivity {
             "名称6","名称7","名称8","名称9","名称10","名称11","名称12","名称13",
             "名称14","名称15","名称16","名称17","名称18","名称19","名称20"};
     private MyGridViewAdpter mMyGridViewAdpter;
+    private ArrayList<MyGridViewAdpter> girdViewList = new ArrayList<>() ;
+    private int checkPosition = 0 ;
+    private Map<Integer,Integer> realList = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,11 @@ public class MyActivity extends AppCompatActivity {
         initView();
         //添加业务逻辑
         initData();
+
     }
+
+
+
 
     private void initView() {
         // TODO Auto-generated method stub
@@ -61,38 +71,47 @@ public class MyActivity extends AppCompatActivity {
         //总的页数向上取整
         totalPage = (int) Math.ceil(listDatas.size() * 1.0 / mPageSize);
         viewPagerList = new ArrayList<View>();
+        viewPagerList.clear();
         for(int i = 0; i < totalPage; i++){
             //每个页面都是inflate出一个新实例
             final GridView gridView = (GridView) View.inflate(this, R.layout.item_gridview, null);
             mMyGridViewAdpter = new MyGridViewAdpter(this, listDatas, i, mPageSize);    // adapter 三个不一样
+            Log.e(TAG, "initData: adapter=="+mMyGridViewAdpter);
             gridView.setAdapter(mMyGridViewAdpter);
 
+            final int index = i ;
+
+
+            mMyGridViewAdpter.setOnPositionClick(new MyGridViewAdpter.OnPositionClick() {
+                @Override
+                public void click(int pos) {
+                    for (int i = 0 ; i < listDatas.size(); i++){
+                        if (i == pos){
+                            checkPosition = index ;
+                            realList.put(index,pos) ;
+                            listDatas.get(pos).setSelect(true);
+                        }else {
+                            listDatas.get(i).setSelect(false);
+                        }
+                    }
+                    Log.e(TAG, "click: adapter=="+mMyGridViewAdpter );
+
+
+                    ToastUtil.showShortToast(listDatas.get(pos).getName());
+                }
+            });
 
             //每一个GridView作为一个View对象添加到ViewPager集合中
             viewPagerList.add(gridView);
+            girdViewList.add(mMyGridViewAdpter) ;
+            mMyGridViewAdpter.notifyDataSetChanged();
+
         }
-        mMyGridViewAdpter.setOnPositionClick(new MyGridViewAdpter.OnPositionClick() {
-            @Override
-            public void click(int pos) {
 
-                for (int i = 0 ; i < listDatas.size(); i++){
-                    if (i == pos){
-                        listDatas.get(pos).setSelect(true);
-                    }else {
-                        listDatas.get(i).setSelect(false);
-                    }
-                }
-                mMyGridViewAdpter.notifyDataSetChanged();
-
-
-                ToastUtil.showShortToast(listDatas.get(pos).getName());
-            }
-        });
 
         //设置ViewPager适配器
         MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(viewPagerList);
         viewPager.setAdapter(myViewPagerAdapter);
-        myViewPagerAdapter.notifyDataSetChanged();
 
         //添加小圆点
         ivPoints = new ImageView[totalPage];
@@ -120,7 +139,22 @@ public class MyActivity extends AppCompatActivity {
                         ivPoints[i].setImageResource(R.drawable.dot_normal);
                     }
                 }
+
+                Log.e(TAG, "onPageSelected:checkPosition== "+checkPosition);
+                Log.e(TAG, "onPageSelected: position=="+position);
+                if (checkPosition != position){
+                    for (int i = 0; i < listDatas.size(); i++){
+                        listDatas.get(i).setSelect(false);
+                    }
+                    girdViewList.get(position).notifyDataSetChanged();
+//                    if (realList.get(position) != null ){
+//
+//
+//                    listDatas.get(realList.get(position)).setSelect(false);
+//                    }
+                }
             }
         });
     }
+
 }

@@ -46,6 +46,7 @@ public class MyGridViewAdpter extends BaseAdapter {
 
     public void setSeclection(int position){
         clickTemp = position ;
+        notifyDataSetChanged();
     }
 
 
@@ -110,16 +111,15 @@ public class MyGridViewAdpter extends BaseAdapter {
 
             @Override
             public void onClick(View arg0) {
-//                setSeclection(position);
+                setSeclection(position);
                 if (mOnPositionClick != null){
                     mOnPositionClick.click(pos);
-                    notifyDataSetChanged();
                 }
             }
         });
         return convertView;
     }
-    static class ViewHolder{
+    class ViewHolder{
         private TextView tv_name;
         private ImageView iv_nul;
         private LinearLayout itemLayout ;

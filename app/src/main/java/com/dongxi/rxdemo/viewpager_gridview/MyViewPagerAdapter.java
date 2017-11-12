@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class MyViewPagerAdapter extends PagerAdapter {
-    private List<View> viewList;//View就二十GridView
+    private List<View> viewList;
 
 
     public MyViewPagerAdapter(List<View> viewList) {
