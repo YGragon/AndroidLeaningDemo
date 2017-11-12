@@ -25,7 +25,7 @@ public class MyGridViewAdpter extends BaseAdapter {
     private List<ProdctBean> lists;//数据源
     private int mIndex; // 页数下标，标示第几页，从0开始
     private int mPargerSize;// 每页显示的最大的数量
-    private int clickTemp = -1 ; // 临时的点击效果
+//    private int clickTemp = -1 ; // 临时的点击效果
 
     private OnPositionClick mOnPositionClick ;
     public interface OnPositionClick{
@@ -44,10 +44,10 @@ public class MyGridViewAdpter extends BaseAdapter {
         this.mPargerSize = mPargerSize;
     }
 
-    public void setSeclection(int position){
-        clickTemp = position ;
-        notifyDataSetChanged();
-    }
+//    public void setSeclection(int position){
+//        clickTemp = position ;
+//        notifyDataSetChanged();
+//    }
 
 
 
@@ -101,17 +101,12 @@ public class MyGridViewAdpter extends BaseAdapter {
             holder.itemLayout.setBackgroundColor(Color.TRANSPARENT);
         }
 
-//        if (clickTemp == position){
-//            holder.itemLayout.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-//        }else {
-//            holder.itemLayout.setBackgroundColor(Color.TRANSPARENT);
-//        }
         //添加item监听
         convertView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                setSeclection(position);
+//                setSeclection(position);
                 if (mOnPositionClick != null){
                     mOnPositionClick.click(pos);
                 }
