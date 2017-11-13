@@ -61,6 +61,7 @@ public class MyActivity extends AppCompatActivity {
         for(int i =0 ; i < proName.length; i++){
             if (i == 1){
                 listDatas.add(new ProdctBean(proName[i], R.mipmap.ic_launcher,true));
+                realList.put(0,1) ; // 默认选中第一个
             }else {
                 listDatas.add(new ProdctBean(proName[i], R.mipmap.ic_launcher,false));
             }
@@ -71,7 +72,6 @@ public class MyActivity extends AppCompatActivity {
         //总的页数向上取整
         totalPage = (int) Math.ceil(listDatas.size() * 1.0 / mPageSize);
         viewPagerList = new ArrayList<View>();
-        viewPagerList.clear();
         for(int i = 0; i < totalPage; i++){
             //每个页面都是inflate出一个新实例
             final GridView gridView = (GridView) View.inflate(this, R.layout.item_gridview, null);
@@ -95,7 +95,7 @@ public class MyActivity extends AppCompatActivity {
                         }
                     }
                     Log.e(TAG, "click: adapter=="+mMyGridViewAdpter );
-
+                    girdViewList.get(index).notifyDataSetChanged();
 
                     ToastUtil.showShortToast(listDatas.get(pos).getName());
                 }
@@ -130,8 +130,6 @@ public class MyActivity extends AppCompatActivity {
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {
-                // TODO Auto-generated method stub
-                //currentPage = position;
                 for(int i=0 ; i < totalPage; i++){
                     if(i == position){
                         ivPoints[i].setImageResource(R.drawable.dot_focused);
@@ -144,15 +142,21 @@ public class MyActivity extends AppCompatActivity {
                 Log.e(TAG, "onPageSelected: position=="+position);
                 if (checkPosition != position){
                     for (int i = 0; i < listDatas.size(); i++){
-                        listDatas.get(i).setSelect(false);
+                        Log.e(TAG, "onPageSelected: value=="+realList.get(position) );
+//                        if (realList.get(position) != null){
+//                            // 有选中的项
+//                            listDatas.get(realList.get(position)).setSelect(true);  // 让其选中
+//                        }else {
+                            listDatas.get(i).setSelect(false);
+//                        }
                     }
-                    girdViewList.get(position).notifyDataSetChanged();
-//                    if (realList.get(position) != null ){
-//
-//
-//                    listDatas.get(realList.get(position)).setSelect(false);
-//                    }
+                }else {
+                    if (realList.get(position) != null){
+                            // 有选中的项
+                            listDatas.get(realList.get(position)).setSelect(true);  // 让其选中
+                    }
                 }
+                girdViewList.get(position).notifyDataSetChanged();
             }
         });
     }
