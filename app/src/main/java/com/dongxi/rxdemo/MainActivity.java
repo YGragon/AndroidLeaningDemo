@@ -59,8 +59,8 @@ import com.dongxi.rxdemo.kenburnview.KenBurnViewActivity;
 import com.dongxi.rxdemo.mulit_layout.MulitLayoutActivity;
 import com.dongxi.rxdemo.pinsenction.IndexActivity;
 import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
-import com.dongxi.rxdemo.update.Update;
-import com.dongxi.rxdemo.viewpager_gridview.MyActivity;
+import com.dongxi.rxdemo.update.DownLoadActivity;
+import com.dongxi.rxdemo.viewpager_gridview.ViewPagerGridViewActivity;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
@@ -132,7 +132,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.nav_viewpager_gridview) {
-                    startActivity(new Intent(MainActivity.this, MyActivity.class));
+                    startActivity(new Intent(MainActivity.this, ViewPagerGridViewActivity.class));
                 } else if (itemId == R.id.nav_permission) {
                     permission();
                 } else if (itemId == R.id.nav_test_db) {
@@ -236,7 +236,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         itemTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Update.class));
+                startActivity(new Intent(MainActivity.this, DownLoadActivity.class));
                 Toast.makeText(MainActivity.this, "点击了 " + tags[position], Toast.LENGTH_SHORT).show();
             }
         });
@@ -261,7 +261,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             public void onDenied(List<String> deniedPermission) {
                 for (int i = 0; i < deniedPermission.size(); i++) {
 
-                    PermissionTip.showTipGoSetting(MainActivity.this, deniedPermission.get(0), deniedPermission.get(0) + "被拒绝");
+                    PermissionTipUtil.showTipGoSetting(MainActivity.this, deniedPermission.get(0), deniedPermission.get(0) + "被拒绝");
                     Toast.makeText(MainActivity.this, "被拒绝的权限：" + permission, Toast.LENGTH_SHORT).show();
                 }
             }

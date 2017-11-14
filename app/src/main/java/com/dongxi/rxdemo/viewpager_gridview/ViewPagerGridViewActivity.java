@@ -17,9 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MyActivity extends AppCompatActivity {
+public class ViewPagerGridViewActivity extends AppCompatActivity {
 
-    private static final String TAG = "MyActivity";
+    private static final String TAG = "ViewPagerGridViewActivity";
 
     private ViewPager viewPager;
     private LinearLayout group;//圆点指示器

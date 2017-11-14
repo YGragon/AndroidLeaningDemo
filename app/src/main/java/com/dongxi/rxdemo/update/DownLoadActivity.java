@@ -24,9 +24,9 @@ import butterknife.OnClick;
  * Created by macmini002 on 17/9/28.
  */
 
-public class Update extends AppCompatActivity implements SystemDownLoadingReceiver.OnSystemDownLoadingListener {
+public class DownLoadActivity extends AppCompatActivity implements SystemDownLoadingReceiver.OnSystemDownLoadingListener {
 
-    private static final String TAG = "Update";
+    private static final String TAG = "DownLoadActivity";
 
     @BindView(R.id.banner)
     TextView banner;
