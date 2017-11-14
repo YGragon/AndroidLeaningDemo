@@ -131,20 +131,20 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                if (itemId == R.id.nav_message) {
+                if (itemId == R.id.nav_viewpager_gridview) {
                     startActivity(new Intent(MainActivity.this, MyActivity.class));
-                } else if (itemId == R.id.nav_me) {
+                } else if (itemId == R.id.nav_permission) {
                     permission();
-                } else if (itemId == R.id.nav_setting) {
+                } else if (itemId == R.id.nav_test_db) {
                     startActivity(new Intent(MainActivity.this, GankTestActivity.class));
-                } else if (itemId == R.id.nav_manage) {
+                } else if (itemId == R.id.nav_select) {
                     startActivity(new Intent(MainActivity.this, ThumbUpActivity.class));
-                } else if (itemId == R.id.nav_friend) {
+                } else if (itemId == R.id.nav_leverl) {
                     startActivity(new Intent(MainActivity.this, CornerLabelActivity.class));
-                }else if (itemId == R.id.nav_notification) {
+                }else if (itemId == R.id.nav_mutiLayout) {
                     //
                     startActivity(new Intent(MainActivity.this, MulitLayoutActivity.class));
-                }else if (itemId == R.id.nav_theme){
+                }else if (itemId == R.id.nav_big_view){
                     // 移动得全景图
                     startActivity(new Intent(MainActivity.this, KenBurnViewActivity.class));
                 }
@@ -330,7 +330,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
         // 居中标题
         TextView title = new TextView(this);
-        title.setText("费用详细");
+        title.setText("详细");
         title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
 // title.setTextColor(getResources().getColor(R.color.greenBG));

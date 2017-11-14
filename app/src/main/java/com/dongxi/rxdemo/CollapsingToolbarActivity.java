@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 
 public class CollapsingToolbarActivity extends AppCompatActivity {
 
-    private static final String TAG = "CollapsingToolbarActivity";
+    private static final String TAG = "CollapsingToolbar";
 
     @BindView(R.id.img_guitar)
     ImageView mImgGuitar;
