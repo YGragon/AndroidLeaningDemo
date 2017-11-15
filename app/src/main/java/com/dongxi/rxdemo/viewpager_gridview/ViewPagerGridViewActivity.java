@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ViewPagerGridViewActivity extends AppCompatActivity {
 
-    private static final String TAG = "ViewPagerGridViewActivity";
+    private static final String TAG = "ViewPagerGridView";
 
     private ViewPager viewPager;
     private LinearLayout group;//圆点指示器
