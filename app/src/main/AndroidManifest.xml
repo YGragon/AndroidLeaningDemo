@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.dongxi.rxdemo">
+    package="com.dongxi.rxdemo">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".global.BaseApplication"
@@ -18,53 +18,40 @@
 
             <!-- <activity android:name=".MainActivity"> -->
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CardRecycleViewActivity">
-        </activity>
+        <activity android:name=".CardRecycleViewActivity"></activity>
         <!-- <activity android:name=".MainActivity" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- &gt; -->
         <!-- </activity> -->
         <activity
             android:name=".CollapsingToolbarActivity"
-            android:theme="@style/MActivityTheme">
-        </activity>
-        <activity android:name=".BaseActivity">
-        </activity>
-        <activity android:name=".guide.WelcomeGuideActivity">
-        </activity>
-        <activity android:name=".guide.SplashActivity">
-        </activity>
-        <activity android:name=".update.DownLoadActivity">
-        </activity>
-        <activity android:name=".pinsenction.IndexActivity">
-        </activity>
+            android:theme="@style/MActivityTheme"></activity>
+        <activity android:name=".BaseActivity"></activity>
+        <activity android:name=".guide.WelcomeGuideActivity"></activity>
+        <activity android:name=".guide.SplashActivity"></activity>
+        <activity android:name=".update.DownLoadActivity"></activity>
+        <activity android:name=".pinsenction.IndexActivity"></activity>
 
         <!-- 下载 -->
         <receiver android:name=".update.SystemDownLoadingReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".db.gank_test.GankTestActivity">
-        </activity>
-        <activity android:name=".thumbup.ThumbUpActivity">
-        </activity>
-        <activity android:name=".cornerlableview.CornerLabelActivity">
-        </activity>
-        <activity android:name=".empety_recyclerview.EmptyRecyclerViewActivity">
-        </activity>
-        <activity android:name=".mulit_layout.MulitLayoutActivity">
-        </activity>
-        <activity android:name=".viewpager_gridview.ViewPagerGridViewActivity">
-        </activity>
-        <activity android:name=".kenburnview.KenBurnViewActivity">
-        </activity>
+        <activity android:name=".db.gank_test.GankTestActivity"></activity>
+        <activity android:name=".thumbup.ThumbUpActivity"></activity>
+        <activity android:name=".cornerlableview.CornerLabelActivity"></activity>
+        <activity android:name=".empety_recyclerview.EmptyRecyclerViewActivity"></activity>
+        <activity android:name=".mulit_layout.MulitLayoutActivity"></activity>
+        <activity android:name=".viewpager_gridview.ViewPagerGridViewActivity"></activity>
+        <activity android:name=".kenburnview.KenBurnViewActivity"></activity>
+        <activity android:name=".kotlinleaning.KotlinLearningActivity"></activity>
     </application>
 
 </manifest>

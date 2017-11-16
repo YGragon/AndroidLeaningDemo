@@ -56,6 +56,7 @@ import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.dongxi.rxdemo.kenburnview.KenBurnViewActivity;
+import com.dongxi.rxdemo.kotlinleaning.KotlinLearningActivity;
 import com.dongxi.rxdemo.mulit_layout.MulitLayoutActivity;
 import com.dongxi.rxdemo.pinsenction.IndexActivity;
 import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
@@ -147,6 +148,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 }else if (itemId == R.id.nav_big_view){
                     // 移动得全景图
                     startActivity(new Intent(MainActivity.this, KenBurnViewActivity.class));
+                }else if (itemId == R.id.nav_kotlin){
+                    startActivity(new Intent(MainActivity.this, KotlinLearningActivity.class));
                 }
 
 
