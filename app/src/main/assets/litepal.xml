@@ -32,8 +32,8 @@
     	</list>
     -->
     <list>
-        <mapping class="com.dongxi.rxdemo.db.gank_test.Gank" />
-        <mapping class="com.dongxi.rxdemo.db.gank_test.ResultsBean" />
+        <mapping class="com.dongxi.demo.db.gank_test.Gank" />
+        <mapping class="com.dongxi.demo.db.gank_test.ResultsBean" />
     </list>
 
     <!--

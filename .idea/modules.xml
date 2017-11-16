@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidLeaningDemo.iml" filepath="$PROJECT_DIR$/AndroidLeaningDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/RxDemo.iml" filepath="$PROJECT_DIR$/RxDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>

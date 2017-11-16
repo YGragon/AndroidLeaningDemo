@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:id="@+id/dialog_layout"
-             tools:context="com.dongxi.rxdemo.anim.ShowAnimFragment">
+             tools:context="com.dongxi.demo.anim.ShowAnimFragment">
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.dongxi.rxdemo.CollapsingToolbarActivity">
+    tools:context="com.dongxi.demo.CollapsingToolbarActivity">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -29,14 +29,14 @@
                 app:layout_collapseMode="parallax"
                 android:fitsSystemWindows="true"
                 />
-            <com.dongxi.rxdemo.widget.CustomToolbar
+            <com.dongxi.demo.widget.CustomToolbar
                 android:id="@+id/m_custom_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:isShowSearchView="true"
                 app:layout_collapseMode="pin"
                 >
-            </com.dongxi.rxdemo.widget.CustomToolbar>
+            </com.dongxi.demo.widget.CustomToolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
