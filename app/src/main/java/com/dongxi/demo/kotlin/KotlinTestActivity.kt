@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo.kotlinleaning
+package com.dongxi.demo.kotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,11 +6,11 @@ import android.widget.Toast
 import com.dongxi.rxdemo.R
 import kotlinx.android.synthetic.main.activity_kotlin_learning.*
 
-class KotlinLearningActivity : AppCompatActivity() {
+class KotlinTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kotlin_learning)
+        setContentView(R.layout.activity_kotlin_test)
 
         var str: String? = "Hello Kotlin"
 
@@ -21,7 +21,7 @@ class KotlinLearningActivity : AppCompatActivity() {
 
         helloTv.setOnClickListener{
             for (i in list.indices){
-                Toast.makeText(this,list[i],Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,list[i], Toast.LENGTH_SHORT).show()
             }
         }
     }
