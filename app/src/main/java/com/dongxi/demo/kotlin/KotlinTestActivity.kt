@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.dongxi.rxdemo.R
 import kotlinx.android.synthetic.main.activity_kotlin_learning.*
-import kotlinx.android.synthetic.main.item_thumb_up.*
 
 class KotlinTestActivity : AppCompatActivity() {
 
@@ -26,7 +25,7 @@ class KotlinTestActivity : AppCompatActivity() {
             }
         }
         printSum(4,5)
-        Toast.makeText(this,sum(2,3)+"",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,sum(2,3),Toast.LENGTH_SHORT).show()
     }
 
     /**
