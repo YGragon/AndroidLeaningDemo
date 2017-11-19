@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dongxi.demo.pinsenction.PinnedSectionListView
+    <com.dongxi.rxdemo.pinsenction.PinnedSectionListView
         android:id="@+id/pinned_section_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

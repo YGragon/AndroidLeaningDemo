@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dongxi.demo.MainActivity">
+    tools:context="com.dongxi.rxdemo.MainActivity">
 
     <FrameLayout
         android:id="@+id/content_top_view"

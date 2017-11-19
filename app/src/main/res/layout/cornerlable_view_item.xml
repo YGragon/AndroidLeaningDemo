@@ -16,7 +16,7 @@
             android:background="@android:color/darker_gray"
             />
 
-        <com.dongxi.demo.cornerlableview.drawbale.CornerMarkView
+        <com.dongxi.rxdemo.cornerlableview.drawbale.CornerMarkView
             xmlns:cm="http://schemas.android.com/apk/res-auto"
             android:id="@+id/corner_mark"
             android:layout_width="wrap_content"

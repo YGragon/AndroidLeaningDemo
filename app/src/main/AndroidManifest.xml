@@ -51,8 +51,7 @@
         <activity android:name=".mulit_layout.MulitLayoutActivity"/>
         <activity android:name=".viewpager_gridview.ViewPagerGridViewActivity"/>
         <activity android:name=".kenburnview.KenBurnViewActivity"/>
-        <activity android:name=".kotlinleaning.KotlinLearningActivity"/>
-        <activity android:name="com.dongxi.demo.kotlin.KotlinTestActivity">
+        <activity android:name=".kotlin.KotlinTestActivity">
         </activity>
     </application>
 
