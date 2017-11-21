@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo;
+package com.dongxi.rxdemo.coordinatorlayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dongxi.rxdemo.R;
 import com.dongxi.rxdemo.widget.CustomToolbar;
 
 import butterknife.BindView;

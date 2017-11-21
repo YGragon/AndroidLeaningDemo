@@ -29,7 +29,7 @@
         <!-- &gt; -->
         <!-- </activity> -->
         <activity
-            android:name=".CollapsingToolbarActivity"
+            android:name=".coordinatorlayout.CollapsingToolbarActivity"
             android:theme="@style/MActivityTheme"/>
         <activity android:name=".BaseActivity"/>
         <activity android:name=".guide.WelcomeGuideActivity"/>

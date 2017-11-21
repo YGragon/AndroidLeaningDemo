@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.dongxi.rxdemo.coordinatorlayout.CollapsingToolbarActivity;
 import com.dongxi.rxdemo.widget.CustomToolbar;
 import com.dongxi.rxdemo.widget.EmptyRecyclerView;
 
