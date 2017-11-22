@@ -54,6 +54,7 @@ import com.dongxi.rxdemo.common.dialog.DialogFragmentHelper;
 import com.dongxi.rxdemo.common.dialog.IDialogResultListener;
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
+import com.dongxi.rxdemo.event_bus.Event1;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.dongxi.rxdemo.kenburnview.KenBurnViewActivity;
 import com.dongxi.rxdemo.kotlin.KotlinTestActivity;
@@ -150,6 +151,9 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     startActivity(new Intent(MainActivity.this, KenBurnViewActivity.class));
                 }else if (itemId == R.id.nav_kotlin){
                     startActivity(new Intent(MainActivity.this, KotlinTestActivity.class));
+                }else if (itemId == R.id.nav_event_bus){
+                    startActivity(new Intent(MainActivity.this, Event1.class));
+//                    startActivity(new Intent(MainActivity.this, EventBus1Activity.class));
                 }
 
 

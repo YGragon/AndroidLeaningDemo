@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.dongxi.rxdemo.R
-import kotlinx.android.synthetic.main.activity_kotlin_learning.*
+import kotlinx.android.synthetic.main.activity_kotlin_test.*
 
 class KotlinTestActivity : AppCompatActivity() {
 
