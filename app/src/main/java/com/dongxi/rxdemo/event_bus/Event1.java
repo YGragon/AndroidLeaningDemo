@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dongxi.rxdemo.R;
+import com.dongxi.rxdemo.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -46,7 +47,7 @@ public class Event1 extends AppCompatActivity {
                 startActivity(new Intent(Event1.this,Event2.class));
             }
         });
-
+        LogUtil.e("啦啦啦"); // 测试日志工具
     }
 
     @Override
