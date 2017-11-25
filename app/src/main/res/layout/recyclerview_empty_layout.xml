@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/guitar"
-        android:tint="#ABABAB"
         android:layout_marginBottom="10dp"
         />
 

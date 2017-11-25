@@ -36,4 +36,12 @@ public class TestData {
         data.add(cityBean1);
         return data;
     }
+
+    public ArrayList<String> getCityName(List<CityBean> list){
+        ArrayList<String> stringList = new ArrayList<>() ;
+        for (int i = 0; i < list.size(); i++){
+            stringList.add(list.get(i).getCityName()) ;
+        }
+        return stringList ;
+    }
 }

@@ -59,7 +59,7 @@ import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.dongxi.rxdemo.kenburnview.KenBurnViewActivity;
 import com.dongxi.rxdemo.kotlin.KotlinTestActivity;
 import com.dongxi.rxdemo.mulit_layout.MulitLayoutActivity;
-import com.dongxi.rxdemo.pinsenction.IndexActivity;
+import com.dongxi.rxdemo.pinsenction.SectionKotlinActivity;
 import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
 import com.dongxi.rxdemo.update.DownLoadActivity;
 import com.dongxi.rxdemo.viewpager_gridview.ViewPagerGridViewActivity;
@@ -409,7 +409,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 break;
             case R.id.btn_2:
                 // 跳转悬浮头的列表页
-                startActivity(new Intent(MainActivity.this, IndexActivity.class));
+//                startActivity(new Intent(MainActivity.this, IndexActivity.class));
+                startActivity(new Intent(MainActivity.this, SectionKotlinActivity.class));
                 break;
         }
     }
