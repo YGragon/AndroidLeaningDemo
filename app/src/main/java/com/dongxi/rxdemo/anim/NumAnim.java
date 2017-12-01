@@ -20,14 +20,19 @@ public class NumAnim {
         startAnim(textV, num, 500);
     }
 
-    // 设置滚动时间
+    // 设置滚动时间,小数后边的位数没处理好.....
     public static void startAnim(TextView textV, float num, long time) {
         if (num == 0) {
             textV.setText(NumUtil.NumberFormat(num,2));
             return;
         }
-
-        Float[] nums = splitnum(num, (int)((time/1000f)*COUNTPERS));
+        if (num >= Float.MAX_VALUE){
+            LogUtil.e(Float.MAX_VALUE+"");
+            textV.setText(NumUtil.NumberFormat(Float.MAX_VALUE,2));
+            return;
+        }
+        float  b   =  (float)(Math.round(num*100))/100;
+        Float[] nums = splitnum(b, (int)((time/1000f)*COUNTPERS));
 
         Counter counter = new Counter(textV, nums, time);
 
@@ -36,16 +41,19 @@ public class NumAnim {
     }
 
     // 数字递增算法
+    // 优化：重写splitnum()方法吧，使这个方法产生的float，先产生大数字，慢慢减小，最后产生小数。这样执行起来就和支付宝非常类似了。
     private static Float[] splitnum(float num, int count) {
         Random random = new Random();
-        float numtemp = num;
+//        float numtemp = num;
+        float numtemp = NumUtil.NumberFormatFloat(num, 2);
+        LogUtil.e("next-numtemp:" + numtemp);
         float sum = 0;
         LinkedList<Float> nums = new LinkedList<Float>();
         nums.add(0f);
         while (true) {
-            float nextFloat = NumUtil.NumberFormatFloat((random.nextFloat()*num*2f)/(float)count, 2);
-            LogUtil.e("next:" + nextFloat);
-            if (nextFloat == 0.0){
+            float nextFloat = NumUtil.NumberFormatFloat((random.nextFloat() * num * 2f)/(float)count, 2);
+            LogUtil.e("next-nextFloat:" + nextFloat);
+            if (nextFloat == 0.00){
                 nextFloat = 0.01f ;
             }
             if (numtemp - nextFloat >= 0) {

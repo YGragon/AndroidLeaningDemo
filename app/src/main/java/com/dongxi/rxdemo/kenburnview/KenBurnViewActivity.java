@@ -32,7 +32,8 @@ public class KenBurnViewActivity extends AppCompatActivity {
         KenBurnsView kbv = (KenBurnsView) findViewById(R.id.image);
         // 滚动的数字
         TextView runText = (TextView) findViewById(R.id.runText);
-        NumAnim.startAnim(runText, 0.03f);   //第二个参数是textView要显示的价格
+        // 第二个参数是textView要显示的价格,是个浮点数
+        NumAnim.startAnim(runText, 453322670.03f);
 
         kbv.setTransitionListener(new KenBurnsView.TransitionListener() {
             @Override
