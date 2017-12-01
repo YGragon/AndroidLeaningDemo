@@ -50,7 +50,8 @@
         <activity android:name=".empety_recyclerview.EmptyRecyclerViewActivity" />
         <activity android:name=".mulit_layout.MulitLayoutActivity" />
         <activity android:name=".viewpager_gridview.ViewPagerGridViewActivity" />
-        <activity android:name=".kenburnview.KenBurnViewActivity" />
+        <activity android:name=".kenburnview.KenBurnViewActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".kotlin.KotlinTestActivity" />
         <activity android:name=".event_bus.Event1" />
         <activity android:name=".event_bus.Event2" />
