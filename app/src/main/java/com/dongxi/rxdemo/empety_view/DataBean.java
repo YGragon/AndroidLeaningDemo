@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo.empety_recyclerview;
+package com.dongxi.rxdemo.empety_view;
 
 /**
  * Created by Administrator on 2017/10/25.

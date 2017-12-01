@@ -1,4 +1,4 @@
-package com.dongxi.rxdemo.empety_recyclerview;
+package com.dongxi.rxdemo.empety_view;
 
 import android.content.Context;
 

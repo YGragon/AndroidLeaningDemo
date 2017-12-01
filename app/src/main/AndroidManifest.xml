@@ -47,7 +47,7 @@
         <activity android:name=".db.gank_test.GankTestActivity" />
         <activity android:name=".thumbup.ThumbUpActivity" />
         <activity android:name=".cornerlableview.CornerLabelActivity" />
-        <activity android:name=".empety_recyclerview.EmptyRecyclerViewActivity" />
+        <activity android:name=".empety_view.EmptyRecyclerViewActivity" />
         <activity android:name=".mulit_layout.MulitLayoutActivity" />
         <activity android:name=".viewpager_gridview.ViewPagerGridViewActivity" />
         <activity android:name=".kenburnview.KenBurnViewActivity"

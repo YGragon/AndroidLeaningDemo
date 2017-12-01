@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dongxi.rxdemo.empety_recyclerview.EmptyRecyclerViewActivity">
+    tools:context="com.dongxi.rxdemo.empety_view.EmptyRecyclerViewActivity">
 
     <com.dongxi.rxdemo.widget.EmptyRecyclerView
         android:id="@+id/empty_recyclerView"
