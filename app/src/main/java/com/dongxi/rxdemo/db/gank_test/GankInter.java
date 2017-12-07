@@ -9,5 +9,5 @@ import retrofit2.http.GET;
 
 public interface GankInter {
     @GET("api/data/福利/10/1")
-    Call<Gank> getResultBean() ;
+    Call<ResultsBean> getResultBean() ;
 }
