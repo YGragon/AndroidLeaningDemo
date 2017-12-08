@@ -8,14 +8,12 @@ import android.util.Log;
 
 import com.dongxi.rxdemo.R;
 import com.dongxi.rxdemo.empety_view.EmptyLayout;
-import com.dongxi.rxdemo.utils.NetUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,57 +38,70 @@ public class GankTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gank_test);
         ButterKnife.bind(this);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        datas = GankDao.queryAll();
+        Log.e(TAG, "onScrollStateChanged: size=="+datas.size());
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mGankAdapter = new GankAdapter(GankTestActivity.this, R.layout.activity_gank_test_item, datas);
         mRecyclerView.setAdapter(mGankAdapter);
         emptyLayout.showLoading();
 
-        getData();
+        if (datas.size() == 0){
+            getData();
+        }else {
+            emptyLayout.hide();
+        }
 
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+
+
+                    if (linearLayoutManager.getItemCount() - 1 == linearLayoutManager.findLastVisibleItemPosition()){
+                        // 模拟，实际操作要获取分页的数据
+                        getData();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
     }
 
     private void getData() {
-        datas.clear();
-        if (!NetUtil.isConnected(this)){
-            Log.e(TAG, "getData: 断网");
-            datas = GankDao.queryAll();
-            Log.e(TAG, "getData: list=="+datas.size());
 
-            mGankAdapter.notifyDataSetChanged();
-        }else {
-            Log.e(TAG, "getData: 有网");
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://Gank.io/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        Log.e(TAG, "getData: 有网");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://Gank.io/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
 
-            GankInter gankinter = retrofit.create(GankInter.class);
-            gankinter.getResultBean().enqueue(new Callback<ResultsBean>() {
-                @Override
-                public void onResponse(Call<ResultsBean> call, Response<ResultsBean> response) {
-                    Log.e(TAG, "getData: 断网111");
-                    datas.addAll(response.body().getResults());
-                    for (int i = 0; i < datas.size(); i++){
-                        ResultsEntity resultsEntity  = datas.get(i) ;
-                        GankDao.insertGank(resultsEntity);
-                        Log.e(TAG, "getData: 断网1111111111111111");
-                    }
-
-                    mGankAdapter.notifyDataSetChanged();
+        GankInter gankinter = retrofit.create(GankInter.class);
+        gankinter.getResultBean().enqueue(new Callback<ResultsBean>() {
+            @Override
+            public void onResponse(Call<ResultsBean> call, Response<ResultsBean> response) {
+                datas.addAll(response.body().getResults());
+                for (int i = 0; i < datas.size(); i++){
+                    ResultsEntity resultsEntity  = datas.get(i) ;
+                    GankDao.insertGank(resultsEntity);
                 }
+                emptyLayout.hide();
+                mGankAdapter.notifyDataSetChanged();
 
-                @Override
-                public void onFailure(Call<ResultsBean> call, Throwable t) {
-                    emptyLayout.showError();
+            }
 
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<ResultsBean> call, Throwable t) {
+                emptyLayout.showError();
 
-
-
+            }
+        });
     }
 }
