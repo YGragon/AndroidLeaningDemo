@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.dongxi.rxdemo.R;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +41,18 @@ public class GankAllFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_gank_all, container, false);
         Bundle bundle = getArguments();
         String agrs1 = bundle.getString("agrs1");
-        TextView tv = (TextView)view.findViewById(R.id.container);
-        tv.setText(agrs1);
+
+        RefreshLayout refreshLayout = (RefreshLayout)view.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+
+        //设置 Header 为 Material样式
+        refreshLayout.setRefreshHeader(new BezierRadarHeader(getActivity()));
+
         return view;
     }
 

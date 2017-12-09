@@ -52,6 +52,8 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'org.greenrobot:eventbus:3.1.1'
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
