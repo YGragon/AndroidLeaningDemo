@@ -27,23 +27,36 @@ public class DataServer {
 
 
     public List<Gank.GankItem> getMultipleItemData() {
+
         List<Gank.GankItem> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Gank.GankItem gankItem = new Gank.GankItem(Gank.GankItem.TEXT);
-            gankItem.setDesc("111");
+        for (int i = 0; i <= 4; i++) {
+            Gank.GankItem gankItem = new Gank.GankItem(
+                    "",
+                    "",
+                    "",
+                    "desc"+i,
+                    "",
+                    "",
+                    "",
+                    false,
+                    "",
+                    Gank.GankItem.TEXT,
+                    Gank.GankItem.TEXT_SPAN_SIZE);
+            gankItem.setDesc("desc=="+i);
             list.add(gankItem);
-            list.add(gankItem);
-        }
-        for (int i = 0; i < 5; i++) {
-            Gank.GankItem gankItem = new Gank.GankItem(Gank.GankItem.IMG);
-            gankItem.setDesc("222");
-            list.add(gankItem);
-            list.add(gankItem);
-        }
-        for (int i = 0; i < 5; i++) {
-            Gank.GankItem gankItem = new Gank.GankItem(Gank.GankItem.VIDEO);
-            gankItem.setDesc("333");
-            list.add(gankItem);
+
+            Gank.GankItem gankItem1 = new Gank.GankItem(
+                    "",
+                    "",
+                    "",
+                    "desc"+i,
+                    "",
+                    "",
+                    "https://avatars1.githubusercontent.com/u/7698209?s=400&v=4",
+                    false,
+                    "",
+                    Gank.GankItem.IMG, Gank.GankItem.IMG_SPAN_SIZE);
+            list.add(gankItem1);
         }
         Log.e(TAG, "getMultipleItemData: size=="+list.size());
         return list;

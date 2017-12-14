@@ -3,13 +3,14 @@ package com.dongxi.rxdemo.db.gank_test;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dongxi.rxdemo.R;
 import com.dongxi.rxdemo.db.gank_test.adapter.MultipleItemQuickAdapter;
 import com.dongxi.rxdemo.db.gank_test.bean.Gank;
@@ -57,15 +58,23 @@ public class GankAllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gank_all, container, false);
+        unbinder = ButterKnife.bind(this, view);
+
         Bundle bundle = getArguments();
         String agrs1 = bundle.getString("agrs1");
 
-        List<Gank.GankItem> gankList = DataServer.getInstance().getMultipleItemData();
+        final List<Gank.GankItem> gankList = DataServer.getInstance().getMultipleItemData();
         Log.e(TAG, "onCreateView: size========="+gankList.size());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerview.setLayoutManager(linearLayoutManager);
-        MultipleItemQuickAdapter gankAdapter = new MultipleItemQuickAdapter(gankList);
-        recyclerview.setAdapter(gankAdapter);
+        final MultipleItemQuickAdapter multipleItemAdapter = new MultipleItemQuickAdapter(getActivity(), gankList);
+        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
+        recyclerview.setLayoutManager(manager);
+        multipleItemAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
+                return gankList.get(position).getSpanSize();
+            }
+        });
+        recyclerview.setAdapter(multipleItemAdapter);
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -80,7 +89,6 @@ public class GankAllFragment extends Fragment {
         //设置 Header 为 Material样式
         refreshLayout.setRefreshHeader(new BezierRadarHeader(getActivity()));
 
-        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 

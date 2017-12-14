@@ -135,21 +135,11 @@ public class Gank {
 
         public static final int TEXT = 1;
         public static final int IMG = 2;
-        public static final int VIDEO = 3;
-
+        public static final int TEXT_SPAN_SIZE = 3;
+        public static final int IMG_SPAN_SIZE = 1;
         private int itemType;
         private int spanSize;
 
-
-
-        public GankItem(int itemType, int spanSize) {
-            this.itemType = itemType;
-            this.spanSize = spanSize;
-        }
-        public GankItem(int itemType) {
-            this.itemType = itemType;
-
-        }
 
         public int getSpanSize() {
             return spanSize;
