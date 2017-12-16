@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dongxi.rxdemo">
+          package="com.dongxi.rxdemo">
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".global.BaseApplication"
@@ -18,46 +18,49 @@
 
             <!-- <activity android:name=".MainActivity"> -->
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".CardRecycleViewActivity" />
+        <activity android:name=".CardRecycleViewActivity"/>
         <!-- <activity android:name=".MainActivity" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- &gt; -->
         <!-- </activity> -->
         <activity
             android:name=".coordinatorlayout.CollapsingToolbarActivity"
-            android:theme="@style/MActivityTheme" />
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".guide.WelcomeGuideActivity" />
-        <activity android:name=".guide.SplashActivity" />
-        <activity android:name=".update.DownLoadActivity" />
-        <activity android:name=".pinsenction.IndexActivity" />
+            android:theme="@style/MActivityTheme"/>
+        <activity android:name=".BaseActivity"/>
+        <activity android:name=".guide.WelcomeGuideActivity"/>
+        <activity android:name=".guide.SplashActivity"/>
+        <activity android:name=".update.DownLoadActivity"/>
+        <activity android:name=".pinsenction.IndexActivity"/>
 
         <!-- 下载 -->
         <receiver android:name=".update.SystemDownLoadingReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
             </intent-filter>
         </receiver>
 
-        <activity android:name=".db.gank_test.GankTestActivity" />
-        <activity android:name=".thumbup.ThumbUpActivity" />
-        <activity android:name=".cornerlableview.CornerLabelActivity" />
-        <activity android:name=".empety_view.EmptyRecyclerViewActivity" />
-        <activity android:name=".mulit_layout.MulitLayoutActivity" />
-        <activity android:name=".viewpager_gridview.ViewPagerGridViewActivity" />
-        <activity android:name=".kenburnview.KenBurnViewActivity"
+        <activity android:name=".db.gank_test.GankTestActivity"/>
+        <activity android:name=".thumbup.ThumbUpActivity"/>
+        <activity android:name=".cornerlableview.CornerLabelActivity"/>
+        <activity android:name=".empety_view.EmptyRecyclerViewActivity"/>
+        <activity android:name=".mulit_layout.MulitLayoutActivity"/>
+        <activity android:name=".viewpager_gridview.ViewPagerGridViewActivity"/>
+        <activity
+            android:name=".kenburnview.KenBurnViewActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".kotlin.KotlinTestActivity" />
-        <activity android:name=".event_bus.Event1" />
-        <activity android:name=".event_bus.Event2" />
-        <activity android:name=".event_bus.EventBus1Activity" />
-        <activity android:name=".event_bus.EventBus2Activity" />
-        <activity android:name=".pinsenction.SectionKotlinActivity"></activity>
+        <activity android:name=".kotlin.KotlinTestActivity"/>
+        <activity android:name=".event_bus.Event1"/>
+        <activity android:name=".event_bus.Event2"/>
+        <activity android:name=".event_bus.EventBus1Activity"/>
+        <activity android:name=".event_bus.EventBus2Activity"/>
+        <activity android:name=".pinsenction.SectionKotlinActivity"/>
+        <activity android:name=".energy_view_demo.EnergyActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -31,8 +31,8 @@
         android:id="@+id/group_settings">
         <item android:id="@+id/nav_big_view"
               android:title="移动的全景图-滚动数字动画"/>
-        <item android:id="@+id/nav_night"
-              android:title="夜间模式"/>
+        <item android:id="@+id/nav_view"
+              android:title="自定义view"/>
         <item android:id="@+id/nav_test_db"
               android:title="干活集中营"/>
         <item android:id="@+id/nav_kotlin"

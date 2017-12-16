@@ -79,4 +79,11 @@
         <!--竖边长度-->
         <attr name="vertical_side" format="dimension"/>
     </declare-styleable>
+    <!--能级-->
+    <declare-styleable name="EnergyView">
+        <!--当前的等级文字大小-->
+        <attr name="current_text_size" format="dimension"/>
+        <!--当前的等级文字颜色-->
+        <attr name="current_text_color" format="color" />
+    </declare-styleable>
 </resources>

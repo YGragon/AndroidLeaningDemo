@@ -54,6 +54,7 @@ import com.dongxi.rxdemo.common.dialog.DialogFragmentHelper;
 import com.dongxi.rxdemo.common.dialog.IDialogResultListener;
 import com.dongxi.rxdemo.cornerlableview.CornerLabelActivity;
 import com.dongxi.rxdemo.db.gank_test.GankTestActivity;
+import com.dongxi.rxdemo.energy_view_demo.EnergyActivity;
 import com.dongxi.rxdemo.event_bus.EventBus1Activity;
 import com.dongxi.rxdemo.home.SimpleFragmentPagerAdapter;
 import com.dongxi.rxdemo.kenburnview.KenBurnViewActivity;
@@ -154,6 +155,9 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 }else if (itemId == R.id.nav_event_bus){
 //                    startActivity(new Intent(MainActivity.this, Event1.class));
                     startActivity(new Intent(MainActivity.this, EventBus1Activity.class));
+                }else if (itemId == R.id.nav_view){
+//                    startActivity(new Intent(MainActivity.this, Event1.class));
+                    startActivity(new Intent(MainActivity.this, EnergyActivity.class));
                 }
 
 

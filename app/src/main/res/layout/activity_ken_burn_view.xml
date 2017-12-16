@@ -8,7 +8,10 @@
     android:orientation="vertical"
     android:id="@+id/root_view"
     tools:context="com.dongxi.rxdemo.kenburnview.KenBurnViewActivity">
-
+    <Button
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"/>
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -16,6 +19,7 @@
         android:layout_marginBottom="10dp"
         android:fillViewport="true"
         android:scrollbars="none"
+        android:layout_below="@id/toolbar"
         >
         <LinearLayout
             android:id="@+id/content_view"
