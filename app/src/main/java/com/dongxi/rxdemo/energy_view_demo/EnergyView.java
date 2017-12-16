@@ -123,57 +123,6 @@ public class EnergyView extends View {
         canvas.drawArc(mRectF, 180, 120, false, mPaint);    // 背景条-黄色
         String level[] = {"1","2","3","4","5","6","7","8","9","10"} ;
 
-//        canvas.drawText(
-//                "1",
-//                100+50,
-//                500,
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "2",
-//                100+88,
-//                (float) (500 - 123.2 + 40),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "3",
-//                100+88*2,
-//                (float) (500 - 231.6 + 40),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "4",
-//                100+88*3,
-//                (float) (500 - 311.2 + 40),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "5",
-//                100+88*4,
-//                (float) (500 - 354.5 + 40),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "6",
-//                100+88*5,
-//                (float) (500 - 354.5 + 40),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "7",
-//                100+88*6,
-//                (float) (500 - 311.7 + 40 ),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "8",
-//                100+88*7,
-//                (float) (500 - 231.6 + 40),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "9",
-//                100+88*8,
-//                (float) (500 - 123.2 + 40),
-//                mLevelPaint);  // 刻度
-//        canvas.drawText(
-//                "10",
-//                900 - 50,
-//                500,
-//                mLevelPaint);  // 刻度
-
         for (int i = 0; i <level.length; i++ ){
 
             int angle = 20 * i ;
@@ -207,6 +156,8 @@ public class EnergyView extends View {
         // 绘制文字
         float textWidth = mTextPaint.measureText(mShowText);   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
         canvas.drawText(mShowText, (int)(length/2-textWidth/2), (int)(length/2+textWidth/2) , mTextPaint);
+
+        // TODO: 2017/12/16 修改宽度、完成剩余的不会绘制、添加动画、添加颗设置的属性 
     }
 
     public void setProgress(float mSweepValue) {
