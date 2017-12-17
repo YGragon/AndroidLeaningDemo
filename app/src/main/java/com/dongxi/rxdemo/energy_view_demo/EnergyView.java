@@ -31,6 +31,8 @@ public class EnergyView extends View {
     private RectF mRectF;
     private int mEnergyTextColor;
     private float mEnergyTextSize;
+    private int mWidth;
+    private int mHeight;
 
     public EnergyView(Context context) {
         this(context,null,0) ;
@@ -80,18 +82,10 @@ public class EnergyView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
 
-//        if (widthSpecMode == MeasureSpec.AT_MOST && heightMeasureSpec == MeasureSpec.AT_MOST){
-//            setMeasuredDimension(200, 200);
-//        }else if (widthSpecMode == MeasureSpec.AT_MOST){
-//            setMeasuredDimension(200, heightSpecSize);
-//        }else if (heightSpecMode == MeasureSpec.AT_MOST){
-//            setMeasuredDimension(widthSpecSize, 200);
-//        }
+        mWidth = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+        mHeight = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+        setMeasuredDimension(mWidth, mHeight);
     }
 
     @Override
@@ -105,59 +99,59 @@ public class EnergyView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int paddingLeft = getPaddingLeft();
-        int paddingRight = getPaddingRight();
-        int paddingTop = getPaddingTop();
-        int paddingBottom = getPaddingBottom();
-        int width = getWidth() - paddingLeft - paddingRight;
-        int height = getHeight() - paddingTop - paddingBottom;
 
-        Log.e("EnergyView", "onDraw: width=="+width );
-        Log.e("EnergyView", "onDraw: height=="+height );
         mRectF = new RectF(100, 100, 900, 900);
         // 画圆
 //        canvas.drawCircle(mCircleXY, mCircleXY, mRadius, mLevelPaint);
 
         // 画弧线
-        canvas.drawArc(mRectF, 180, 180, false, mArcPaint); // 进度条-灰色
-        canvas.drawArc(mRectF, 180, 120, false, mPaint);    // 背景条-黄色
+        canvas.drawArc(mRectF, 135, 270, false, mArcPaint); // 进度条-灰色
+        canvas.drawArc(mRectF, 135, 60, false, mPaint);    // 背景条-黄色
         String level[] = {"1","2","3","4","5","6","7","8","9","10"} ;
 
-        for (int i = 0; i <level.length; i++ ){
-
-            int angle = 20 * i ;
-            // Math.sin(angle*Math.PI/180) sin() 里面的参数时弧度不是角度，弧度和角度的转换方式：角度*Math.PI/180
-            float dX = (100 + (float)(800/9 * i)) ;
-            float y = 360 * (float)(Math.sin(angle*Math.PI/180)) ;
-
-            if (i == 0){
+        for(int i = 0; i < level.length; i++){
+            int angle =135 + 30 * i ;
+            // Math.sin(angle*Math.PI/180) sin()
+            Log.e(TAG, "onDraw: y=="+(500+(400*Math.sin((180-angle)*Math.PI/180))));
+            Log.e(TAG, "onDraw: x=="+(100+(400-(400*Math.sin((180-angle)*Math.PI/180)))));
+            Log.e(TAG, "onDraw: position=="+i);
+            if (angle < 180){
+                // 第三象限
                 canvas.drawText(
                         level[i],
-                        100+50,
-                        500,
-                        mLevelPaint);  // 刻度
-            }else if (i == level.length-1){
-                Log.e(TAG, "onDraw: "+level[i]);
+                        (float) (100+(400-400*Math.sin((90-(180-angle))*Math.PI/180))+45),
+                        (float) (500+(400*Math.sin((180-angle)*Math.PI/180))-2),
+                        mLevelPaint);
+            }else if (angle >= 180 && angle < 270){
+                // 第二象限
                 canvas.drawText(
                         level[i],
-                        900-50,
-                        500,
-                        mLevelPaint);  // 刻度
-            }else {
+                        (float) (100+(400-400*Math.sin((90-(angle-180))*Math.PI/180))+10),
+                        (float) (500-(400*Math.sin((angle-180)*Math.PI/180))+50),
+                        mLevelPaint);
+            }else if (angle >= 270 && angle < 360){
+              // 第一象限
+                Log.e(TAG, "onDraw: level[i]=="+level[i]);
                 canvas.drawText(
                         level[i],
-                        dX,
-                        (500 - y + 40),
-                        mLevelPaint);  // 刻度
+                        (float) (100+(400+400*Math.sin((90-(angle-270))*Math.PI/180))-15),
+                        (float) (500-(400*Math.sin((angle-270)*Math.PI/180))+50),
+                        mLevelPaint);
+            } else {
+                // 第四象限
+                canvas.drawText(
+                        level[i],
+                        (float) (100+(400+400*Math.sin((90-(angle-360))*Math.PI/180))-60),
+                        (float) (500+(400*Math.sin((angle-360)*Math.PI/180))-2),
+                        mLevelPaint);
             }
-
         }
 
         // 绘制文字
         float textWidth = mTextPaint.measureText(mShowText);   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
         canvas.drawText(mShowText, (int)(length/2-textWidth/2), (int)(length/2+textWidth/2) , mTextPaint);
 
-        // TODO: 2017/12/16 修改宽度、完成剩余的不会绘制、添加动画、添加颗设置的属性 
+        // TODO: 2017/12/16 修改宽度、完成剩余的不会绘制、添加动画、添加颗设置的属性
     }
 
     public void setProgress(float mSweepValue) {
