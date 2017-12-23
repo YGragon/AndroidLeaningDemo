@@ -4,6 +4,7 @@ package com.dongxi.rxdemo.db.gank_test;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,7 +67,8 @@ public class GankAllFragment extends Fragment {
         final List<Gank.GankItem> gankList = DataServer.getInstance().getMultipleItemData();
         Log.e(TAG, "onCreateView: size========="+gankList.size());
         final MultipleItemQuickAdapter multipleItemAdapter = new MultipleItemQuickAdapter(getActivity(), gankList);
-        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
+//        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
+        final LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerview.setLayoutManager(manager);
         multipleItemAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
             @Override

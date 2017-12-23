@@ -136,7 +136,7 @@ public class Gank {
         public static final int TEXT = 1;
         public static final int IMG = 2;
         public static final int TEXT_SPAN_SIZE = 3;
-        public static final int IMG_SPAN_SIZE = 1;
+        public static final int IMG_SPAN_SIZE = 3;  // 权重是3
         private int itemType;
         private int spanSize;
 
