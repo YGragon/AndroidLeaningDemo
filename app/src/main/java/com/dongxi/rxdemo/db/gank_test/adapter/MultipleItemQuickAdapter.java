@@ -30,8 +30,6 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Gank.Gan
     @Override
     protected void convert(BaseViewHolder helper, Gank.GankItem item) {
 
-        Log.e(TAG, "convert: 尽力啊啊啊啊");
-        Log.e(TAG, "convert: 尽力啊啊啊啊type==="+helper.getItemViewType());
         switch (helper.getItemViewType()) {
             case Gank.GankItem.TEXT:
                 Log.e(TAG, "convert: 文字");
