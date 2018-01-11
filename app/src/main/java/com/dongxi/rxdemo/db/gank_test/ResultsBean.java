@@ -3,7 +3,7 @@ package com.dongxi.rxdemo.db.gank_test;
 import java.util.List;
 
 /**
- * 
+ *
  */
 public class ResultsBean{
 
