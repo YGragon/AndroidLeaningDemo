@@ -3,10 +3,8 @@ package com.dongxi.rxdemo.db.gank_test;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/10/5.
+ * 
  */
-
-
 public class ResultsBean{
 
     /**

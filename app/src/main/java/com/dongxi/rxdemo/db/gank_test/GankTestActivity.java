@@ -1,16 +1,18 @@
 package com.dongxi.rxdemo.db.gank_test;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.dongxi.rxdemo.MainActivity;
 import com.dongxi.rxdemo.R;
 
+/**
+ * 第一个页面
+ */
 public class GankTestActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener{
 
     private BottomNavigationBar bottomNavigationBar;
@@ -82,7 +84,6 @@ public class GankTestActivity extends AppCompatActivity implements BottomNavigat
      */
     @Override
     public void onTabSelected(int position) {
-        Log.d(TAG, "onTabSelected() called with: " + "position = [" + position + "]");
         FragmentManager fm = getSupportFragmentManager();
         //开启事务
         FragmentTransaction transaction = fm.beginTransaction();
