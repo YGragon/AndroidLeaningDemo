@@ -61,5 +61,5 @@ public class DataServer {
         Log.e(TAG, "getMultipleItemData: size=="+list.size());
         return list;
     }
-    
+
 }
