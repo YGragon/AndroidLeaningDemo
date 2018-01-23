@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.dongxi.rxdemo.R;
+import com.dongxi.rxdemo.utils.DensityUtil;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -127,7 +128,8 @@ public class EnergyView extends View {
         // 绘制当前等级
         canvas.drawText("8",mWidth / 2, mWidth / 2,mLevelPaint);
         // 绘制距离下一等级的经验
-        canvas.drawText("距离下一等级需要 888 经验",mWidth / 2, mWidth / 2,mTextPaint);
+        mTextPaint.setTextSize(DensityUtil.dp2px(getContext(),12));
+        canvas.drawText("距离下一等级需要 888 经验",mWidth / 2 - 200, mWidth / 2 + 200,mTextPaint);
     }
 
 //            if (angle < 180){
