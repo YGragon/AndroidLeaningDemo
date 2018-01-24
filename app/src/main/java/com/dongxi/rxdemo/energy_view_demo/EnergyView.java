@@ -99,29 +99,23 @@ public class EnergyView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mRectF = new RectF((float) (length * 0.1), (float) (length * 0.1),
-                (float) (length * 0.9), (float) (length * 0.9));
+        mRectF = new RectF((float) (length * 0.2), (float) (length * 0.1),
+                (float) (length * 0.8), (float) (length * 0.7));
         // 画圆
 //        canvas.drawCircle(mCircleXY, mCircleXY, mRadius, mLevelPaint);
 
         // 画弧线
-        canvas.drawArc(mRectF, 135, 270, false, mArcPaint); // 进度条-灰色
-        canvas.drawArc(mRectF, 135, 60, false, mPaint);    // 背景条-黄色
-        String level[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        canvas.drawArc(mRectF, 145, 250, false, mArcPaint); // 进度条-灰色
+        canvas.drawArc(mRectF, 145, 60, false, mPaint);    // 背景条-黄色
 
         for (int i = 1; i <= 10; i++) {
-//            int angle = 135 + 30 * i;
-            // Math.sin(angle*Math.PI/180) sin()
-//            Log.e(TAG, "onDraw: y==" + (500 + (400 * Math.sin((180 - angle) * Math.PI / 180))));
-//            Log.e(TAG, "onDraw: x==" + (100 + (400 - (400 * Math.sin((180 - angle) * Math.PI / 180)))));
-//            Log.e(TAG, "onDraw: position==" + i);
             canvas.save();
             // 以屏幕的宽高为中心，顺时针旋转
 //            canvas.rotate(angle, mWidth / 2, mHeight / 2);
-            canvas.rotate(205 + 270 / 10 * i , mWidth / 2, mWidth / 2);
+            canvas.rotate(220 + 270 / 10 * i , mWidth / 2, mWidth / 2-110);
 //            canvas.drawLine(mWidth / 2, mHeight / 2 - 200, mWidth / 2, mHeight / 2 - 180, mPaintline); //起点左边X,Y、终点坐标X,Y、画笔
 //            canvas.drawText("" + i, mWidth / 2-300, mHeight / 2 - 300, mTextPaint);
-            canvas.drawText("" + i, mWidth / 2, mWidth / 2 - 360, mTextPaint);
+            canvas.drawText("" + i, mWidth / 2-60, mWidth / 2 - 360, mTextPaint);
 //            canvas.drawText("" + i, (float) ((length * 0.1) / 2 - 30), (float) ((length * 0.9) / 2 - 50), mLevelPaint);
             canvas.restore();
         }

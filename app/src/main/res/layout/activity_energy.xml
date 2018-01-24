@@ -9,13 +9,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        >
+        android:layout_height="300dp"
+        android:gravity="center">
         <com.dongxi.rxdemo.energy_view_demo.EnergyView
             android:id="@+id/energy_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             app:current_text_color="@color/colorAccent"
             app:current_text_size="20sp"
             />
