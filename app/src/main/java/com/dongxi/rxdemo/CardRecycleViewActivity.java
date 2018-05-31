@@ -52,7 +52,7 @@ public class CardRecycleViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rx_java_test);
+        setContentView(R.layout.activity_card_recycler_view);
         ButterKnife.bind(this);
 
         initTextData();

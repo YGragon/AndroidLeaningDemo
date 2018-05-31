@@ -34,7 +34,7 @@ public class CollapsingToolbarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_m);
+        setContentView(R.layout.activity_collapsing_toolbar);
         ButterKnife.bind(this);
 
         Intent intent = getIntent() ;

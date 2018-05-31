@@ -92,6 +92,28 @@ public class CircleImageView extends AppCompatImageView {
         }
     }
 
+    /**
+     * 设置支持wrap_content
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(200,200);
+        }else if (widthSpecMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(200, heightSpecSize);
+        }else if (heightMeasureSpec == MeasureSpec.AT_MOST){
+            setMeasuredDimension(widthSpecSize, 200);
+        }
+    }
+
     @Override
     public ScaleType getScaleType() {
         return SCALE_TYPE;

@@ -35,7 +35,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 干货---All
  */
 public class GankAllFragment extends Fragment {
 

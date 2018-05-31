@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.dongxi.rxdemo.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 干货----妹子
  */
 public class GankMeiziFragment extends Fragment {
 
@@ -22,10 +22,6 @@ public class GankMeiziFragment extends Fragment {
         args.putString("agrs1", param1);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public GankMeiziFragment() {
-
     }
 
     @Override
