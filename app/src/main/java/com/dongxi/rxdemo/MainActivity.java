@@ -19,7 +19,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -64,6 +63,7 @@ import com.dongxi.rxdemo.pinsenction.SectionKotlinActivity;
 import com.dongxi.rxdemo.thumbup.ThumbUpActivity;
 import com.dongxi.rxdemo.update.DownLoadActivity;
 import com.dongxi.rxdemo.viewpager_gridview.ViewPagerGridViewActivity;
+import com.dongxi.rxdemo.widget.CustomDrawerLayout;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     private FlexboxLayout mFlexboxLayout;
 
     private Toolbar mToolbar;
-    private DrawerLayout mDrawerLayout;
+    private CustomDrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private RecyclerView mRecyclerViewRightMenu;
     private TopViewBroadcastReceiver mTopViewBroadcastReceiver;
@@ -181,7 +181,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     private void iniView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
+        mDrawerLayout = (CustomDrawerLayout) findViewById(R.id.activity_main);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mRecyclerViewRightMenu = (RecyclerView) findViewById(R.id.recycler_view_right_menu);
 
